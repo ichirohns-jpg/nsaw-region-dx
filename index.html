@@ -1,158 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>NSAW地域DX</title>
-
 <style>
-
 body{
   margin:0;
-  padding:20px;
+  padding:22px;
   background:#eef3f8;
-  font-family:sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
 }
-
-.wrap{
-  max-width:700px;
-  margin:0 auto;
-}
-
-.title{
-  font-size:38px;
-  font-weight:bold;
-  margin-bottom:30px;
-}
-
+.wrap{max-width:720px;margin:0 auto;}
+h1{font-size:42px;margin:24px 0 28px;font-weight:900;}
 .card{
-  background:#fff;
-  border-radius:24px;
+  background:white;
+  border-radius:26px;
   overflow:hidden;
-  margin-bottom:30px;
-  box-shadow:0 4px 18px rgba(0,0,0,.08);
+  margin-bottom:28px;
+  box-shadow:0 6px 18px rgba(0,0,0,.10);
 }
-
-.card img{
-  width:100%;
-  display:block;
-}
-
-.card-body{
-  padding:20px;
-}
-
-.card-title{
-  font-size:28px;
-  font-weight:bold;
-  line-height:1.5;
-  margin-bottom:15px;
-}
-
-.card-text{
-  font-size:20px;
-  line-height:1.8;
-  color:#333;
-}
-
+.card img{width:100%;display:block;}
+.body{padding:22px;}
+.date{font-size:18px;color:#666;margin-bottom:8px;}
+.title{font-size:28px;font-weight:900;line-height:1.45;margin-bottom:14px;}
+.text{font-size:21px;line-height:1.8;color:#222;white-space:pre-wrap;}
 </style>
-
 </head>
-
 <body>
-
 <div class="wrap">
-
-<div class="title">
-NSAW地域DX
-</div>
-
+<h1>NSAW地域DX</h1>
 <div id="list"></div>
-
 </div>
 
 <script>
+const POSTS = [{"date":"2026-05-19T15:00:00.000Z","id":"007","title":"5月20日 四市かわら版","image":"https://drive.google.com/thumbnail?id=1Pu3rQldHEQ4DXryPo4O9kTQQUitw95_R&sz=w1600","text":"5月20日の志木・新座・朝霞・和光の暮らし情報をまとめました。気になる情報は下のボタンから確認できます。"},{"date":"","id":"","title":"🎬 本日のお楽しみ動画｜懐かし昭和歌謡BGM","image":"","text":""},{"date":"2026-05-18T15:00:00.000Z","id":"005","title":"5月19日 四市かわら版","image":"https://drive.google.com/thumbnail?id=1weO1_pqGhYZ2fw7mNWad8NN6diA8TQfd&sz=w1200","text":"5月19日の志木・新座・朝霞・和光の暮らし情報をまとめました。気になる情報は下のボタンから確認できます。"},{"date":"2026-05-17T15:00:00.000Z","id":"004","title":"今日のお楽しみ動画です","image":"","text":""},{"date":"2026-05-17T15:00:00.000Z","id":"003","title":"5月18日 四市かわら版","image":"https://drive.google.com/thumbnail?id=1lF_l-Wr0c4-Do2bnLsxRXUWIo5Wbz6aG&sz=w1200","text":"5月18日の志木・新座・朝霞・和光の暮らし情報をまとめました。気になる情報は下のボタンから確認できます。"},{"date":"2026-05-16T15:00:00.000Z","id":"002","title":"今日のお楽しみ動画です！病院での待ち時間などにイヤホンでお楽しみください🎧","image":"","text":""},{"date":"2026-05-16T15:00:00.000Z","id":"001","title":"5月17日 四市かわら版","image":"https://drive.google.com/thumbnail?id=1W-aF4ZWw9F4HNfH6-2qd7tHnnKRKDddk&sz=w1200","text":"5月17日の志木・新座・朝霞・和光の暮らし情報をまとめました。気になる情報は下のボタンから確認できます。"}];
 
-fetch('https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-tzwPuu527BUIfH_K2pTuu-pPT0cZg_gTo6h/exec')
-.then(r => r.json())
-.then(data => {
+const list = document.getElementById('list');
 
-  const list =
-    document.getElementById('list');
+POSTS.forEach(post => {
+  const card = document.createElement('div');
+  card.className = 'card';
 
-  data.shift();
+  card.innerHTML =
+    (post.image ? '<img src="' + post.image + '">' : '') +
+    '<div class="body">' +
+    '<div class="date">' + post.date + '</div>' +
+    '<div class="title">' + post.title + '</div>' +
+    '<div class="text">' + post.text + '</div>' +
+    '</div>';
 
-  data.reverse();
-
-  data.forEach(row => {
-
-    const rawImage =
-      row[3] || '';
-
-    let imageUrl = rawImage;
-
-    if(rawImage.includes('/file/d/')){
-
-      imageUrl =
-        rawImage
-          .replace(
-            'https://drive.google.com/file/d/',
-            'https://drive.google.com/thumbnail?id='
-          )
-          .replace(
-            '/view?usp=drivesdk',
-            '&sz=w1200'
-          );
-
-    }
-
-    const title =
-      row[2] || '';
-
-    const text =
-      row[4] || '';
-
-    const card =
-      document.createElement('div');
-
-    card.className = 'card';
-
-    card.innerHTML = `
-
-      <img src="${imageUrl}">
-
-      <div class="card-body">
-
-        <div class="card-title">
-          ${title}
-        </div>
-
-        <div class="card-text">
-          ${text}
-        </div>
-
-      </div>
-
-    `;
-
-    list.appendChild(card);
-
-  });
-
-})
-.catch(err => {
-
-  document.body.innerHTML +=
-    '<pre style="color:red;">'+
-    err +
-    '</pre>';
-
+  list.appendChild(card);
 });
-
 </script>
-
 </body>
 </html>
