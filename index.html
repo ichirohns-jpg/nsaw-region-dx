@@ -23,9 +23,9 @@ body{
 }
 
 .title{
-  font-size:36px;
+  font-size:38px;
   font-weight:bold;
-  margin-bottom:25px;
+  margin-bottom:30px;
 }
 
 .card{
@@ -33,7 +33,7 @@ body{
   border-radius:24px;
   overflow:hidden;
   margin-bottom:30px;
-  box-shadow:0 4px 16px rgba(0,0,0,.08);
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
 }
 
 .card img{
@@ -83,12 +83,14 @@ fetch('https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-t
   const list =
     document.getElementById('list');
 
+  data.shift();
+
   data.reverse();
 
-  data.forEach(item => {
+  data.forEach(row => {
 
     const rawImage =
-      item['瓦版画像URL'] || '';
+      row[3] || '';
 
     let imageUrl = rawImage;
 
@@ -107,6 +109,12 @@ fetch('https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-t
 
     }
 
+    const title =
+      row[2] || '';
+
+    const text =
+      row[4] || '';
+
     const card =
       document.createElement('div');
 
@@ -119,11 +127,11 @@ fetch('https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-t
       <div class="card-body">
 
         <div class="card-title">
-          ${item['瓦版タイトル'] || ''}
+          ${title}
         </div>
 
         <div class="card-text">
-          ${item['説明文'] || ''}
+          ${text}
         </div>
 
       </div>
