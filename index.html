@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>NSAW地域DX</title>
+
+<style>
+
+body{
+  margin:0;
+  padding:20px;
+  background:#f2f4f8;
+  font-family:sans-serif;
+}
+
+.wrap{
+  max-width:700px;
+  margin:0 auto;
+}
+
+.title{
+  font-size:32px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.card img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.card-title{
+  font-size:24px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.card-text{
+  line-height:1.7;
+  font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="title">
+NSAW地域DX
+</div>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+
+fetch('https://script.google.com/macros/s/AKfycbxcFYCZeblDelbYDzgmC1Q2o9b2EV4Cnj03VgcGz06q4XWDW4yKl9xIL0So4s7nOzQA/exec')
+.then(r => r.json())
+.then(data => {
+
+  const list =
+    document.getElementById('list');
+
+  data.reverse();
+
+  data.forEach(item => {
+
+    const card =
+      document.createElement('div');
+
+    card.className = 'card';
+
+    card.innerHTML = `
+      <img src="${item['瓦版画像URL'] || ''}">
+      <div class="card-title">
+        ${item['瓦版タイトル'] || ''}
+      </div>
+      <div class="card-text">
+        ${item['説明文'] || ''}
+      </div>
+    `;
+
+    list.appendChild(card);
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
