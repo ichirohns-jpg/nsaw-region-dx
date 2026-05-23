@@ -15,84 +15,119 @@ box-sizing:border-box;
 
 body{
 margin:0;
-padding:20px;
-background:#eef3f8;
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Hiragino Sans",
-"Yu Gothic",
-sans-serif;
+padding:0;
+background:#f1f4f7;
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
 color:#222;
 }
 
 .wrap{
-max-width:760px;
+max-width:720px;
 margin:0 auto;
-padding-bottom:120px;
+padding:22px 16px 120px;
 }
 
-.top-title{
-font-size:52px;
+
+
+/* タイトル */
+
+.header{
+font-size:38px;
 font-weight:900;
-margin-bottom:30px;
 line-height:1.4;
+margin-bottom:20px;
 }
 
-.box{
+
+
+/* カード */
+
+.card{
 background:#fff;
-border-radius:32px;
-padding:28px;
-margin-bottom:28px;
+border-radius:28px;
+padding:26px;
+margin-bottom:22px;
+
 box-shadow:
-0 10px 28px rgba(0,0,0,.08);
+0 8px 24px rgba(0,0,0,.08);
 }
 
-.box-title{
-font-size:40px;
+
+
+/* 見出し */
+
+.card-title{
+font-size:34px;
 font-weight:900;
-margin-bottom:24px;
+margin-bottom:20px;
 }
+
+
+
+/* ボタン */
 
 .btn{
 width:100%;
 border:none;
-border-radius:24px;
-padding:30px;
-margin-bottom:18px;
-font-size:38px;
+border-radius:22px;
+padding:28px 20px;
+margin-bottom:16px;
+
+font-size:34px;
 font-weight:900;
+line-height:1.4;
 }
 
+
+
+/* 緑 */
+
 .green{
-background:#57c66a;
+background:#58c86b;
 color:#fff;
 }
 
+
+
+/* グレー */
+
 .gray{
-background:#f3f5f7;
+background:#f4f6f8;
 color:#222;
 }
 
+
+
+/* 結果 */
+
 .result{
-font-size:28px;
+font-size:24px;
 font-weight:900;
-color:#22aa44;
-margin-bottom:12px;
 line-height:1.6;
+margin-bottom:10px;
+color:#1f9d4a;
 }
+
+
+
+/* bottom */
 
 .bottom-menu{
 position:fixed;
 left:0;
 right:0;
 bottom:0;
+
 background:#fff;
+
 display:flex;
 justify-content:space-around;
+
 padding:14px 0;
+
 box-shadow:
 0 -4px 14px rgba(0,0,0,.10);
+
 z-index:999;
 }
 
@@ -106,7 +141,7 @@ text-align:center;
 
 .bottom-icon{
 display:block;
-font-size:32px;
+font-size:30px;
 margin-bottom:4px;
 }
 
@@ -117,13 +152,15 @@ margin-bottom:4px;
 
 <div class="wrap">
 
-<div class="top-title">
+<div class="header">
 🏠 家族見守りDX
 </div>
 
-<div class="box">
 
-<div class="box-title">
+
+<div class="card">
+
+<div class="card-title">
 😊 今日の状態
 </div>
 
@@ -143,9 +180,9 @@ class="result"
 
 
 
-<div class="box">
+<div class="card">
 
-<div class="box-title">
+<div class="card-title">
 💊 今日の薬
 </div>
 
