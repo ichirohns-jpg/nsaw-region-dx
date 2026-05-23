@@ -568,14 +568,61 @@ JSON.stringify(data)
 
 
 
-/* カレンダー */
+/* Googleカレンダー */
 
 function createGoogleCalendarUrl(parsed){
+
+const now =
+new Date();
+
+const year =
+now.getFullYear();
+
+const month =
+parsed.date.match(/\d+/)[0]
+.padStart(2,'0');
+
+const day =
+parsed.date.match(/\d+/g)[1]
+.padStart(2,'0');
+
+const hour =
+parsed.time.split(':')[0]
+.padStart(2,'0');
+
+const minute =
+parsed.time.split(':')[1]
+.padStart(2,'0');
+
+
+
+const start =
+year +
+month +
+day +
+'T' +
+hour +
+minute +
+'00';
+
+
+
+const end =
+year +
+month +
+day +
+'T' +
+hour +
+'5900';
+
+
 
 const title =
 encodeURIComponent(
 parsed.title
 );
+
+
 
 return
 
@@ -584,7 +631,14 @@ return
 +
 
 '&text=' +
-title;
+title
+
++
+
+'&dates=' +
+start +
+'/' +
+end;
 
 }
 
@@ -640,13 +694,33 @@ halfMatch[1]
 
 }
 
+else{
+
+const hourMatch =
+
+text.match(
+/(\d{1,2})時/
+);
+
+if(hourMatch){
+
+time =
+hourMatch[1]
+.padStart(2,'0')
++
+':00';
+
+}
+
+}
+
 
 
 if(text.includes('歯医者')){
 title = '歯医者';
 }
 
-else if(text.includes('病院')){
+if(text.includes('病院')){
 title = '病院';
 }
 
@@ -678,7 +752,7 @@ if(!SpeechRecognition){
 
 document.getElementById(
 'voiceResult'
-).innerText =
+).innerHTML =
 
 '⚠ 音声入力できません';
 
