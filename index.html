@@ -179,6 +179,16 @@ font-size:24px;
 font-weight:900;
 }
 
+.medicine-box{
+padding:24px;
+}
+
+.medicine-title{
+font-size:40px;
+font-weight:900;
+margin-bottom:20px;
+}
+
 .medicine-result{
 font-size:22px;
 font-weight:900;
@@ -308,58 +318,12 @@ id="normalMenu"
 style="display:none;"
 >
 
-<button
-class="sub-btn"
-onclick="takeMorningMedicine()"
->
-💊 朝の薬
-</button>
-
-<div
-id="morningResult"
-class="medicine-result"
-></div>
-
-
-
-<button
-class="sub-btn"
-onclick="takeLunchMedicine()"
->
-💊 昼の薬
-</button>
-
-<div
-id="lunchResult"
-class="medicine-result"
-></div>
-
-
-
-<button
-class="sub-btn"
-onclick="takeNightMedicine()"
->
-💊 夜の薬
-</button>
-
-<div
-id="nightResult"
-class="medicine-result"
-></div>
-
-
-
 <button class="sub-btn">
 体調が悪い
 </button>
 
 <button class="sub-btn">
 転んだ
-</button>
-
-<button class="sub-btn">
-薬がない
 </button>
 
 <button class="sub-btn">
@@ -410,6 +374,58 @@ onclick="getLocation()"
 </button>
 
 </div>
+
+</div>
+
+
+
+<!-- 薬 -->
+
+<div class="box medicine-box">
+
+<div class="medicine-title">
+💊 今日の薬
+</div>
+
+<button
+class="sub-btn"
+onclick="takeMorningMedicine()"
+>
+💊 朝の薬
+</button>
+
+<div
+id="morningResult"
+class="medicine-result"
+></div>
+
+
+
+<button
+class="sub-btn"
+onclick="takeLunchMedicine()"
+>
+💊 昼の薬
+</button>
+
+<div
+id="lunchResult"
+class="medicine-result"
+></div>
+
+
+
+<button
+class="sub-btn"
+onclick="takeNightMedicine()"
+>
+💊 夜の薬
+</button>
+
+<div
+id="nightResult"
+class="medicine-result"
+></div>
 
 </div>
 
@@ -1008,8 +1024,6 @@ minute:'2-digit'
 
 
 
-/* 朝 */
-
 function takeMorningMedicine(){
 
 const time =
@@ -1025,8 +1039,6 @@ document.getElementById(
 
 
 
-/* 昼 */
-
 function takeLunchMedicine(){
 
 const time =
@@ -1041,8 +1053,6 @@ document.getElementById(
 }
 
 
-
-/* 夜 */
 
 function takeNightMedicine(){
 
