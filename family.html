@@ -65,26 +65,8 @@ font-weight:900;
 margin-bottom:18px;
 }
 
-hr{
-margin:28px 0;
-}
-
-.blue{
-color:#1d4ed8;
-}
-
-.red{
-color:#ef5350;
-}
-
 .gray{
 color:#666;
-}
-
-a{
-color:#1d4ed8;
-text-decoration:none;
-font-weight:900;
 }
 
 </style>
@@ -104,284 +86,31 @@ font-weight:900;
 👴 山口さん
 </div>
 
-<div
-id="statusBox"
-class="status"
->
-読み込み中...
+<div class="status">
+😊 元気です
 </div>
 
-<div
-id="timeBox"
-class="item gray"
->
----
+<div class="item gray">
+最終確認：今日 08:15
 </div>
 
 <hr>
 
-<div
-id="medicineBox"
-class="item"
->
-💊 読み込み中...
+<div class="item">
+💊 朝の薬：飲みました
 </div>
 
-<div
-id="alertBox"
-class="item red"
->
-🆘 読み込み中...
+<div class="item">
+💊 昼の薬：未確認
 </div>
 
-<div
-id="locationBox"
-class="item blue"
->
-📍 読み込み中...
+<div class="item">
+💊 夜の薬：未確認
 </div>
 
 </div>
 
 </div>
-
-<script>
-
-const GAS_URL =
-'https://script.google.com/macros/s/AKfycbwcb8ig7N1XMZkwYm-BOSDC3N1w5ifNvGr6qqE3-ER0gn4pkn3zgLZ7sWIrcrzgH6yE/exec?code=YAMA1234';
-
-
-
-async function loadData(){
-
-try{
-
-const response =
-await fetch(
-GAS_URL + '&t=' + Date.now()
-);
-
-const data =
-await response.json();
-
-console.log(data);
-
-
-
-if(
-!data ||
-!data.rows
-){
-
-document.getElementById(
-'statusBox'
-).innerHTML =
-'データ取得失敗';
-
-return;
-
-}
-
-
-
-const rows =
-data.rows;
-
-
-
-if(rows.length === 0){
-
-document.getElementById(
-'statusBox'
-).innerHTML =
-'データなし';
-
-document.getElementById(
-'timeBox'
-).innerHTML =
-'まだ記録されていません';
-
-document.getElementById(
-'medicineBox'
-).innerHTML =
-'💊 薬記録なし';
-
-document.getElementById(
-'alertBox'
-).innerHTML =
-'🆘 緊急記録なし';
-
-document.getElementById(
-'locationBox'
-).innerHTML =
-'📍 位置情報なし';
-
-return;
-
-}
-
-
-
-const latest =
-rows[rows.length - 1];
-
-
-
-document.getElementById(
-'statusBox'
-).innerHTML =
-
-'😊 ' +
-(latest.status || '確認中');
-
-
-
-document.getElementById(
-'timeBox'
-).innerHTML =
-
-'最終確認：' +
-(latest.datetime || '');
-
-
-
-let medicineHtml =
-'💊 薬記録なし';
-
-let alertHtml =
-'🆘 緊急記録なし';
-
-let locationHtml =
-'📍 位置情報なし';
-
-
-
-const medicineRows =
-rows.filter(
-r => r.type === '薬'
-);
-
-if(medicineRows.length > 0){
-
-medicineHtml = '';
-
-medicineRows.reverse().forEach(r => {
-
-medicineHtml +=
-
-'💊 ' +
-
-r.status +
-
-' ： ' +
-
-r.time +
-
-'<br>';
-
-});
-
-}
-
-
-
-const alertRows =
-rows.filter(
-r => r.type === '緊急'
-);
-
-if(alertRows.length > 0){
-
-alertHtml = '';
-
-alertRows.reverse().forEach(r => {
-
-alertHtml +=
-
-'🆘 ' +
-
-r.status +
-
-' ： ' +
-
-r.time +
-
-'<br>';
-
-});
-
-}
-
-
-
-const locationRows =
-rows.filter(
-r => r.lat && r.lng
-);
-
-if(locationRows.length > 0){
-
-const loc =
-locationRows[
-locationRows.length - 1
-];
-
-locationHtml =
-
-'<a target="_blank" href="https://maps.google.com/?q=' +
-
-loc.lat +
-
-',' +
-
-loc.lng +
-
-'">📍 現在地を見る</a>';
-
-}
-
-
-
-document.getElementById(
-'medicineBox'
-).innerHTML =
-medicineHtml;
-
-document.getElementById(
-'alertBox'
-).innerHTML =
-alertHtml;
-
-document.getElementById(
-'locationBox'
-).innerHTML =
-locationHtml;
-
-}
-
-catch(err){
-
-console.log(err);
-
-document.getElementById(
-'statusBox'
-).innerHTML =
-'通信エラー';
-
-}
-
-}
-
-
-
-loadData();
-
-setInterval(
-loadData,
-10000
-);
-
-</script>
 
 </body>
 </html>
