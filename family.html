@@ -192,7 +192,7 @@ href="./family.html"
 <script>
 
 const GAS_URL =
-'https://script.google.com/macros/s/AKfycbzEfMIty3nwXxLeNKR7lPd3WcPtZVQj139UoxLIblHFM2395CJ8BHHsR1hbGaYgTKiz/exec?code=YAMA1234';
+'https://script.google.com/macros/s/AKfycbyHPHU3XBp8Zch_sriN-J_Pc3J6tFx0_YZZb7b9YXafIFAJabRvMdKtSfi6vVaqkCCK/exec?code=YAMA1234';
 
 
 
@@ -257,14 +257,7 @@ document.getElementById(
 
 '最終確認： ' +
 
-(latest.datetime || '');
-
-
-
-const medicineRows =
-rows.filter(
-r => r.type === '薬'
-);
+(latest.update || '');
 
 
 
@@ -272,16 +265,7 @@ let html = '';
 
 
 
-if(medicineRows.length === 0){
-
-html =
-'<div class="item">💊 薬記録なし</div>';
-
-}
-
-else{
-
-medicineRows.reverse().forEach(r => {
+if(latest.medicine){
 
 html +=
 
@@ -293,7 +277,7 @@ html +=
 
 +
 
-(r.status || '')
+latest.medicine
 
 +
 
@@ -305,13 +289,18 @@ html +=
 
 +
 
-(r.time || '')
+(latest.medicineTime || '')
 
 +
 
 '</div>';
 
-});
+}
+
+else{
+
+html =
+'<div class="item">💊 薬記録なし</div>';
 
 }
 
