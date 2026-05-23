@@ -30,10 +30,6 @@ body{
   margin:0 auto;
 }
 
-
-
-/* 時計 */
-
 .clock-box,
 .today-box,
 .voice-result,
@@ -62,10 +58,6 @@ body{
   font-size:72px;
   font-weight:900;
 }
-
-
-
-/* タイトル */
 
 .main-title{
   font-size:44px;
@@ -739,6 +731,28 @@ monthDay[2] +
 
 /* 時間 */
 
+if(text.includes('時半')){
+
+const halfMatch =
+
+text.match(
+/(\d{1,2})時半/
+);
+
+if(halfMatch){
+
+time =
+halfMatch[1]
+.padStart(2,'0')
++
+':30';
+
+}
+
+}
+
+else{
+
 const timeMatch =
 
 text.match(
@@ -768,6 +782,8 @@ hour.padStart(2,'0')
 ':'
 +
 minute;
+
+}
 
 }
 
