@@ -10,11 +10,12 @@
 
 *{
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
 margin:0;
-padding:18px;
+padding:16px;
 background:#eef3f8;
 font-family:
 -apple-system,
@@ -30,13 +31,24 @@ max-width:760px;
 margin:0 auto;
 }
 
+
+
+/* 共通 */
+
 .box{
 background:#fff;
 border-radius:28px;
-margin-bottom:34px;
+padding:24px;
+margin-bottom:24px;
 box-shadow:
 0 8px 24px
-rgba(0,0,0,.10);
+rgba(0,0,0,.08);
+}
+
+.section-title{
+font-size:38px;
+font-weight:900;
+margin-bottom:20px;
 }
 
 
@@ -45,17 +57,18 @@ rgba(0,0,0,.10);
 
 .clock-box{
 text-align:center;
-padding:28px;
+padding:24px;
 }
 
 .clock-date{
-font-size:30px;
+font-size:28px;
 font-weight:900;
-margin-bottom:10px;
+margin-bottom:8px;
+color:#666;
 }
 
 .clock-time{
-font-size:72px;
+font-size:64px;
 font-weight:900;
 }
 
@@ -64,31 +77,24 @@ font-weight:900;
 /* タイトル */
 
 .main-title{
-font-size:44px;
+font-size:48px;
 font-weight:900;
-margin:14px 0 28px;
+margin:10px 0 24px;
 }
 
 
 
-/* 今日 */
+/* 今日の予定 */
 
 .today-box{
 background:#fff8dc;
-padding:24px;
-}
-
-.today-title{
-font-size:38px;
-font-weight:900;
-margin-bottom:18px;
 }
 
 .today-item{
 font-size:28px;
-line-height:1.9;
-margin-bottom:14px;
-word-break:keep-all;
+line-height:1.8;
+margin-bottom:12px;
+font-weight:900;
 }
 
 
@@ -98,31 +104,30 @@ word-break:keep-all;
 .voice-btn{
 width:100%;
 border:none;
-border-radius:22px;
+border-radius:24px;
 padding:28px;
 margin-bottom:18px;
 background:#4a90e2;
 color:#fff;
-font-size:34px;
+font-size:36px;
 font-weight:900;
 }
 
 .voice-result{
-padding:28px;
 font-size:26px;
-line-height:1.9;
+line-height:1.8;
 white-space:pre-wrap;
 }
 
 .voice-save{
 display:block;
 width:100%;
-text-decoration:none;
 text-align:center;
+text-decoration:none;
 border:none;
 border-radius:20px;
 padding:22px;
-margin-top:22px;
+margin-top:18px;
 background:#5cc96b;
 color:#fff;
 font-size:28px;
@@ -133,20 +138,10 @@ font-weight:900;
 
 /* 状態 */
 
-.health-box{
-padding:24px;
-}
-
-.health-title{
-font-size:42px;
-font-weight:900;
-margin-bottom:20px;
-}
-
 .health-btn{
 width:100%;
 border:none;
-border-radius:20px;
+border-radius:22px;
 padding:26px;
 margin-bottom:18px;
 font-size:34px;
@@ -175,30 +170,46 @@ border-radius:18px;
 padding:20px;
 margin-bottom:14px;
 background:#f3f5f7;
-font-size:24px;
+font-size:26px;
 font-weight:900;
 }
 
-.medicine-box{
-padding:24px;
-}
 
-.medicine-title{
-font-size:40px;
+
+/* 薬 */
+
+.medicine-btn{
+width:100%;
+border:none;
+border-radius:18px;
+padding:22px;
+margin-bottom:10px;
+background:#f3f5f7;
+font-size:30px;
 font-weight:900;
-margin-bottom:20px;
 }
 
 .medicine-result{
-font-size:22px;
+font-size:24px;
 font-weight:900;
-margin-bottom:18px;
 color:#22aa44;
+margin-bottom:18px;
+line-height:1.7;
+}
+
+.cancel-btn{
+border:none;
+border-radius:12px;
+padding:10px 16px;
+background:#ddd;
+font-size:18px;
+font-weight:900;
+margin-left:12px;
 }
 
 
 
-/* 下 */
+/* 下メニュー */
 
 .bottom-menu{
 position:fixed;
@@ -211,7 +222,7 @@ justify-content:space-around;
 padding:12px 0;
 box-shadow:
 0 -4px 14px
-rgba(0,0,0,.12);
+rgba(0,0,0,.10);
 }
 
 .bottom-btn{
@@ -225,7 +236,7 @@ text-align:center;
 .bottom-icon{
 display:block;
 font-size:28px;
-margin-bottom:6px;
+margin-bottom:4px;
 }
 
 .footer-space{
@@ -240,6 +251,8 @@ height:100px;
 <div class="wrap">
 
 
+
+<!-- 時計 -->
 
 <div class="box clock-box">
 
@@ -257,15 +270,19 @@ id="clockTime"
 
 
 
+<!-- タイトル -->
+
 <div class="main-title">
 NSAW地域DX
 </div>
 
 
 
+<!-- 今日の予定 -->
+
 <div class="box today-box">
 
-<div class="today-title">
+<div class="section-title">
 ☀ 今日の予定
 </div>
 
@@ -275,14 +292,14 @@ NSAW地域DX
 
 
 
+<!-- 音声 -->
+
 <button
 class="voice-btn"
 onclick="startVoiceInput()"
 >
 🎤 話して予定追加
 </button>
-
-
 
 <div
 class="box voice-result"
@@ -293,9 +310,11 @@ id="voiceResult"
 
 
 
-<div class="box health-box">
+<!-- 状態 -->
 
-<div class="health-title">
+<div class="box">
+
+<div class="section-title">
 😊 今日の状態
 </div>
 
@@ -327,15 +346,15 @@ style="display:none;"
 </button>
 
 <button class="sub-btn">
-食べ物がない
+食欲がない
 </button>
 
 <button class="sub-btn">
-病院に行きたい
+病院へ行きたい
 </button>
 
 <button class="sub-btn">
-誰かに電話したい
+誰かと話したい
 </button>
 
 </div>
@@ -370,7 +389,7 @@ onclick="call110()"
 class="sub-btn"
 onclick="getLocation()"
 >
-📍 現在地
+📍 現在地を開く
 </button>
 
 </div>
@@ -381,14 +400,14 @@ onclick="getLocation()"
 
 <!-- 薬 -->
 
-<div class="box medicine-box">
+<div class="box">
 
-<div class="medicine-title">
+<div class="section-title">
 💊 今日の薬
 </div>
 
 <button
-class="sub-btn"
+class="medicine-btn"
 onclick="takeMorningMedicine()"
 >
 💊 朝の薬
@@ -402,7 +421,7 @@ class="medicine-result"
 
 
 <button
-class="sub-btn"
+class="medicine-btn"
 onclick="takeLunchMedicine()"
 >
 💊 昼の薬
@@ -416,7 +435,7 @@ class="medicine-result"
 
 
 <button
-class="sub-btn"
+class="medicine-btn"
 onclick="takeNightMedicine()"
 >
 💊 夜の薬
@@ -436,6 +455,8 @@ class="medicine-result"
 </div>
 
 
+
+<!-- 下 -->
 
 <div class="bottom-menu">
 
@@ -459,15 +480,6 @@ class="medicine-result"
 
 
 <script>
-
-const GAS_URL =
-'https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-tzwPuu527BUIfH_K2pTuu-pPT0cZg_gTo6h/exec';
-
-const USER_CODE =
-'YAMA1234';
-
-const USER_NAME =
-'山口さん';
 
 
 
@@ -515,7 +527,7 @@ updateClock,
 
 
 
-/* 今日 */
+/* 今日の予定 */
 
 let todayData =
 
@@ -577,47 +589,18 @@ document.getElementById(
 filtered.map(item =>
 
 '<div class="today-item">' +
+
 item.icon +
 ' ' +
 item.text +
+
 '</div>'
 
 ).join('');
 
-
-
-localStorage.setItem(
-'todayData',
-JSON.stringify(todayData)
-);
-
 }
 
 renderToday();
-
-
-
-/* GAS */
-
-function sendToGas(data){
-
-fetch(
-GAS_URL,
-{
-method:'POST',
-
-headers:{
-'Content-Type':
-'application/json'
-},
-
-body:
-JSON.stringify(data)
-
-}
-);
-
-}
 
 
 
@@ -822,8 +805,6 @@ recognition.lang = 'ja-JP';
 
 recognition.interimResults = false;
 
-recognition.continuous = false;
-
 
 
 recognition.onstart = function(){
@@ -969,36 +950,6 @@ document.getElementById(
 
 function showGood(){
 
-const now =
-new Date();
-
-const time =
-
-now.toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-);
-
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-genkiStatus:'元気です',
-genkiTime:time,
-
-medicineStatus:'未確認',
-medicineTime:'--:--'
-
-});
-
-
-
 alert(
 '😊 元気を記録しました'
 );
@@ -1024,6 +975,8 @@ minute:'2-digit'
 
 
 
+/* 朝 */
+
 function takeMorningMedicine(){
 
 const time =
@@ -1033,11 +986,26 @@ document.getElementById(
 'morningResult'
 ).innerHTML =
 
-'✅ 飲みました ' + time;
+'✅ 飲みました ' +
+time +
+
+' <button class="cancel-btn" onclick="cancelMorningMedicine()">取り消し</button>';
 
 }
 
 
+
+function cancelMorningMedicine(){
+
+document.getElementById(
+'morningResult'
+).innerHTML = '';
+
+}
+
+
+
+/* 昼 */
 
 function takeLunchMedicine(){
 
@@ -1048,11 +1016,26 @@ document.getElementById(
 'lunchResult'
 ).innerHTML =
 
-'✅ 飲みました ' + time;
+'✅ 飲みました ' +
+time +
+
+' <button class="cancel-btn" onclick="cancelLunchMedicine()">取り消し</button>';
 
 }
 
 
+
+function cancelLunchMedicine(){
+
+document.getElementById(
+'lunchResult'
+).innerHTML = '';
+
+}
+
+
+
+/* 夜 */
 
 function takeNightMedicine(){
 
@@ -1063,7 +1046,20 @@ document.getElementById(
 'nightResult'
 ).innerHTML =
 
-'✅ 飲みました ' + time;
+'✅ 飲みました ' +
+time +
+
+' <button class="cancel-btn" onclick="cancelNightMedicine()">取り消し</button>';
+
+}
+
+
+
+function cancelNightMedicine(){
+
+document.getElementById(
+'nightResult'
+).innerHTML = '';
 
 }
 
