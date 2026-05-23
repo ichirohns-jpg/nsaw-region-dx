@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NSAW地域DX</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;padding:16px;background:#eef3f8;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222;}
+.wrap{max-width:760px;margin:0 auto;padding-bottom:100px;}
+.box{background:#fff;border-radius:28px;padding:24px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.title{font-size:42px;font-weight:900;margin-bottom:24px;}
+.btn{width:100%;border:none;border-radius:22px;padding:26px;margin-bottom:18px;font-size:34px;font-weight:900;}
+.green{background:#5cc96b;color:#fff;}
+.gray{background:#f3f5f7;}
+.result{font-size:24px;font-weight:900;color:#22aa44;margin-bottom:18px;}
+.bottom-menu{position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;box-shadow:0 -4px 14px rgba(0,0,0,.10);}
+.bottom-btn{text-decoration:none;color:#222;font-size:18px;font-weight:900;text-align:center;}
+.bottom-icon{display:block;font-size:28px;margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<div class="box">
+<div class="title">😊 今日の状態</div>
+<button class="btn green" onclick="showGood()">😊 元気です</button>
+<div id="goodResult" class="result"></div>
+</div>
+
+<div class="box">
+<div class="title">💊 今日の薬</div>
+
+<button class="btn gray" onclick="takeMorningMedicine()">💊 朝の薬</button>
+<div id="morningResult" class="result"></div>
+
+<button class="btn gray" onclick="takeLunchMedicine()">💊 昼の薬</button>
+<div id="lunchResult" class="result"></div>
+
+<button class="btn gray" onclick="takeNightMedicine()">💊 夜の薬</button>
+<div id="nightResult" class="result"></div>
+</div>
+
+</div>
+
+<div class="bottom-menu">
+<a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
+<a class="bottom-btn" href="./family.html"><span class="bottom-icon">👪</span>家族</a>
+</div>
+
+<script>
+const GAS_URL =
+'https://script.google.com/macros/s/AKfycbyFUX6w7KMKZ87PR37MrFaPgW1clmiTR5LigJO43XLVQCZ7IdsGLP6HXPeNMzd9qN1L/exec';
+
+const USER_CODE = 'YAMA1234';
+const USER_NAME = '山口さん';
+
+function getNowTime(){
+  return new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+}
+
+function sendToGas(data){
+  fetch(GAS_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain'},
+    body:JSON.stringify(data)
+  });
+}
+
+function showGood(){
+  const time = getNowTime();
+  document.getElementById('goodResult').innerHTML = '✅ 元気確認 ' + time;
+  sendToGas({code:USER_CODE,name:USER_NAME,type:'元気',status:'元気です',time:time});
+}
+
+function takeMorningMedicine(){
+  const time = getNowTime();
+  document.getElementById('morningResult').innerHTML = '✅ 飲みました ' + time;
+  sendToGas({code:USER_CODE,name:USER_NAME,type:'薬',status:'朝の薬',time:time});
+}
+
+function takeLunchMedicine(){
+  const time = getNowTime();
+  document.getElementById('lunchResult').innerHTML = '✅ 飲みました ' + time;
+  sendToGas({code:USER_CODE,name:USER_NAME,type:'薬',status:'昼の薬',time:time});
+}
+
+function takeNightMedicine(){
+  const time = getNowTime();
+  document.getElementById('nightResult').innerHTML = '✅ 飲みました ' + time;
+  sendToGas({code:USER_CODE,name:USER_NAME,type:'薬',status:'夜の薬',time:time});
+}
+</script>
+
+</body>
+</html>
