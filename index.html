@@ -66,7 +66,7 @@ body{
 
 
 
-/* 今日の予定 */
+/* 予定 */
 
 .today-box{
   background:#fff8dc;
@@ -83,6 +83,7 @@ body{
   font-size:28px;
   line-height:1.8;
   margin-bottom:12px;
+  word-break:keep-all;
 }
 
 
@@ -125,7 +126,7 @@ body{
 
 
 
-/* 元気 */
+/* 状態 */
 
 .health-box{
   padding:24px;
@@ -156,11 +157,6 @@ body{
   background:#ffd54f;
 }
 
-.danger-btn{
-  background:#ef5350;
-  color:#fff;
-}
-
 .sub-btn{
   width:100%;
   border:none;
@@ -174,7 +170,7 @@ body{
 
 
 
-/* 下固定 */
+/* 下 */
 
 .bottom-menu{
   position:fixed;
@@ -410,16 +406,19 @@ document.getElementById(
 'todayBox'
 ).innerHTML =
 
-'<div class="today-title">📅 予定一覧</div>'
+'<div class="today-title">☀ 今日の予定</div>'
 
 +
 
 todayData.map(item =>
 
 '<div class="today-item">' +
+
 item.icon +
 ' ' +
+
 item.text +
+
 '</div>'
 
 ).join('');
@@ -681,8 +680,6 @@ calendarUrl +
 
 };
 
-
-
 recognition.start();
 
 }
@@ -698,10 +695,13 @@ todayData.unshift({
 icon:'📅',
 
 text:
+
 parsed.date +
 ' ' +
+
 parsed.time +
 ' ' +
+
 parsed.title
 
 });
