@@ -111,6 +111,8 @@ body{
 .voice-save{
   display:block;
   width:100%;
+  text-decoration:none;
+  text-align:center;
   border:none;
   border-radius:20px;
   padding:22px;
@@ -292,38 +294,7 @@ onclick="takeMedicine()"
 💊 薬を飲みました
 </button>
 
-<button class="sub-btn">
-体調が悪い
-</button>
-
-<button class="sub-btn">
-転んだ
-</button>
-
-<button class="sub-btn">
-薬がない
-</button>
-
-<button class="sub-btn">
-食べ物がない
-</button>
-
-<button class="sub-btn">
-病院に行きたい
-</button>
-
-<button class="sub-btn">
-誰かに電話したい
-</button>
-
 </div>
-
-<button
-class="health-btn danger-btn"
-onclick="toggleDanger()"
->
-🆘 困っています
-</button>
 
 </div>
 
@@ -373,6 +344,8 @@ const USER_NAME =
 
 
 
+/* 時計 */
+
 function updateClock(){
 
 const now =
@@ -415,6 +388,8 @@ updateClock,
 
 
 
+/* 今日の予定 */
+
 let todayData =
 
 JSON.parse(
@@ -435,7 +410,7 @@ document.getElementById(
 'todayBox'
 ).innerHTML =
 
-'<div class="today-title">☀ 今日の予定</div>'
+'<div class="today-title">📅 予定一覧</div>'
 
 +
 
@@ -462,6 +437,8 @@ renderToday();
 
 
 
+/* GAS送信 */
+
 function sendToGas(data){
 
 fetch(
@@ -478,21 +455,268 @@ body:
 JSON.stringify(data)
 
 }
-)
+);
 
-.then(res => res.text())
+}
 
-.then(result => {
 
-console.log(result);
 
-})
+/* Googleカレンダー */
 
-.catch(error => {
+function createGoogleCalendarUrl(parsed){
 
-console.error(error);
+const title =
+encodeURIComponent(
+parsed.title
+);
+
+return
+
+'https://calendar.google.com/calendar/render?action=TEMPLATE'
+
++
+
+'&text=' +
+title;
+
+}
+
+
+
+/* AI整理 */
+
+function parseScheduleText(text){
+
+let date = '未整理';
+
+let time = '未整理';
+
+let title = text;
+
+
+
+const monthDay =
+
+text.match(
+/(\d{1,2})月(\d{1,2})日/
+);
+
+if(monthDay){
+
+date =
+monthDay[1] +
+'月' +
+monthDay[2] +
+'日';
+
+}
+
+
+
+if(text.includes('時半')){
+
+const halfMatch =
+
+text.match(
+/(\d{1,2})時半/
+);
+
+if(halfMatch){
+
+time =
+halfMatch[1]
+.padStart(2,'0')
++
+':30';
+
+}
+
+}
+
+
+
+if(text.includes('歯医者')){
+
+title = '歯医者';
+
+}
+
+
+
+return {
+
+date:date,
+time:time,
+title:title
+
+};
+
+}
+
+
+
+/* 音声 */
+
+function startVoiceInput(){
+
+const SpeechRecognition =
+
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+
+
+if(!SpeechRecognition){
+
+document.getElementById(
+'voiceResult'
+).innerText =
+
+'⚠ 音声入力できません';
+
+return;
+
+}
+
+
+
+const recognition =
+new SpeechRecognition();
+
+recognition.lang = 'ja-JP';
+
+recognition.interimResults = false;
+
+
+
+recognition.onstart = function(){
+
+document.getElementById(
+'voiceResult'
+).innerText =
+
+'🎤 聞き取り中...';
+
+};
+
+
+
+recognition.onresult = function(event){
+
+const text =
+
+event.results[0][0]
+.transcript;
+
+
+
+const parsed =
+parseScheduleText(text);
+
+
+
+const calendarUrl =
+createGoogleCalendarUrl(parsed);
+
+
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'<div>🎤 ' +
+text +
+'</div>'
+
++
+
+'<div style="margin-top:18px;font-weight:900;">AI整理結果</div>'
+
++
+
+'<div>📅 日付：' +
+parsed.date +
+'</div>'
+
++
+
+'<div>⏰ 時間：' +
+parsed.time +
+'</div>'
+
++
+
+'<div>🏥 内容：' +
+parsed.title +
+'</div>'
+
++
+
+'<button class="voice-save" onclick="saveSchedule(' +
+
+JSON.stringify(parsed)
+.replace(/"/g,'&quot;')
+
++
+
+')">' +
+
+'📅 予定に追加'
+
++
+
+'</button>'
+
++
+
+'<a class="voice-save" href="' +
+calendarUrl +
+'" target="_blank">' +
+
+'📅 Googleカレンダーへ登録'
+
++
+
+'</a>';
+
+};
+
+
+
+recognition.start();
+
+}
+
+
+
+/* 予定保存 */
+
+function saveSchedule(parsed){
+
+todayData.unshift({
+
+icon:'📅',
+
+text:
+parsed.date +
+' ' +
+parsed.time +
+' ' +
+parsed.title
 
 });
+
+
+
+renderToday();
+
+
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'✅ 予定へ追加しました';
 
 }
 
@@ -517,18 +741,16 @@ minute:'2-digit'
 
 
 
-const genkiData = {
+localStorage.setItem(
+'genkiData',
+
+JSON.stringify({
 
 status:'元気です',
 time:time
 
-};
+})
 
-
-
-localStorage.setItem(
-'genkiData',
-JSON.stringify(genkiData)
 );
 
 
@@ -578,18 +800,16 @@ minute:'2-digit'
 
 
 
-const medicineData = {
+localStorage.setItem(
+'medicineData',
+
+JSON.stringify({
 
 status:'飲みました',
 time:time
 
-};
+})
 
-
-
-localStorage.setItem(
-'medicineData',
-JSON.stringify(medicineData)
 );
 
 
@@ -620,6 +840,8 @@ alert(
 
 
 
+/* メニュー */
+
 function toggleNormal(){
 
 const menu =
@@ -635,102 +857,6 @@ menu.style.display === 'none'
 ? 'block'
 
 : 'none';
-
-}
-
-
-
-function toggleDanger(){
-
-alert(
-'🆘 困っています'
-);
-
-}
-
-
-
-/* 音声 */
-
-function startVoiceInput(){
-
-const SpeechRecognition =
-
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
-
-
-
-if(!SpeechRecognition){
-
-document.getElementById(
-'voiceResult'
-).innerText =
-
-'⚠ この端末では音声入力できません';
-
-return;
-
-}
-
-
-
-const recognition =
-new SpeechRecognition();
-
-recognition.lang = 'ja-JP';
-
-recognition.interimResults = false;
-
-recognition.continuous = false;
-
-
-
-recognition.onstart = function(){
-
-document.getElementById(
-'voiceResult'
-).innerText =
-
-'🎤 聞き取り中...';
-
-};
-
-
-
-recognition.onresult = function(event){
-
-const text =
-
-event.results[0][0]
-.transcript;
-
-
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'🎤 ' + text;
-
-
-
-todayData.unshift({
-
-icon:'📅',
-text:text
-
-});
-
-
-
-renderToday();
-
-};
-
-
-
-recognition.start();
 
 }
 
