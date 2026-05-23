@@ -3,121 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>NSAW地域DX</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
   padding:18px;
   background:#eef3f8;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Hiragino Sans",
-  "Yu Gothic",
-  sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
   color:#222;
 }
-
-.wrap{
-  max-width:760px;
-  margin:0 auto;
-}
-
-.clock-box,
-.today-box,
-.voice-result,
-.health-box,
-.card{
+.wrap{max-width:760px;margin:0 auto}
+.clock-box,.today-box,.voice-result,.health-box,.card{
   background:#fff;
   border-radius:28px;
   margin-bottom:34px;
-  box-shadow:
-  0 8px 24px
-  rgba(0,0,0,.10);
+  box-shadow:0 8px 24px rgba(0,0,0,.10);
 }
-
-.clock-box{
-  text-align:center;
-  padding:28px;
-}
-
-.clock-date{
-  font-size:30px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.clock-time{
-  font-size:72px;
-  font-weight:900;
-}
-
-.main-title{
-  font-size:44px;
-  font-weight:900;
-  margin:14px 0 28px;
-}
-
-
-
-/* 今日の予定 */
-
-.today-box{
-  background:#fff8dc;
-  padding:24px;
-}
-
-.today-title{
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:18px;
-}
-
-.today-link{
-  text-decoration:none;
-  color:#222;
-  display:block;
-}
-
-.today-item{
-  font-size:28px;
-  line-height:1.8;
-  margin-bottom:12px;
-}
-
-
-
-/* 音声 */
-
-.voice-btn{
+.clock-box{text-align:center;padding:28px}
+.clock-date{font-size:30px;font-weight:900;margin-bottom:10px}
+.clock-time{font-size:72px;font-weight:900}
+.main-title{font-size:44px;font-weight:900;margin:14px 0 28px}
+.today-box{background:#fff8dc;padding:24px}
+.today-title{font-size:36px;font-weight:900;margin-bottom:18px}
+.today-link{text-decoration:none;color:#222;display:block}
+.today-item{font-size:28px;line-height:1.8;margin-bottom:12px}
+.voice-btn,.health-btn{
   width:100%;
   border:none;
   border-radius:22px;
   padding:26px;
   margin-bottom:18px;
-  background:#4a90e2;
-  color:#fff;
-  font-size:32px;
+  font-size:30px;
   font-weight:900;
 }
-
-.voice-result{
-  padding:24px;
-  font-size:26px;
-  line-height:1.8;
-  white-space:pre-wrap;
-}
-
+.voice-btn{background:#4a90e2;color:#fff;font-size:32px}
+.voice-result{padding:24px;font-size:26px;line-height:1.8;white-space:pre-wrap}
 .voice-save{
   display:block;
   width:100%;
+  text-decoration:none;
+  text-align:center;
   border:none;
   border-radius:20px;
   padding:22px;
@@ -127,45 +54,11 @@ body{
   font-size:28px;
   font-weight:900;
 }
-
-
-
-/* 元気 */
-
-.health-box{
-  padding:24px;
-}
-
-.health-title{
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:20px;
-}
-
-.health-btn{
-  width:100%;
-  border:none;
-  border-radius:20px;
-  padding:24px;
-  margin-bottom:18px;
-  font-size:30px;
-  font-weight:900;
-}
-
-.good-btn{
-  background:#5cc96b;
-  color:#fff;
-}
-
-.normal-btn{
-  background:#ffd54f;
-}
-
-.danger-btn{
-  background:#ef5350;
-  color:#fff;
-}
-
+.health-box{padding:24px}
+.health-title{font-size:36px;font-weight:900;margin-bottom:20px}
+.good-btn{background:#5cc96b;color:#fff}
+.normal-btn{background:#ffd54f}
+.danger-btn{background:#ef5350;color:#fff}
 .sub-btn{
   width:100%;
   border:none;
@@ -176,7 +69,6 @@ body{
   font-size:24px;
   font-weight:900;
 }
-
 .danger-call{
   display:block;
   text-decoration:none;
@@ -189,69 +81,15 @@ body{
   font-size:26px;
   font-weight:900;
 }
-
-
-
-/* 記事 */
-
-.card{
-  overflow:hidden;
-}
-
-.card img{
-  width:100%;
-  display:block;
-}
-
-.card-body{
-  padding:24px;
-}
-
-.date{
-  font-size:18px;
-  color:#666;
-  margin-bottom:10px;
-}
-
-.title{
-  font-size:32px;
-  font-weight:900;
-  margin-bottom:18px;
-}
-
-.text{
-  font-size:22px;
-  line-height:1.9;
-  white-space:pre-wrap;
-}
-
-.video-title{
-  font-size:24px;
-  font-weight:900;
-  margin:28px 0 14px;
-}
-
-.video-wrap{
-  position:relative;
-  width:100%;
-  padding-top:56.25%;
-  border-radius:22px;
-  overflow:hidden;
-  background:#000;
-}
-
-.video-wrap iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-
-
-/* 下固定 */
-
+.card{overflow:hidden}
+.card img{width:100%;display:block}
+.card-body{padding:24px}
+.date{font-size:18px;color:#666;margin-bottom:10px}
+.title{font-size:32px;font-weight:900;margin-bottom:18px}
+.text{font-size:22px;line-height:1.9;white-space:pre-wrap}
+.video-title{font-size:24px;font-weight:900;margin:28px 0 14px}
+.video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:22px;overflow:hidden;background:#000}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
 .bottom-menu{
   position:fixed;
   left:0;
@@ -261,737 +99,293 @@ body{
   display:flex;
   justify-content:space-around;
   padding:12px 0;
-  box-shadow:
-  0 -4px 14px
-  rgba(0,0,0,.12);
+  box-shadow:0 -4px 14px rgba(0,0,0,.12);
 }
-
-.bottom-btn{
-  text-decoration:none;
-  color:#222;
-  font-size:18px;
-  font-weight:900;
-  text-align:center;
-}
-
-.bottom-icon{
-  display:block;
-  font-size:28px;
-  margin-bottom:6px;
-}
-
-.footer-space{
-  height:100px;
-}
-
+.bottom-btn{text-decoration:none;color:#222;font-size:18px;font-weight:900;text-align:center}
+.bottom-icon{display:block;font-size:28px;margin-bottom:6px}
+.footer-space{height:100px}
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
-
-
-<!-- 時計 -->
-
 <div class="clock-box">
-
-<div
-class="clock-date"
-id="clockDate"
-></div>
-
-<div
-class="clock-time"
-id="clockTime"
-></div>
-
+  <div class="clock-date" id="clockDate"></div>
+  <div class="clock-time" id="clockTime"></div>
 </div>
 
+<div class="main-title">NSAW地域DX</div>
 
+<div class="today-box" id="todayBox"></div>
 
-<div class="main-title">
-NSAW地域DX
-</div>
+<button class="voice-btn" onclick="startVoiceInput()">🎤 話して予定追加</button>
 
-
-
-<!-- 今日の予定 -->
-
-<div
-class="today-box"
-id="todayBox"
-></div>
-
-
-
-<!-- 音声 -->
-
-<button
-class="voice-btn"
-onclick="startVoiceInput()"
->
-🎤 話して予定追加
-</button>
-
-<div
-class="voice-result"
-id="voiceResult"
->
-ここに話した内容が表示されます
-</div>
-
-
-
-<!-- 元気 -->
+<div class="voice-result" id="voiceResult">ここに話した内容が表示されます</div>
 
 <div class="health-box">
+  <div class="health-title">😊 今日の状態</div>
 
-<div class="health-title">
-😊 今日の状態
+  <button class="health-btn good-btn" onclick="showGood()">😊 元気です</button>
+  <button class="health-btn normal-btn" onclick="toggleNormal()">😐 ちょっと不調</button>
+
+  <div id="normalMenu" style="display:none;">
+    <button class="sub-btn">体調が悪い</button>
+    <button class="sub-btn">転んだ</button>
+    <button class="sub-btn">薬がない</button>
+    <button class="sub-btn">食べ物がない</button>
+    <button class="sub-btn">病院に行きたい</button>
+    <button class="sub-btn">誰かに電話したい</button>
+  </div>
+
+  <button class="health-btn danger-btn" onclick="toggleDanger()">🆘 困っています</button>
+
+  <div id="dangerMenu" style="display:none;">
+    <a class="danger-call" href="tel:119">🚑 119</a>
+    <a class="danger-call" href="tel:110">🚓 110</a>
+  </div>
 </div>
-
-<button
-class="health-btn good-btn"
-onclick="showGood()"
->
-😊 元気です
-</button>
-
-<button
-class="health-btn normal-btn"
-onclick="toggleNormal()"
->
-😐 ちょっと不調
-</button>
-
-<div
-id="normalMenu"
-style="display:none;"
->
-
-<button class="sub-btn">
-体調が悪い
-</button>
-
-<button class="sub-btn">
-転んだ
-</button>
-
-<button class="sub-btn">
-薬がない
-</button>
-
-<button class="sub-btn">
-食べ物がない
-</button>
-
-<button class="sub-btn">
-病院に行きたい
-</button>
-
-<button class="sub-btn">
-誰かに電話したい
-</button>
-
-</div>
-
-<button
-class="health-btn danger-btn"
-onclick="toggleDanger()"
->
-🆘 困っています
-</button>
-
-<div
-id="dangerMenu"
-style="display:none;"
->
-
-<a
-class="danger-call"
-href="tel:119"
->
-🚑 119
-</a>
-
-<a
-class="danger-call"
-href="tel:110"
->
-🚓 110
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- 記事 -->
 
 <div id="list"></div>
-
 <div class="footer-space"></div>
 
 </div>
 
-
-
-<!-- 下固定 -->
-
 <div class="bottom-menu">
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">📅</span>
-予定
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🗺</span>
-地図
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">😊</span>
-元気
-</a>
-
+  <a class="bottom-btn" href="#"><span class="bottom-icon">🏠</span>ホーム</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">📅</span>予定</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">🗺</span>地図</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">😊</span>元気</a>
 </div>
 
-
-
 <script>
-
-
-
-/* 時計 */
-
 function updateClock(){
+  const now = new Date();
 
-const now =
-new Date();
+  document.getElementById('clockDate').innerText =
+    now.toLocaleDateString('ja-JP',{
+      year:'numeric',
+      month:'long',
+      day:'numeric',
+      weekday:'long'
+    });
 
-document.getElementById(
-'clockDate'
-).innerText =
-
-now.toLocaleDateString(
-'ja-JP',
-{
-year:'numeric',
-month:'long',
-day:'numeric',
-weekday:'long'
+  document.getElementById('clockTime').innerText =
+    now.toLocaleTimeString('ja-JP',{
+      hour:'2-digit',
+      minute:'2-digit'
+    });
 }
-);
-
-document.getElementById(
-'clockTime'
-).innerText =
-
-now.toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-);
-
-}
-
 updateClock();
-
-setInterval(
-updateClock,
-1000
-);
-
-
-
-/* 今日の予定 */
+setInterval(updateClock,1000);
 
 let todayData =
-
-JSON.parse(
-localStorage.getItem(
-'todayData'
-)
-)
-
-||
-
+JSON.parse(localStorage.getItem('todayData')) ||
 [
-
-{
-icon:'🏥',
-text:'10:00 歯医者',
-url:'#'
-},
-
-{
-icon:'💊',
-text:'朝の薬',
-url:'#'
-}
-
+  {icon:'🏥',text:'10:00 歯医者',url:'#'},
+  {icon:'💊',text:'朝の薬',url:'#'}
 ];
 
-
-
 function renderToday(){
+  document.getElementById('todayBox').innerHTML =
+    '<div class="today-title">☀ 今日の予定</div>' +
+    todayData.map(item =>
+      '<a class="today-link" href="' + item.url + '" target="_blank">' +
+      '<div class="today-item">' + item.icon + ' ' + item.text + '</div></a>'
+    ).join('');
 
-document.getElementById(
-'todayBox'
-).innerHTML =
-
-'<div class="today-title">☀ 今日の予定</div>'
-
-+
-
-todayData.map(item =>
-
-'<a class="today-link" href="' +
-item.url +
-'" target="_blank">' +
-
-'<div class="today-item">' +
-item.icon +
-' ' +
-item.text +
-'</div></a>'
-
-).join('');
-
-
-
-localStorage.setItem(
-'todayData',
-JSON.stringify(todayData)
-);
-
+  localStorage.setItem('todayData',JSON.stringify(todayData));
 }
-
 renderToday();
-
-
-
-/* 音声 */
 
 function startVoiceInput(){
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const SpeechRecognition =
+  if(!SpeechRecognition){
+    document.getElementById('voiceResult').innerText =
+      '⚠ この端末では音声入力できません';
+    return;
+  }
 
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'ja-JP';
+  recognition.interimResults = false;
+  recognition.continuous = false;
 
+  recognition.onstart = function(){
+    document.getElementById('voiceResult').innerText = '🎤 聞き取り中...';
+  };
 
+  recognition.onresult = function(event){
+    const text = event.results[0][0].transcript;
+    const parsed = parseScheduleText(text);
+    const calendarUrl = createGoogleCalendarUrl(parsed);
 
-if(!SpeechRecognition){
+    document.getElementById('voiceResult').innerHTML =
+      '<div>🎤 ' + text + '</div>' +
+      '<div style="margin-top:18px;font-weight:900;">AI整理結果</div>' +
+      '<div>📅 日付：' + parsed.date + '</div>' +
+      '<div>⏰ 時間：' + parsed.time + '</div>' +
+      '<div>🏥 内容：' + parsed.title + '</div>' +
+      '<button class="voice-save" onclick="saveSchedule(' +
+      JSON.stringify(parsed).replace(/"/g,'&quot;') +
+      ')">☀ 今日の予定へ追加</button>' +
+      '<a class="voice-save" href="' + calendarUrl + '" target="_blank">📅 Googleカレンダーへ登録</a>';
+  };
 
-document.getElementById(
-'voiceResult'
-).innerText =
-
-'⚠ この端末では音声入力できません';
-
-return;
-
+  recognition.start();
 }
-
-
-
-const recognition =
-new SpeechRecognition();
-
-recognition.lang = 'ja-JP';
-
-recognition.interimResults = false;
-
-recognition.continuous = false;
-
-
-
-recognition.onstart = function(){
-
-document.getElementById(
-'voiceResult'
-).innerText =
-
-'🎤 聞き取り中...';
-
-};
-
-
-
-recognition.onresult = function(event){
-
-const text =
-
-event.results[0][0]
-.transcript;
-
-
-
-const parsed =
-parseScheduleText(text);
-
-
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'<div>🎤 ' +
-text +
-'</div>'
-
-+
-
-'<div style="margin-top:18px;font-weight:900;">AI整理結果</div>'
-
-+
-
-'<div>📅 日付：' +
-parsed.date +
-'</div>'
-
-+
-
-'<div>⏰ 時間：' +
-parsed.time +
-'</div>'
-
-+
-
-'<div>🏥 内容：' +
-parsed.title +
-'</div>'
-
-+
-
-'<button class="voice-save" onclick="saveSchedule(' +
-
-JSON.stringify(parsed)
-.replace(/"/g,'&quot;')
-
-+
-
-')">' +
-
-'☀ 今日の予定へ追加'
-
-+
-
-'</button>';
-
-};
-
-recognition.start();
-
-}
-
-
-
-/* AI整理 */
 
 function parseScheduleText(text){
+  let date = '未整理';
+  let time = '未整理';
+  let title = text;
 
-let date = '未整理';
+  const monthDay = text.match(/(\d{1,2})月(\d{1,2})日/);
 
-let time = '未整理';
+  if(monthDay){
+    date = monthDay[1] + '月' + monthDay[2] + '日';
+  }
 
-let title = text;
+  if(text.includes('時半')){
+    const halfMatch = text.match(/(\d{1,2})時半/);
+    if(halfMatch){
+      time = halfMatch[1].padStart(2,'0') + ':30';
+    }
+  }else{
+    const timeMatch = text.match(/(\d{1,2})時\s*(\d{1,2})?分?/);
+    if(timeMatch){
+      const hour = timeMatch[1];
+      let minute = timeMatch[2] ? timeMatch[2] : '00';
+      time = hour.padStart(2,'0') + ':' + minute.padStart(2,'0');
+    }
+  }
 
+  if(text.includes('歯医者')){
+    title = '歯医者';
+  }else if(text.includes('病院')){
+    title = '病院';
+  }else if(text.includes('内科')){
+    title = '内科';
+  }else if(text.includes('薬')){
+    title = '薬';
+  }
 
-
-const monthDay =
-
-text.match(
-/(\d{1,2})月(\d{1,2})日/
-);
-
-if(monthDay){
-
-date =
-monthDay[1] +
-'月' +
-monthDay[2] +
-'日';
-
+  return {date:date,time:time,title:title};
 }
 
+function createGoogleCalendarUrl(parsed){
+  const title = encodeURIComponent(parsed.title || '予定');
 
+  const details = encodeURIComponent(
+    'NSAW地域DXから登録'
+  );
 
-/* 時間 */
+  const dates = createGoogleCalendarDates(parsed);
 
-if(text.includes('時半')){
-
-const halfMatch =
-
-text.match(
-/(\d{1,2})時半/
-);
-
-if(halfMatch){
-
-time =
-halfMatch[1]
-.padStart(2,'0')
-+
-':30';
-
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + title +
+    '&details=' + details +
+    dates;
 }
 
+function createGoogleCalendarDates(parsed){
+  if(parsed.date === '未整理' || parsed.time === '未整理'){
+    return '';
+  }
+
+  const now = new Date();
+  const year = now.getFullYear();
+
+  const md = parsed.date.match(/(\d{1,2})月(\d{1,2})日/);
+  const tm = parsed.time.match(/(\d{2}):(\d{2})/);
+
+  if(!md || !tm){
+    return '';
+  }
+
+  const month = String(md[1]).padStart(2,'0');
+  const day = String(md[2]).padStart(2,'0');
+  const hour = String(tm[1]).padStart(2,'0');
+  const minute = String(tm[2]).padStart(2,'0');
+
+  const start =
+    String(year) + month + day + 'T' + hour + minute + '00';
+
+  const endDate = new Date(
+    year,
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute) + 60
+  );
+
+  const end =
+    String(endDate.getFullYear()) +
+    String(endDate.getMonth() + 1).padStart(2,'0') +
+    String(endDate.getDate()).padStart(2,'0') +
+    'T' +
+    String(endDate.getHours()).padStart(2,'0') +
+    String(endDate.getMinutes()).padStart(2,'0') +
+    '00';
+
+  return '&dates=' + start + '/' + end;
 }
-
-else{
-
-const timeMatch =
-
-text.match(
-/(\d{1,2})時\s*(\d{1,2})?分?/
-);
-
-if(timeMatch){
-
-const hour =
-timeMatch[1];
-
-let minute =
-timeMatch[2];
-
-if(!minute){
-
-minute = '00';
-
-}
-
-minute =
-minute.padStart(2,'0');
-
-time =
-hour.padStart(2,'0')
-+
-':'
-+
-minute;
-
-}
-
-}
-
-
-
-/* 内容 */
-
-if(text.includes('歯医者')){
-
-title = '歯医者';
-
-}
-
-else if(text.includes('病院')){
-
-title = '病院';
-
-}
-
-
-
-return {
-
-date:date,
-time:time,
-title:title
-
-};
-
-}
-
-
-
-/* 保存 */
 
 function saveSchedule(parsed){
+  todayData.unshift({
+    icon:'📅',
+    text: parsed.date + ' ' + parsed.time + ' ' + parsed.title,
+    url:'#'
+  });
 
-todayData.unshift({
+  renderToday();
 
-icon:'📅',
-
-text:
-parsed.date +
-' ' +
-parsed.time +
-' ' +
-parsed.title,
-
-url:'#'
-
-});
-
-
-
-renderToday();
-
-
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'✅ 今日の予定へ追加しました';
-
+  document.getElementById('voiceResult').innerHTML =
+    '✅ 今日の予定へ追加しました';
 }
-
-
-
-/* 元気 */
 
 function showGood(){
-
-alert(
-'😊 元気を記録しました'
-);
-
+  alert('😊 元気を記録しました');
 }
-
-
 
 function toggleNormal(){
-
-const menu =
-
-document.getElementById(
-'normalMenu'
-);
-
-menu.style.display =
-
-menu.style.display === 'none'
-
-? 'block'
-
-: 'none';
-
+  const menu = document.getElementById('normalMenu');
+  menu.style.display =
+    menu.style.display === 'none' ? 'block' : 'none';
 }
-
-
 
 function toggleDanger(){
-
-const menu =
-
-document.getElementById(
-'dangerMenu'
-);
-
-menu.style.display =
-
-menu.style.display === 'none'
-
-? 'block'
-
-: 'none';
-
+  const menu = document.getElementById('dangerMenu');
+  menu.style.display =
+    menu.style.display === 'none' ? 'block' : 'none';
 }
 
-
-
-/* 記事 */
-
 fetch('data.json')
-
 .then(res => res.json())
-
 .then(posts => {
+  const list = document.getElementById('list');
 
-const list =
+  posts.forEach(post => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-document.getElementById(
-'list'
-);
+    card.innerHTML =
+      (post.image ? '<img src="' + post.image + '">' : '') +
+      '<div class="card-body">' +
+      '<div class="date">' + post.date + '</div>' +
+      '<div class="title">' + post.title + '</div>' +
+      '<div class="text">' + post.text + '</div>' +
+      (post.youtubeUrl
+        ? '<div class="video-title">' + post.videoTitle + '</div>' +
+          '<div class="video-wrap"><iframe src="' + post.youtubeUrl + '" allowfullscreen></iframe></div>'
+        : '') +
+      '</div>';
 
-
-
-posts.forEach(post => {
-
-const card =
-
-document.createElement(
-'div'
-);
-
-card.className = 'card';
-
-
-
-card.innerHTML =
-
-(post.image
-
-? '<img src="' +
-post.image +
-'">'
-
-: '')
-
-+
-
-'<div class="card-body">'
-
-+
-
-'<div class="date">' +
-post.date +
-'</div>'
-
-+
-
-'<div class="title">' +
-post.title +
-'</div>'
-
-+
-
-'<div class="text">' +
-post.text +
-'</div>'
-
-+
-
-(post.youtubeUrl
-
-? '<div class="video-title">' +
-post.videoTitle +
-'</div>'
-
-+
-
-'<div class="video-wrap"><iframe src="' +
-post.youtubeUrl +
-'" allowfullscreen></iframe></div>'
-
-: '')
-
-+
-
-'</div>';
-
-
-
-list.appendChild(card);
-
+    list.appendChild(card);
+  });
 });
-
-});
-
 </script>
 
 </body>
