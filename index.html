@@ -8,77 +8,50 @@
 
 <style>
 
-*{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
 body{
 margin:0;
 padding:16px;
 background:#eef3f8;
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Hiragino Sans",
-"Yu Gothic",
-sans-serif;
-color:#222;
-}
-
-.wrap{
-max-width:760px;
-margin:0 auto;
+font-family:sans-serif;
 }
 
 .box{
 background:#fff;
-border-radius:28px;
+border-radius:24px;
 padding:24px;
 margin-bottom:24px;
-box-shadow:
-0 8px 24px
-rgba(0,0,0,.08);
 }
 
-.section-title{
-font-size:38px;
+.title{
+font-size:40px;
 font-weight:900;
 margin-bottom:20px;
 }
 
-.health-btn{
+.btn{
 width:100%;
 border:none;
-border-radius:22px;
-padding:26px;
-margin-bottom:18px;
-font-size:34px;
+border-radius:20px;
+padding:24px;
+margin-bottom:16px;
+font-size:32px;
 font-weight:900;
 }
 
-.good-btn{
+.green{
 background:#5cc96b;
 color:#fff;
 }
 
-.medicine-btn{
-width:100%;
-border:none;
-border-radius:18px;
-padding:22px;
-margin-bottom:10px;
+.gray{
 background:#f3f5f7;
-font-size:30px;
-font-weight:900;
 }
 
-.medicine-result{
+.result{
 font-size:24px;
 font-weight:900;
 color:#22aa44;
-margin-bottom:18px;
-line-height:1.7;
+margin-bottom:20px;
 }
 
 </style>
@@ -86,33 +59,36 @@ line-height:1.7;
 
 <body>
 
-<div class="wrap">
-
 <div class="box">
 
-<div class="section-title">
+<div class="title">
 😊 今日の状態
 </div>
 
 <button
-class="health-btn good-btn"
+class="btn green"
 onclick="showGood()"
 >
 😊 元気です
 </button>
 
+<div
+id="goodResult"
+class="result"
+></div>
+
 </div>
 
 
 
 <div class="box">
 
-<div class="section-title">
+<div class="title">
 💊 今日の薬
 </div>
 
 <button
-class="medicine-btn"
+class="btn gray"
 onclick="takeMorningMedicine()"
 >
 💊 朝の薬
@@ -120,13 +96,13 @@ onclick="takeMorningMedicine()"
 
 <div
 id="morningResult"
-class="medicine-result"
+class="result"
 ></div>
 
 
 
 <button
-class="medicine-btn"
+class="btn gray"
 onclick="takeLunchMedicine()"
 >
 💊 昼の薬
@@ -134,13 +110,13 @@ onclick="takeLunchMedicine()"
 
 <div
 id="lunchResult"
-class="medicine-result"
+class="result"
 ></div>
 
 
 
 <button
-class="medicine-btn"
+class="btn gray"
 onclick="takeNightMedicine()"
 >
 💊 夜の薬
@@ -148,25 +124,12 @@ onclick="takeNightMedicine()"
 
 <div
 id="nightResult"
-class="medicine-result"
+class="result"
 ></div>
 
 </div>
 
-</div>
-
 <script>
-
-const GAS_URL =
-'https://script.google.com/macros/s/AKfycbwcb8ig7N1XMZkwYm-BOSDC3N1w5ifNvGr6qqE3-ER0gn4pkn3zgLZ7sWIrcrzgH6yE/exec';
-
-const USER_CODE =
-'YAMA1234';
-
-const USER_NAME =
-'山口さん';
-
-
 
 function getNowTime(){
 
@@ -183,168 +146,61 @@ minute:'2-digit'
 
 
 
-/* GAS送信 */
-
-function sendToGas(data){
-
-fetch(
-
-GAS_URL,
-
-{
-
-method:'POST',
-
-mode:'no-cors',
-
-headers:{
-'Content-Type':
-'text/plain'
-},
-
-body:
-JSON.stringify(data)
-
-}
-
-);
-
-}
-
-
-
-/* 元気 */
-
 function showGood(){
 
 const time =
 getNowTime();
 
+document.getElementById(
+'goodResult'
+).innerHTML =
 
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'元気',
-
-status:'元気です',
-
-time:time
-
-});
-
-
-
-alert(
-'😊 元気を送信しました'
-);
+'✅ 元気確認 ' + time;
 
 }
 
 
-
-/* 朝 */
 
 function takeMorningMedicine(){
 
 const time =
 getNowTime();
 
-
-
 document.getElementById(
 'morningResult'
 ).innerHTML =
 
-'✅ 飲みました ' +
-time;
-
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'薬',
-
-status:'朝の薬',
-
-time:time
-
-});
+'✅ 飲みました ' + time;
 
 }
 
 
-
-/* 昼 */
 
 function takeLunchMedicine(){
 
 const time =
 getNowTime();
 
-
-
 document.getElementById(
 'lunchResult'
 ).innerHTML =
 
-'✅ 飲みました ' +
-time;
-
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'薬',
-
-status:'昼の薬',
-
-time:time
-
-});
+'✅ 飲みました ' + time;
 
 }
 
 
-
-/* 夜 */
 
 function takeNightMedicine(){
 
 const time =
 getNowTime();
 
-
-
 document.getElementById(
 'nightResult'
 ).innerHTML =
 
-'✅ 飲みました ' +
-time;
-
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'薬',
-
-status:'夜の薬',
-
-time:time
-
-});
+'✅ 飲みました ' + time;
 
 }
 
