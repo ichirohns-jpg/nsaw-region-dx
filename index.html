@@ -179,6 +179,13 @@ font-size:24px;
 font-weight:900;
 }
 
+.medicine-result{
+font-size:22px;
+font-weight:900;
+margin-bottom:18px;
+color:#22aa44;
+}
+
 
 
 /* 下 */
@@ -303,10 +310,45 @@ style="display:none;"
 
 <button
 class="sub-btn"
-onclick="takeMedicine()"
+onclick="takeMorningMedicine()"
 >
-💊 薬を飲みました
+💊 朝の薬
 </button>
+
+<div
+id="morningResult"
+class="medicine-result"
+></div>
+
+
+
+<button
+class="sub-btn"
+onclick="takeLunchMedicine()"
+>
+💊 昼の薬
+</button>
+
+<div
+id="lunchResult"
+class="medicine-result"
+></div>
+
+
+
+<button
+class="sub-btn"
+onclick="takeNightMedicine()"
+>
+💊 夜の薬
+</button>
+
+<div
+id="nightResult"
+class="medicine-result"
+></div>
+
+
 
 <button class="sub-btn">
 体調が悪い
@@ -457,7 +499,7 @@ updateClock,
 
 
 
-/* データ */
+/* 今日 */
 
 let todayData =
 
@@ -472,8 +514,6 @@ localStorage.getItem(
 [];
 
 
-
-/* 今日だけ */
 
 function renderToday(){
 
@@ -521,12 +561,9 @@ document.getElementById(
 filtered.map(item =>
 
 '<div class="today-item">' +
-
 item.icon +
 ' ' +
-
 item.text +
-
 '</div>'
 
 ).join('');
@@ -568,7 +605,7 @@ JSON.stringify(data)
 
 
 
-/* Googleカレンダー */
+/* カレンダー */
 
 function createGoogleCalendarUrl(parsed){
 
@@ -865,14 +902,6 @@ document.getElementById(
 
 
 
-recognition.onend = function(){
-
-console.log('音声終了');
-
-};
-
-
-
 recognition.start();
 
 }
@@ -964,14 +993,10 @@ alert(
 
 /* 薬 */
 
-function takeMedicine(){
+function getNowTime(){
 
-const now =
-new Date();
-
-const time =
-
-now.toLocaleTimeString(
+return new Date()
+.toLocaleTimeString(
 'ja-JP',
 {
 hour:'2-digit',
@@ -979,26 +1004,56 @@ minute:'2-digit'
 }
 );
 
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-genkiStatus:'元気です',
-genkiTime:'保存済み',
-
-medicineStatus:'飲みました',
-medicineTime:time
-
-});
+}
 
 
 
-alert(
-'💊 薬を記録しました'
-);
+/* 朝 */
+
+function takeMorningMedicine(){
+
+const time =
+getNowTime();
+
+document.getElementById(
+'morningResult'
+).innerHTML =
+
+'✅ 飲みました ' + time;
+
+}
+
+
+
+/* 昼 */
+
+function takeLunchMedicine(){
+
+const time =
+getNowTime();
+
+document.getElementById(
+'lunchResult'
+).innerHTML =
+
+'✅ 飲みました ' + time;
+
+}
+
+
+
+/* 夜 */
+
+function takeNightMedicine(){
+
+const time =
+getNowTime();
+
+document.getElementById(
+'nightResult'
+).innerHTML =
+
+'✅ 飲みました ' + time;
 
 }
 
