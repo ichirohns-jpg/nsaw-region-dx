@@ -58,6 +58,7 @@ body{
   font-size:28px;
   line-height:1.9;
   margin-bottom:14px;
+  word-break:keep-all;
 }
 
 .good{
@@ -99,6 +100,27 @@ body{
   color:#fff;
   font-size:30px;
   font-weight:900;
+}
+
+.section-title{
+  font-size:30px;
+  font-weight:900;
+  margin:
+  26px 0
+  18px;
+}
+
+hr{
+  border:none;
+  border-top:
+  2px solid #ddd;
+  margin:
+  22px 0;
+}
+
+.empty{
+  color:#777;
+  font-size:24px;
 }
 
 </style>
@@ -143,6 +165,33 @@ localStorage.getItem(
 
 
 
+const todayHtml =
+
+todayData.length
+
+?
+
+todayData.map(item =>
+
+`
+<div class="line">
+${item.icon}
+${item.text}
+</div>
+`
+
+).join('')
+
+:
+
+`
+<div class="empty">
+今日の予定はありません
+</div>
+`;
+
+
+
 const familyHtml =
 
 `
@@ -160,7 +209,7 @@ const familyHtml =
 最終確認：今日 08:15
 </div>
 
-<hr style="margin:22px 0;">
+<hr>
 
 <div class="line">
 💊 朝の薬：
@@ -169,20 +218,11 @@ const familyHtml =
 </span>
 </div>
 
-<div class="line">
+<div class="section-title">
 📅 今日の予定
 </div>
 
-${todayData.map(item =>
-
-`
-<div class="line">
-${item.icon}
-${item.text}
-</div>
-`
-
-).join('')}
+${todayHtml}
 
 <a
 class="map-btn"
