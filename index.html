@@ -14,6 +14,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   padding:18px;
@@ -21,7 +22,12 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
   color:#222;
 }
-.wrap{max-width:760px;margin:0 auto}
+
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+}
+
 .clock-box,.today-box,.health-box,.card{
   background:#fff;
   border-radius:28px;
@@ -29,14 +35,53 @@ body{
   box-shadow:0 8px 24px rgba(0,0,0,.10);
   overflow:hidden;
 }
-.clock-box{text-align:center;padding:28px}
-.clock-date{font-size:30px;font-weight:900;margin-bottom:10px}
-.clock-time{font-size:72px;font-weight:900;line-height:1.1}
-.main-title{font-size:44px;font-weight:900;margin:14px 0 28px}
-.today-box{background:#fff8dc;padding:24px}
-.today-title,.health-title{font-size:36px;font-weight:900;margin-bottom:18px}
-.today-link{text-decoration:none;color:#222;display:block}
-.today-item{font-size:28px;line-height:1.8;margin-bottom:12px}
+
+.clock-box{
+  text-align:center;
+  padding:28px;
+}
+
+.clock-date{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.clock-time{
+  font-size:72px;
+  font-weight:900;
+  line-height:1.1;
+}
+
+.main-title{
+  font-size:44px;
+  font-weight:900;
+  margin:14px 0 28px;
+}
+
+.today-box{
+  background:#fff8dc;
+  padding:24px;
+}
+
+.today-title,.health-title{
+  font-size:36px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.today-link{
+  text-decoration:none;
+  color:#222;
+  display:block;
+}
+
+.today-item{
+  font-size:28px;
+  line-height:1.8;
+  margin-bottom:12px;
+}
+
 .voice-btn,.health-btn{
   width:100%;
   border:none;
@@ -46,19 +91,54 @@ body{
   font-size:30px;
   font-weight:900;
 }
-.voice-btn{background:#4a90e2;color:#fff}
+
+.voice-btn{
+  background:#4a90e2;
+  color:#fff;
+}
+
 .voice-result{
   background:#fff;
   border-radius:20px;
   padding:22px;
   margin:-6px 0 36px;
   font-size:26px;
-  line-height:1.7;
+  line-height:1.8;
+  white-space:pre-wrap;
 }
-.health-box{padding:24px}
-.good-btn{background:#5cc96b;color:#fff}
-.normal-btn{background:#ffd54f;color:#222}
-.danger-btn{background:#ef5350;color:#fff}
+
+.voice-save{
+  display:block;
+  width:100%;
+  border:none;
+  border-radius:18px;
+  padding:20px;
+  margin-top:18px;
+  background:#5cc96b;
+  color:#fff;
+  font-size:26px;
+  font-weight:900;
+}
+
+.health-box{
+  padding:24px;
+}
+
+.good-btn{
+  background:#5cc96b;
+  color:#fff;
+}
+
+.normal-btn{
+  background:#ffd54f;
+  color:#222;
+}
+
+.danger-btn{
+  background:#ef5350;
+  color:#fff;
+}
+
 .sub-btn{
   width:100%;
   border:none;
@@ -69,6 +149,7 @@ body{
   font-size:24px;
   font-weight:900;
 }
+
 .danger-call{
   display:block;
   text-decoration:none;
@@ -81,11 +162,35 @@ body{
   font-size:26px;
   font-weight:900;
 }
-.card img{width:100%;display:block}
-.card-body{padding:24px}
-.date{font-size:18px;color:#666;margin-bottom:10px}
-.title{font-size:32px;font-weight:900;line-height:1.5;margin-bottom:18px}
-.text{font-size:22px;line-height:1.9;white-space:pre-wrap}
+
+.card img{
+  width:100%;
+  display:block;
+}
+
+.card-body{
+  padding:24px;
+}
+
+.date{
+  font-size:18px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:32px;
+  font-weight:900;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.text{
+  font-size:22px;
+  line-height:1.9;
+  white-space:pre-wrap;
+}
+
 .link-btn{
   display:block;
   width:100%;
@@ -99,9 +204,30 @@ body{
   padding:18px;
   margin-top:14px;
 }
-.video-title{font-size:24px;font-weight:900;margin:28px 0 14px}
-.video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:22px;overflow:hidden;background:#000}
-.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+.video-title{
+  font-size:24px;
+  font-weight:900;
+  margin:28px 0 14px;
+}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;
+  border-radius:22px;
+  overflow:hidden;
+  background:#000;
+}
+
+.video-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+}
+
 .bottom-menu{
   position:fixed;
   left:0;
@@ -113,9 +239,24 @@ body{
   padding:12px 0;
   box-shadow:0 -4px 14px rgba(0,0,0,.12);
 }
-.bottom-btn{text-decoration:none;color:#222;font-size:18px;font-weight:900;text-align:center}
-.bottom-icon{display:block;font-size:28px;margin-bottom:6px}
-.footer-space{height:100px}
+
+.bottom-btn{
+  text-decoration:none;
+  color:#222;
+  font-size:18px;
+  font-weight:900;
+  text-align:center;
+}
+
+.bottom-icon{
+  display:block;
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.footer-space{
+  height:100px;
+}
 </style>
 </head>
 
@@ -179,11 +320,22 @@ body{
 <script>
 function updateClock(){
   const now = new Date();
+
   document.getElementById('clockDate').innerText =
-    now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+    now.toLocaleDateString('ja-JP',{
+      year:'numeric',
+      month:'long',
+      day:'numeric',
+      weekday:'long'
+    });
+
   document.getElementById('clockTime').innerText =
-    now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+    now.toLocaleTimeString('ja-JP',{
+      hour:'2-digit',
+      minute:'2-digit'
+    });
 }
+
 updateClock();
 setInterval(updateClock,1000);
 
@@ -201,7 +353,8 @@ document.getElementById('todayBox').innerHTML =
   ).join('');
 
 function startVoiceInput(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if(!SpeechRecognition){
     document.getElementById('voiceResult').innerText =
@@ -210,17 +363,30 @@ function startVoiceInput(){
   }
 
   const recognition = new SpeechRecognition();
+
   recognition.lang = 'ja-JP';
   recognition.interimResults = false;
   recognition.continuous = false;
 
   recognition.onstart = function(){
-    document.getElementById('voiceResult').innerText = '🎤 聞き取り中...';
+    document.getElementById('voiceResult').innerText =
+      '🎤 聞き取り中...';
   };
 
   recognition.onresult = function(event){
-    const text = event.results[0][0].transcript;
-    document.getElementById('voiceResult').innerText = '🎤 ' + text;
+    const text =
+      event.results[0][0].transcript;
+
+    const parsed =
+      parseScheduleText(text);
+
+    document.getElementById('voiceResult').innerHTML =
+      '<div>🎤 ' + text + '</div>' +
+      '<div style="margin-top:18px;font-weight:900;">予定として整理しました</div>' +
+      '<div>📅 日付：' + parsed.date + '</div>' +
+      '<div>⏰ 時間：' + parsed.time + '</div>' +
+      '<div>🏥 内容：' + parsed.title + '</div>' +
+      '<button class="voice-save" onclick="alert(\'まだ登録はしません。次にGoogleカレンダーへつなぎます。\')">この予定を登録する</button>';
   };
 
   recognition.onerror = function(event){
@@ -229,7 +395,9 @@ function startVoiceInput(){
   };
 
   recognition.onend = function(){
-    const nowText = document.getElementById('voiceResult').innerText;
+    const nowText =
+      document.getElementById('voiceResult').innerText;
+
     if(nowText === '🎤 聞き取り中...'){
       document.getElementById('voiceResult').innerText =
         '⚠ 聞き取れませんでした。もう一度押してください。';
@@ -239,27 +407,76 @@ function startVoiceInput(){
   recognition.start();
 }
 
+function parseScheduleText(text){
+  let date = '未整理';
+  let time = '未整理';
+  let title = text;
+
+  const monthDay =
+    text.match(/(\d{1,2})月(\d{1,2})日/);
+
+  if(monthDay){
+    date = monthDay[1] + '月' + monthDay[2] + '日';
+  }
+
+  const timeMatch =
+    text.match(/(\d{1,2})時/);
+
+  if(timeMatch){
+    time = timeMatch[1] + ':00';
+  }
+
+  if(text.includes('歯医者')){
+    title = '歯医者';
+  }else if(text.includes('病院')){
+    title = '病院';
+  }else if(text.includes('内科')){
+    title = '内科';
+  }else if(text.includes('薬')){
+    title = '薬';
+  }
+
+  return {
+    date: date,
+    time: time,
+    title: title
+  };
+}
+
 function showGood(){
   alert('😊 元気を記録しました');
 }
 
 function toggleNormal(){
-  const menu = document.getElementById('normalMenu');
-  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+  const menu =
+    document.getElementById('normalMenu');
+
+  menu.style.display =
+    menu.style.display === 'none'
+    ? 'block'
+    : 'none';
 }
 
 function toggleDanger(){
-  const menu = document.getElementById('dangerMenu');
-  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+  const menu =
+    document.getElementById('dangerMenu');
+
+  menu.style.display =
+    menu.style.display === 'none'
+    ? 'block'
+    : 'none';
 }
 
 fetch('data.json')
 .then(res => res.json())
 .then(posts => {
-  const list = document.getElementById('list');
+  const list =
+    document.getElementById('list');
 
   posts.forEach(post => {
-    const card = document.createElement('div');
+    const card =
+      document.createElement('div');
+
     card.className = 'card';
 
     const links = [
@@ -270,6 +487,7 @@ fetch('data.json')
       [post.info5Title, post.info5Url]
     ].map(pair => {
       if(!pair[0]) return '';
+
       return '<a class="link-btn" href="'+pair[1]+'" target="_blank">'+pair[0]+'</a>';
     }).join('');
 
