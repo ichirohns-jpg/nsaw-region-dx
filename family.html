@@ -10,6 +10,7 @@
 
 *{
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
@@ -47,27 +48,47 @@ margin-bottom:24px;
 }
 
 .name{
-font-size:54px;
+font-size:56px;
 font-weight:900;
 margin-bottom:24px;
 }
 
 .status{
-font-size:42px;
+font-size:48px;
 font-weight:900;
 margin-bottom:24px;
 color:#22aa44;
 }
 
-.item{
-font-size:28px;
-line-height:1.8;
+.time{
+font-size:30px;
 font-weight:900;
-margin-bottom:18px;
+margin-bottom:28px;
+color:#666;
+line-height:1.6;
 }
 
-.gray{
-color:#666;
+.hr{
+height:2px;
+background:#ddd;
+margin:28px 0;
+border-radius:999px;
+}
+
+.sub-title{
+font-size:38px;
+font-weight:900;
+margin-bottom:24px;
+}
+
+.item{
+background:#f5f7fa;
+border-radius:20px;
+padding:22px;
+margin-bottom:18px;
+font-size:30px;
+font-weight:900;
+line-height:1.6;
 }
 
 .bottom-menu{
@@ -81,6 +102,7 @@ justify-content:space-around;
 padding:12px 0;
 box-shadow:
 0 -4px 14px rgba(0,0,0,.10);
+z-index:999;
 }
 
 .bottom-btn{
@@ -95,6 +117,10 @@ text-align:center;
 display:block;
 font-size:28px;
 margin-bottom:4px;
+}
+
+.error{
+color:#ef5350;
 }
 
 </style>
@@ -123,18 +149,23 @@ class="status"
 
 <div
 id="timeBox"
-class="item gray"
+class="time"
 >
 ---
 </div>
 
-<hr>
+<div class="hr"></div>
+
+<div class="sub-title">
+💊 今日の薬
+</div>
 
 <div
 id="medicineBox"
-class="item"
 >
-💊 読み込み中...
+<div class="item">
+読み込み中...
+</div>
 </div>
 
 </div>
@@ -184,6 +215,73 @@ const GAS_URL =
 
 
 
+function formatDate(dateStr){
+
+try{
+
+const d =
+new Date(dateStr);
+
+if(isNaN(d)){
+return '---';
+}
+
+return
+
+d.getFullYear()
+
++
+
+'/'
+
++
+
+String(
+d.getMonth()+1
+).padStart(2,'0')
+
++
+
+'/'
+
++
+
+String(
+d.getDate()
+).padStart(2,'0')
+
++
+
+' '
+
++
+
+String(
+d.getHours()
+).padStart(2,'0')
+
++
+
+':'
+
++
+
+String(
+d.getMinutes()
+).padStart(2,'0');
+
+}
+
+catch(err){
+
+return '---';
+
+}
+
+}
+
+
+
 async function loadData(){
 
 try{
@@ -208,6 +306,17 @@ document.getElementById(
 ).innerHTML =
 'まだ記録なし';
 
+document.getElementById(
+'timeBox'
+).innerHTML =
+'まだデータがありません';
+
+document.getElementById(
+'medicineBox'
+).innerHTML =
+
+'<div class="item">💊 記録なし</div>';
+
 return;
 
 }
@@ -224,7 +333,7 @@ document.getElementById(
 ).innerHTML =
 
 '😊 ' +
-(latest.status || '');
+(latest.status || '確認中');
 
 
 
@@ -232,8 +341,11 @@ document.getElementById(
 'timeBox'
 ).innerHTML =
 
-'最終確認：' +
-(latest.datetime || '');
+'最終確認： ' +
+
+formatDate(
+latest.datetime
+);
 
 
 
@@ -244,28 +356,48 @@ r => r.type === '薬'
 
 
 
-let medicineHtml =
-'💊 薬記録なし';
+let html = '';
 
 
 
-if(medicineRows.length > 0){
+if(medicineRows.length === 0){
 
-medicineHtml = '';
+html =
+'<div class="item">💊 記録なし</div>';
+
+}
+
+else{
 
 medicineRows.reverse().forEach(r => {
 
-medicineHtml +=
+html +=
 
-'💊 ' +
+'<div class="item">'
 
-r.status +
++
 
-' ： ' +
+'💊 '
 
-r.time +
++
 
-'<br>';
+(r.status || '')
+
++
+
+'<br>'
+
++
+
+'🕒 '
+
++
+
+(r.time || '')
+
++
+
+'</div>';
 
 });
 
@@ -276,16 +408,24 @@ r.time +
 document.getElementById(
 'medicineBox'
 ).innerHTML =
-medicineHtml;
+html;
 
 }
 
 catch(err){
 
+console.log(err);
+
 document.getElementById(
 'statusBox'
 ).innerHTML =
 '通信エラー';
+
+document.getElementById(
+'statusBox'
+).classList.add(
+'error'
+);
 
 }
 
