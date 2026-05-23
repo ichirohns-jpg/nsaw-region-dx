@@ -3,185 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>NSAW地域DX</title>
 
 <meta name="description" content="志木・新座・朝霞・和光の地域生活情報">
-
 <meta property="og:title" content="NSAW地域DX">
 <meta property="og:description" content="志木・新座・朝霞・和光の地域生活情報">
 <meta property="og:image" content="https://ichirohns-jpg.github.io/nsaw-region-dx/ogp.jpg">
 <meta property="og:url" content="https://ichirohns-jpg.github.io/nsaw-region-dx/">
-
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
   padding:18px;
   background:#eef3f8;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Hiragino Sans",
-  "Yu Gothic",
-  sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
   color:#222;
 }
-
-.wrap{
-  max-width:760px;
-  margin:0 auto;
-}
-
-
-
-/* 時計 */
-
-.clock-box{
-  background:#ffffff;
+.wrap{max-width:760px;margin:0 auto}
+.clock-box,.today-box,.health-box,.card{
+  background:#fff;
   border-radius:28px;
-  padding:28px;
   margin-bottom:34px;
-  text-align:center;
-  box-shadow:
-  0 8px 24px
-  rgba(0,0,0,.10);
+  box-shadow:0 8px 24px rgba(0,0,0,.10);
+  overflow:hidden;
 }
-
-.clock-date{
-  font-size:30px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.clock-time{
-  font-size:72px;
-  font-weight:900;
-  line-height:1.1;
-}
-
-
-
-/* タイトル */
-
-.main-title{
-  font-size:44px;
-  font-weight:900;
-  line-height:1.4;
-  margin:
-  14px 0
-  28px;
-}
-
-
-
-/* 今日の予定 */
-
-.today-box{
-  background:#fff8dc;
-  border-radius:28px;
-  padding:24px;
-  margin-bottom:20px;
-  box-shadow:
-  0 6px 18px
-  rgba(0,0,0,.08);
-}
-
-.today-title{
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:18px;
-}
-
-.today-link{
-  text-decoration:none;
-  color:#222;
-  display:block;
-}
-
-.today-item{
-  font-size:28px;
-  line-height:1.8;
-  margin-bottom:12px;
-}
-
-
-
-/* 音声 */
-
-.voice-btn{
+.clock-box{text-align:center;padding:28px}
+.clock-date{font-size:30px;font-weight:900;margin-bottom:10px}
+.clock-time{font-size:72px;font-weight:900;line-height:1.1}
+.main-title{font-size:44px;font-weight:900;margin:14px 0 28px}
+.today-box{background:#fff8dc;padding:24px}
+.today-title,.health-title{font-size:36px;font-weight:900;margin-bottom:18px}
+.today-link{text-decoration:none;color:#222;display:block}
+.today-item{font-size:28px;line-height:1.8;margin-bottom:12px}
+.voice-btn,.health-btn{
   width:100%;
   border:none;
   border-radius:20px;
   padding:24px;
-  margin-bottom:36px;
-  background:#4a90e2;
-  color:#fff;
+  margin-bottom:18px;
   font-size:30px;
   font-weight:900;
 }
-
+.voice-btn{background:#4a90e2;color:#fff}
 .voice-result{
   background:#fff;
   border-radius:20px;
   padding:22px;
-  margin-top:-18px;
-  margin-bottom:36px;
+  margin:-6px 0 36px;
   font-size:26px;
   line-height:1.7;
 }
-
-
-
-/* 元気 */
-
-.health-box{
-  background:#ffffff;
-  border-radius:28px;
-  padding:24px;
-  margin-bottom:36px;
-  box-shadow:
-  0 8px 24px
-  rgba(0,0,0,.10);
-}
-
-.health-title{
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:20px;
-}
-
-.health-btn{
-  width:100%;
-  border:none;
-  border-radius:20px;
-  padding:24px;
-  margin-bottom:18px;
-  font-size:30px;
-  font-weight:900;
-}
-
-.good-btn{
-  background:#5cc96b;
-  color:#fff;
-}
-
-.normal-btn{
-  background:#ffd54f;
-  color:#222;
-}
-
-.danger-btn{
-  background:#ef5350;
-  color:#fff;
-}
-
+.health-box{padding:24px}
+.good-btn{background:#5cc96b;color:#fff}
+.normal-btn{background:#ffd54f;color:#222}
+.danger-btn{background:#ef5350;color:#fff}
 .sub-btn{
   width:100%;
   border:none;
@@ -192,7 +69,6 @@ body{
   font-size:24px;
   font-weight:900;
 }
-
 .danger-call{
   display:block;
   text-decoration:none;
@@ -205,53 +81,11 @@ body{
   font-size:26px;
   font-weight:900;
 }
-
-
-
-/* カード */
-
-.card{
-  background:#fff;
-  border-radius:28px;
-  overflow:hidden;
-  margin-bottom:34px;
-  box-shadow:
-  0 8px 24px
-  rgba(0,0,0,.10);
-}
-
-.card img{
-  width:100%;
-  display:block;
-}
-
-.card-body{
-  padding:24px;
-}
-
-.date{
-  font-size:18px;
-  color:#666;
-  margin-bottom:10px;
-}
-
-.title{
-  font-size:32px;
-  font-weight:900;
-  line-height:1.5;
-  margin-bottom:18px;
-}
-
-.text{
-  font-size:22px;
-  line-height:1.9;
-  white-space:pre-wrap;
-}
-
-
-
-/* ボタン */
-
+.card img{width:100%;display:block}
+.card-body{padding:24px}
+.date{font-size:18px;color:#666;margin-bottom:10px}
+.title{font-size:32px;font-weight:900;line-height:1.5;margin-bottom:18px}
+.text{font-size:22px;line-height:1.9;white-space:pre-wrap}
 .link-btn{
   display:block;
   width:100%;
@@ -265,40 +99,9 @@ body{
   padding:18px;
   margin-top:14px;
 }
-
-
-
-/* 動画 */
-
-.video-title{
-  font-size:24px;
-  font-weight:900;
-  margin:
-  28px 0
-  14px;
-}
-
-.video-wrap{
-  position:relative;
-  width:100%;
-  padding-top:56.25%;
-  border-radius:22px;
-  overflow:hidden;
-  background:#000;
-}
-
-.video-wrap iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-
-
-/* 下固定 */
-
+.video-title{font-size:24px;font-weight:900;margin:28px 0 14px}
+.video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:22px;overflow:hidden;background:#000}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
 .bottom-menu{
   position:fixed;
   left:0;
@@ -308,512 +111,184 @@ body{
   display:flex;
   justify-content:space-around;
   padding:12px 0;
-  box-shadow:
-  0 -4px 14px
-  rgba(0,0,0,.12);
+  box-shadow:0 -4px 14px rgba(0,0,0,.12);
 }
-
-.bottom-btn{
-  text-decoration:none;
-  color:#222;
-  font-size:18px;
-  font-weight:900;
-  text-align:center;
-}
-
-.bottom-icon{
-  display:block;
-  font-size:28px;
-  margin-bottom:6px;
-}
-
-.footer-space{
-  height:100px;
-}
-
+.bottom-btn{text-decoration:none;color:#222;font-size:18px;font-weight:900;text-align:center}
+.bottom-icon{display:block;font-size:28px;margin-bottom:6px}
+.footer-space{height:100px}
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
-
-
-<!-- 時計 -->
-
 <div class="clock-box">
-
-<div
-class="clock-date"
-id="clockDate"
-></div>
-
-<div
-class="clock-time"
-id="clockTime"
-></div>
-
+  <div class="clock-date" id="clockDate"></div>
+  <div class="clock-time" id="clockTime"></div>
 </div>
 
+<div class="main-title">NSAW地域DX</div>
 
+<div class="today-box" id="todayBox"></div>
 
-<div class="main-title">
-NSAW地域DX
-</div>
-
-
-
-<!-- 今日の予定 -->
-
-<div
-class="today-box"
-id="todayBox"
-></div>
-
-
-
-<!-- 音声 -->
-
-<button
-class="voice-btn"
-onclick="startVoiceInput()"
->
+<button class="voice-btn" onclick="startVoiceInput()">
 🎤 話して追加
 </button>
 
-<div
-class="voice-result"
-id="voiceResult"
-></div>
-
-
-
-<!-- 元気 -->
+<div class="voice-result" id="voiceResult">
+ここに話した内容が表示されます
+</div>
 
 <div class="health-box">
+  <div class="health-title">😊 今日の状態</div>
 
-<div class="health-title">
-😊 今日の状態
+  <button class="health-btn good-btn" onclick="showGood()">😊 元気です</button>
+  <button class="health-btn normal-btn" onclick="toggleNormal()">😐 ちょっと不調</button>
+
+  <div id="normalMenu" style="display:none;">
+    <button class="sub-btn">体調が悪い</button>
+    <button class="sub-btn">転んだ</button>
+    <button class="sub-btn">薬がない</button>
+    <button class="sub-btn">食べ物がない</button>
+    <button class="sub-btn">病院に行きたい</button>
+    <button class="sub-btn">誰かに電話したい</button>
+  </div>
+
+  <button class="health-btn danger-btn" onclick="toggleDanger()">🆘 困っています</button>
+
+  <div id="dangerMenu" style="display:none;">
+    <a class="danger-call" href="tel:119">🚑 119</a>
+    <a class="danger-call" href="tel:110">🚓 110</a>
+    <a class="danger-call" href="tel:0484731111">☎ 地域包括</a>
+    <a class="danger-call" href="tel:09012345678">👨 家族に電話</a>
+  </div>
 </div>
-
-<button
-class="health-btn good-btn"
-onclick="showGood()"
->
-😊 元気です
-</button>
-
-<button
-class="health-btn normal-btn"
-onclick="toggleNormal()"
->
-😐 ちょっと不調
-</button>
-
-<div
-id="normalMenu"
-style="display:none;"
->
-
-<button class="sub-btn">
-体調が悪い
-</button>
-
-<button class="sub-btn">
-転んだ
-</button>
-
-<button class="sub-btn">
-薬がない
-</button>
-
-<button class="sub-btn">
-食べ物がない
-</button>
-
-<button class="sub-btn">
-病院に行きたい
-</button>
-
-<button class="sub-btn">
-誰かに電話したい
-</button>
-
-</div>
-
-<button
-class="health-btn danger-btn"
-onclick="toggleDanger()"
->
-🆘 困っています
-</button>
-
-<div
-id="dangerMenu"
-style="display:none;"
->
-
-<a
-class="danger-call"
-href="tel:119"
->
-🚑 119
-</a>
-
-<a
-class="danger-call"
-href="tel:110"
->
-🚓 110
-</a>
-
-<a
-class="danger-call"
-href="tel:0484731111"
->
-☎ 地域包括
-</a>
-
-<a
-class="danger-call"
-href="tel:09012345678"
->
-👨 家族に電話
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- 記事 -->
 
 <div id="list"></div>
-
 <div class="footer-space"></div>
 
 </div>
 
-
-
-<!-- 下固定 -->
-
 <div class="bottom-menu">
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">📅</span>
-予定
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🗺</span>
-地図
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">😊</span>
-元気
-</a>
-
+  <a class="bottom-btn" href="#"><span class="bottom-icon">🏠</span>ホーム</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">📅</span>予定</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">🗺</span>地図</a>
+  <a class="bottom-btn" href="#"><span class="bottom-icon">😊</span>元気</a>
 </div>
-
-
 
 <script>
-
-
-
-/* 時計 */
-
 function updateClock(){
-
-const now =
-new Date();
-
-const date =
-now.toLocaleDateString(
-'ja-JP',
-{
-year:'numeric',
-month:'long',
-day:'numeric',
-weekday:'long'
+  const now = new Date();
+  document.getElementById('clockDate').innerText =
+    now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+  document.getElementById('clockTime').innerText =
+    now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
 }
-);
-
-const time =
-now.toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-);
-
-document.getElementById(
-'clockDate'
-).innerText = date;
-
-document.getElementById(
-'clockTime'
-).innerText = time;
-
-}
-
 updateClock();
-
-setInterval(
-updateClock,
-1000
-);
-
-
-
-/* 今日の予定 */
-
-const todayBox =
-document.getElementById(
-'todayBox'
-);
+setInterval(updateClock,1000);
 
 const todayData = [
-
-{
-icon:'🏥',
-text:'10:00 歯医者',
-url:'https://www.google.com/maps'
-},
-
-{
-icon:'💊',
-text:'朝の薬',
-url:'#'
-},
-
-{
-icon:'🗑',
-text:'明日は燃えるごみ',
-url:'#'
-}
-
+  {icon:'🏥',text:'10:00 歯医者',url:'https://www.google.com/maps'},
+  {icon:'💊',text:'朝の薬',url:'#'},
+  {icon:'🗑',text:'明日は燃えるごみ',url:'#'}
 ];
 
-todayBox.innerHTML = `
-
-<div class="today-title">
-☀ 今日の予定
-</div>
-
-` +
-
-todayData.map(item => `
-
-<a
-class="today-link"
-href="${item.url}"
-target="_blank"
->
-
-<div class="today-item">
-${item.icon}
-${item.text}
-</div>
-
-</a>
-
-`).join('');
-
-
-
-/* 音声 */
+document.getElementById('todayBox').innerHTML =
+  '<div class="today-title">☀ 今日の予定</div>' +
+  todayData.map(item =>
+    '<a class="today-link" href="'+item.url+'" target="_blank">' +
+    '<div class="today-item">'+item.icon+' '+item.text+'</div></a>'
+  ).join('');
 
 function startVoiceInput(){
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const SpeechRecognition =
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    document.getElementById('voiceResult').innerText =
+      '⚠ この端末ではブラウザ音声入力に対応していません';
+    return;
+  }
 
-if(!SpeechRecognition){
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'ja-JP';
+  recognition.interimResults = false;
+  recognition.continuous = false;
 
-alert('音声入力非対応');
+  recognition.onstart = function(){
+    document.getElementById('voiceResult').innerText = '🎤 聞き取り中...';
+  };
 
-return;
+  recognition.onresult = function(event){
+    const text = event.results[0][0].transcript;
+    document.getElementById('voiceResult').innerText = '🎤 ' + text;
+  };
 
+  recognition.onerror = function(event){
+    document.getElementById('voiceResult').innerText =
+      '⚠ 音声認識エラー：' + event.error;
+  };
+
+  recognition.onend = function(){
+    const nowText = document.getElementById('voiceResult').innerText;
+    if(nowText === '🎤 聞き取り中...'){
+      document.getElementById('voiceResult').innerText =
+        '⚠ 聞き取れませんでした。もう一度押してください。';
+    }
+  };
+
+  recognition.start();
 }
-
-const recognition =
-new SpeechRecognition();
-
-recognition.lang = 'ja-JP';
-
-recognition.start();
-
-recognition.onresult =
-function(event){
-
-const text =
-event.results[0][0]
-.transcript;
-
-document.getElementById(
-'voiceResult'
-).innerText =
-'🎤 ' + text;
-
-};
-
-}
-
-
-
-/* 元気 */
 
 function showGood(){
-
-alert(
-'😊 元気を記録しました'
-);
-
+  alert('😊 元気を記録しました');
 }
 
 function toggleNormal(){
-
-const menu =
-document.getElementById(
-'normalMenu'
-);
-
-menu.style.display =
-menu.style.display === 'none'
-? 'block'
-: 'none';
-
+  const menu = document.getElementById('normalMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
 function toggleDanger(){
-
-const menu =
-document.getElementById(
-'dangerMenu'
-);
-
-menu.style.display =
-menu.style.display === 'none'
-? 'block'
-: 'none';
-
+  const menu = document.getElementById('dangerMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
-
-
-
-/* 記事 */
 
 fetch('data.json')
-
 .then(res => res.json())
-
 .then(posts => {
+  const list = document.getElementById('list');
 
-const list =
-document.getElementById(
-'list'
-);
+  posts.forEach(post => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-posts.forEach(post => {
+    const links = [
+      [post.info1Title, post.info1Url],
+      [post.info2Title, post.info2Url],
+      [post.info3Title, post.info3Url],
+      [post.info4Title, post.info4Url],
+      [post.info5Title, post.info5Url]
+    ].map(pair => {
+      if(!pair[0]) return '';
+      return '<a class="link-btn" href="'+pair[1]+'" target="_blank">'+pair[0]+'</a>';
+    }).join('');
 
-const card =
-document.createElement(
-'div'
-);
+    card.innerHTML =
+      (post.image ? '<img src="'+post.image+'">' : '') +
+      '<div class="card-body">' +
+      '<div class="date">'+post.date+'</div>' +
+      '<div class="title">'+post.title+'</div>' +
+      '<div class="text">'+post.text+'</div>' +
+      links +
+      (post.youtubeUrl
+        ? '<div class="video-title">'+post.videoTitle+'</div>' +
+          '<div class="video-wrap"><iframe src="'+post.youtubeUrl+'" allowfullscreen></iframe></div>'
+        : '') +
+      '</div>';
 
-card.className =
-'card';
-
-const links = [
-
-[post.info1Title, post.info1Url],
-[post.info2Title, post.info2Url],
-[post.info3Title, post.info3Url],
-[post.info4Title, post.info4Url],
-[post.info5Title, post.info5Url]
-
-]
-
-.map(pair => {
-
-if(!pair[0]) return '';
-
-return `
-<a
-class="link-btn"
-href="${pair[1]}"
-target="_blank"
->
-${pair[0]}
-</a>
-`;
-
-})
-
-.join('');
-
-card.innerHTML =
-
-`
-${post.image
-? `<img src="${post.image}">`
-: ''
-}
-
-<div class="card-body">
-
-<div class="date">
-${post.date}
-</div>
-
-<div class="title">
-${post.title}
-</div>
-
-<div class="text">
-${post.text}
-</div>
-
-${links}
-
-${post.youtubeUrl
-? `
-<div class="video-title">
-${post.videoTitle}
-</div>
-
-<div class="video-wrap">
-<iframe
-src="${post.youtubeUrl}"
-allowfullscreen
-></iframe>
-</div>
-`
-: ''
-}
-
-</div>
-`;
-
-list.appendChild(card);
-
+    list.appendChild(card);
+  });
 });
-
-});
-
 </script>
-
 </body>
 </html>
