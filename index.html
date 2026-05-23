@@ -71,7 +71,7 @@ margin:14px 0 28px;
 
 
 
-/* 今日の予定 */
+/* 今日 */
 
 .today-box{
 background:#fff8dc;
@@ -221,6 +221,8 @@ height:100px;
 <body>
 
 <div class="wrap">
+
+
 
 <div class="box clock-box">
 
@@ -471,7 +473,7 @@ localStorage.getItem(
 
 
 
-/* 今日だけ表示 */
+/* 今日だけ */
 
 function renderToday(){
 
@@ -519,9 +521,12 @@ document.getElementById(
 filtered.map(item =>
 
 '<div class="today-item">' +
+
 item.icon +
 ' ' +
+
 item.text +
+
 '</div>'
 
 ).join('');
@@ -563,12 +568,14 @@ JSON.stringify(data)
 
 
 
-/* Googleカレンダー */
+/* カレンダー */
 
 function createGoogleCalendarUrl(parsed){
 
 const title =
-encodeURIComponent(parsed.title);
+encodeURIComponent(
+parsed.title
+);
 
 return
 
@@ -576,18 +583,21 @@ return
 
 +
 
-'&text=' + title;
+'&text=' +
+title;
 
 }
 
 
 
-/* AI整理 */
+/* AI */
 
 function parseScheduleText(text){
 
 let date = '今日';
+
 let time = '未設定';
+
 let title = text;
 
 
@@ -643,9 +653,11 @@ title = '病院';
 
 
 return {
+
 date:date,
 time:time,
 title:title
+
 };
 
 }
@@ -683,13 +695,15 @@ recognition.lang = 'ja-JP';
 
 recognition.interimResults = false;
 
+recognition.continuous = false;
+
 
 
 recognition.onstart = function(){
 
 document.getElementById(
 'voiceResult'
-).innerText =
+).innerHTML =
 
 '🎤 聞き取り中...';
 
@@ -718,7 +732,9 @@ document.getElementById(
 'voiceResult'
 ).innerHTML =
 
-'<div>🎤 ' + text + '</div>'
+'<div>🎤 ' +
+text +
+'</div>'
 
 +
 
@@ -761,6 +777,28 @@ calendarUrl +
 
 };
 
+
+
+recognition.onerror = function(){
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'⚠ 音声入力エラー';
+
+};
+
+
+
+recognition.onend = function(){
+
+console.log('音声終了');
+
+};
+
+
+
 recognition.start();
 
 }
@@ -787,7 +825,22 @@ parsed.title
 
 
 
+localStorage.setItem(
+'todayData',
+JSON.stringify(todayData)
+);
+
+
+
 renderToday();
+
+
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'✅ 予定へ追加しました';
 
 }
 
