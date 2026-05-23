@@ -270,25 +270,35 @@ document.getElementById(
   'todayBox'
 );
 
+
+
+const todayData = [
+
+  '🏥 10:00 歯医者',
+
+  '💊 朝の薬',
+
+  '🗑 明日は燃えるごみ'
+
+];
+
+
+
 todayBox.innerHTML = `
 
 <div class="today-title">
 ☀ 今日の予定
 </div>
 
-<div class="today-item">
-🏥 10:00 歯医者
-</div>
+` +
+
+todayData.map(item => `
 
 <div class="today-item">
-💊 朝の薬
+${item}
 </div>
 
-<div class="today-item">
-🗑 明日は燃えるごみ
-</div>
-
-`;
+`).join('');
 
 
 
