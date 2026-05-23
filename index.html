@@ -68,10 +68,85 @@ body{
   margin-bottom:18px;
 }
 
+.today-link{
+  text-decoration:none;
+  color:#222;
+  display:block;
+}
+
 .today-item{
   font-size:28px;
   line-height:1.8;
   margin-bottom:12px;
+}
+
+
+
+/* 元気ボックス */
+
+.health-box{
+  background:#ffffff;
+  border-radius:28px;
+  padding:24px;
+  margin-bottom:36px;
+  box-shadow:
+  0 8px 24px
+  rgba(0,0,0,.10);
+}
+
+.health-title{
+  font-size:36px;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.health-btn{
+  width:100%;
+  border:none;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:18px;
+  font-size:30px;
+  font-weight:900;
+}
+
+.good-btn{
+  background:#5cc96b;
+  color:#fff;
+}
+
+.normal-btn{
+  background:#ffd54f;
+  color:#222;
+}
+
+.danger-btn{
+  background:#ef5350;
+  color:#fff;
+}
+
+.sub-btn{
+  width:100%;
+  border:none;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:14px;
+  background:#f3f5f7;
+  font-size:24px;
+  font-weight:900;
+}
+
+.danger-call{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  background:#ef5350;
+  color:#fff;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:14px;
+  font-size:26px;
+  font-weight:900;
 }
 
 
@@ -215,9 +290,108 @@ NSAW地域DX
 <!-- 今日の予定 -->
 
 <div
-  class="today-box"
-  id="todayBox"
+class="today-box"
+id="todayBox"
 ></div>
+
+
+
+<!-- 元気ボックス -->
+
+<div class="health-box">
+
+<div class="health-title">
+😊 今日の状態
+</div>
+
+<button
+class="health-btn good-btn"
+onclick="showGood()"
+>
+😊 元気です
+</button>
+
+<button
+class="health-btn normal-btn"
+onclick="toggleNormal()"
+>
+😐 ちょっと不調
+</button>
+
+<div
+id="normalMenu"
+style="display:none;"
+>
+
+<button class="sub-btn">
+体調が悪い
+</button>
+
+<button class="sub-btn">
+転んだ
+</button>
+
+<button class="sub-btn">
+薬がない
+</button>
+
+<button class="sub-btn">
+食べ物がない
+</button>
+
+<button class="sub-btn">
+病院に行きたい
+</button>
+
+<button class="sub-btn">
+誰かに電話したい
+</button>
+
+</div>
+
+<button
+class="health-btn danger-btn"
+onclick="toggleDanger()"
+>
+🆘 困っています
+</button>
+
+<div
+id="dangerMenu"
+style="display:none;"
+>
+
+<a
+class="danger-call"
+href="tel:119"
+>
+🚑 119
+</a>
+
+<a
+class="danger-call"
+href="tel:110"
+>
+🚓 110
+</a>
+
+<a
+class="danger-call"
+href="tel:0484731111"
+>
+☎ 地域包括
+</a>
+
+<a
+class="danger-call"
+href="tel:09012345678"
+>
+👨 家族に電話
+</a>
+
+</div>
+
+</div>
 
 
 
@@ -231,7 +405,7 @@ NSAW地域DX
 
 
 
-<!-- 下メニュー -->
+<!-- 下固定 -->
 
 <div class="bottom-menu">
 
@@ -267,18 +441,30 @@ NSAW地域DX
 
 const todayBox =
 document.getElementById(
-  'todayBox'
+'todayBox'
 );
 
 
 
 const todayData = [
 
-  '🏥 10:00 歯医者',
+{
+icon:'🏥',
+text:'10:00 歯医者',
+url:'https://www.google.com/maps'
+},
 
-  '💊 朝の薬',
+{
+icon:'💊',
+text:'朝の薬',
+url:'#'
+},
 
-  '🗑 明日は燃えるごみ'
+{
+icon:'🗑',
+text:'明日は燃えるごみ',
+url:'#'
+}
 
 ];
 
@@ -294,11 +480,64 @@ todayBox.innerHTML = `
 
 todayData.map(item => `
 
+<a
+class="today-link"
+href="${item.url}"
+target="_blank"
+>
+
 <div class="today-item">
-${item}
+${item.icon}
+${item.text}
 </div>
 
+</a>
+
 `).join('');
+
+
+
+/* 元気ボタン */
+
+function showGood(){
+
+alert(
+'😊 元気を記録しました'
+);
+
+}
+
+
+
+function toggleNormal(){
+
+const menu =
+document.getElementById(
+'normalMenu'
+);
+
+menu.style.display =
+menu.style.display === 'none'
+? 'block'
+: 'none';
+
+}
+
+
+
+function toggleDanger(){
+
+const menu =
+document.getElementById(
+'dangerMenu'
+);
+
+menu.style.display =
+menu.style.display === 'none'
+? 'block'
+: 'none';
+
+}
 
 
 
@@ -310,98 +549,98 @@ fetch('data.json')
 
 .then(posts => {
 
-  const list =
-    document.getElementById('list');
+const list =
+document.getElementById('list');
 
 
 
-  posts.forEach(post => {
+posts.forEach(post => {
 
-    const card =
-      document.createElement('div');
+const card =
+document.createElement('div');
 
-    card.className = 'card';
-
-
-
-    const links = [
-
-      [post.info1Title, post.info1Url],
-      [post.info2Title, post.info2Url],
-      [post.info3Title, post.info3Url],
-      [post.info4Title, post.info4Url],
-      [post.info5Title, post.info5Url]
-
-    ]
-
-    .map(pair => {
-
-      if(!pair[0]) return '';
-
-      return `
-      <a
-        class="link-btn"
-        href="${pair[1]}"
-        target="_blank"
-      >
-        ${pair[0]}
-      </a>
-      `;
-
-    })
-
-    .join('');
+card.className = 'card';
 
 
 
-    card.innerHTML =
+const links = [
 
-      `
-      ${post.image
-        ? `<img src="${post.image}">`
-        : ''
-      }
+[post.info1Title, post.info1Url],
+[post.info2Title, post.info2Url],
+[post.info3Title, post.info3Url],
+[post.info4Title, post.info4Url],
+[post.info5Title, post.info5Url]
 
-      <div class="card-body">
+]
 
-        <div class="date">
-          ${post.date}
-        </div>
+.map(pair => {
 
-        <div class="title">
-          ${post.title}
-        </div>
+if(!pair[0]) return '';
 
-        <div class="text">
-          ${post.text}
-        </div>
+return `
+<a
+class="link-btn"
+href="${pair[1]}"
+target="_blank"
+>
+${pair[0]}
+</a>
+`;
 
-        ${links}
+})
 
-        ${post.youtubeUrl
-          ? `
-          <div class="video-title">
-            ${post.videoTitle}
-          </div>
-
-          <div class="video-wrap">
-            <iframe
-              src="${post.youtubeUrl}"
-              allowfullscreen
-            ></iframe>
-          </div>
-          `
-          : ''
-        }
-
-      </div>
-      `;
+.join('');
 
 
 
-    list.appendChild(card);
+card.innerHTML =
 
-  });
+`
+${post.image
+? `<img src="${post.image}">`
+: ''
+}
+
+<div class="card-body">
+
+<div class="date">
+${post.date}
+</div>
+
+<div class="title">
+${post.title}
+</div>
+
+<div class="text">
+${post.text}
+</div>
+
+${links}
+
+${post.youtubeUrl
+? `
+<div class="video-title">
+${post.videoTitle}
+</div>
+
+<div class="video-wrap">
+<iframe
+src="${post.youtubeUrl}"
+allowfullscreen
+></iframe>
+</div>
+`
+: ''
+}
+
+</div>
+`;
+
+
+
+list.appendChild(card);
+
+});
 
 });
 
