@@ -74,6 +74,7 @@ body{
 .time{
   color:#666;
   font-size:22px;
+  margin-bottom:12px;
 }
 
 .map-btn{
@@ -123,6 +124,11 @@ hr{
   font-size:24px;
 }
 
+.warn{
+  color:#d93025;
+  font-weight:900;
+}
+
 </style>
 </head>
 
@@ -147,9 +153,43 @@ onclick="loadData()"
 
 <script>
 
-
-
 function loadData(){
+
+
+
+const genkiData =
+
+JSON.parse(
+localStorage.getItem(
+'genkiData'
+)
+)
+
+||
+
+{
+status:'未確認',
+time:'--:--'
+};
+
+
+
+const medicineData =
+
+JSON.parse(
+localStorage.getItem(
+'medicineData'
+)
+)
+
+||
+
+{
+status:'未確認',
+time:'--:--'
+};
+
+
 
 const todayData =
 
@@ -192,6 +232,39 @@ ${item.text}
 
 
 
+const medicineHtml =
+
+medicineData.status === '飲みました'
+
+?
+
+`
+<div class="line">
+💊 朝の薬：
+<span class="good">
+${medicineData.status}
+</span>
+</div>
+
+<div class="time">
+確認時間：
+${medicineData.time}
+</div>
+`
+
+:
+
+`
+<div class="line">
+💊 朝の薬：
+<span class="warn">
+未確認
+</span>
+</div>
+`;
+
+
+
 const familyHtml =
 
 `
@@ -202,21 +275,18 @@ const familyHtml =
 </div>
 
 <div class="line good">
-😊 元気です
+😊 ${genkiData.status}
 </div>
 
 <div class="time">
-最終確認：今日 08:15
+最終確認：今日 ${genkiData.time}
 </div>
 
 <hr>
 
-<div class="line">
-💊 朝の薬：
-<span class="good">
-飲みました
-</span>
-</div>
+${medicineHtml}
+
+<hr>
 
 <div class="section-title">
 📅 今日の予定
