@@ -483,6 +483,19 @@ class="medicine-result"
 
 
 
+/* GAS */
+
+const GAS_URL =
+'https://script.google.com/macros/s/AKfycbxsLXiFBlcAWwIYnvcVo93rmTAWJzbKhdY258bvDuCz7wwRjT18NcYYEvvY-D1FlmXV/exec';
+
+const USER_CODE =
+'YAMA1234';
+
+const USER_NAME =
+'山口さん';
+
+
+
 /* 時計 */
 
 function updateClock(){
@@ -601,6 +614,30 @@ item.text +
 }
 
 renderToday();
+
+
+
+/* GAS送信 */
+
+function sendToGas(data){
+
+fetch(
+GAS_URL,
+{
+method:'POST',
+
+headers:{
+'Content-Type':
+'application/json'
+},
+
+body:
+JSON.stringify(data)
+
+}
+);
+
+}
 
 
 
@@ -950,6 +987,26 @@ document.getElementById(
 
 function showGood(){
 
+const time =
+getNowTime();
+
+
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'元気',
+
+status:'元気です',
+
+time:time
+
+});
+
+
+
 alert(
 '😊 元気を記録しました'
 );
@@ -958,7 +1015,7 @@ alert(
 
 
 
-/* 薬 */
+/* 時間 */
 
 function getNowTime(){
 
@@ -982,6 +1039,8 @@ function takeMorningMedicine(){
 const time =
 getNowTime();
 
+
+
 document.getElementById(
 'morningResult'
 ).innerHTML =
@@ -990,6 +1049,21 @@ document.getElementById(
 time +
 
 ' <button class="cancel-btn" onclick="cancelMorningMedicine()">取り消し</button>';
+
+
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'薬',
+
+status:'朝の薬',
+
+time:time
+
+});
 
 }
 
@@ -1012,6 +1086,8 @@ function takeLunchMedicine(){
 const time =
 getNowTime();
 
+
+
 document.getElementById(
 'lunchResult'
 ).innerHTML =
@@ -1020,6 +1096,21 @@ document.getElementById(
 time +
 
 ' <button class="cancel-btn" onclick="cancelLunchMedicine()">取り消し</button>';
+
+
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'薬',
+
+status:'昼の薬',
+
+time:time
+
+});
 
 }
 
@@ -1042,6 +1133,8 @@ function takeNightMedicine(){
 const time =
 getNowTime();
 
+
+
 document.getElementById(
 'nightResult'
 ).innerHTML =
@@ -1050,6 +1143,21 @@ document.getElementById(
 time +
 
 ' <button class="cancel-btn" onclick="cancelNightMedicine()">取り消し</button>';
+
+
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'薬',
+
+status:'夜の薬',
+
+time:time
+
+});
 
 }
 
@@ -1106,13 +1214,49 @@ menu.style.display === 'none'
 
 
 function call119(){
-window.location.href = 'tel:119';
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'緊急',
+
+status:'119',
+
+time:getNowTime()
+
+});
+
+
+
+window.location.href =
+'tel:119';
+
 }
 
 
 
 function call110(){
-window.location.href = 'tel:110';
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'緊急',
+
+status:'110',
+
+time:getNowTime()
+
+});
+
+
+
+window.location.href =
+'tel:110';
+
 }
 
 
@@ -1128,6 +1272,26 @@ position.coords.latitude;
 
 const lng =
 position.coords.longitude;
+
+
+
+sendToGas({
+
+code:USER_CODE,
+name:USER_NAME,
+
+type:'位置情報',
+
+status:'現在地',
+
+time:getNowTime(),
+
+lat:lat,
+lng:lng
+
+});
+
+
 
 window.open(
 'https://maps.google.com/?q=' +
