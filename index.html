@@ -39,6 +39,37 @@ body{
   margin:0 auto;
 }
 
+
+
+/* 時計 */
+
+.clock-box{
+  background:#ffffff;
+  border-radius:28px;
+  padding:28px;
+  margin-bottom:34px;
+  text-align:center;
+  box-shadow:
+  0 8px 24px
+  rgba(0,0,0,.10);
+}
+
+.clock-date{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.clock-time{
+  font-size:72px;
+  font-weight:900;
+  line-height:1.1;
+}
+
+
+
+/* タイトル */
+
 .main-title{
   font-size:44px;
   font-weight:900;
@@ -82,7 +113,7 @@ body{
 
 
 
-/* 元気ボックス */
+/* 元気 */
 
 .health-box{
   background:#ffffff;
@@ -281,6 +312,26 @@ body{
 
 <div class="wrap">
 
+
+
+<!-- 時計 -->
+
+<div class="clock-box">
+
+<div
+class="clock-date"
+id="clockDate"
+></div>
+
+<div
+class="clock-time"
+id="clockTime"
+></div>
+
+</div>
+
+
+
 <div class="main-title">
 NSAW地域DX
 </div>
@@ -296,7 +347,7 @@ id="todayBox"
 
 
 
-<!-- 元気ボックス -->
+<!-- 元気 -->
 
 <div class="health-box">
 
@@ -437,14 +488,58 @@ href="tel:09012345678"
 
 
 
+/* 時計 */
+
+function updateClock(){
+
+const now =
+new Date();
+
+const date =
+now.toLocaleDateString(
+'ja-JP',
+{
+year:'numeric',
+month:'long',
+day:'numeric',
+weekday:'long'
+}
+);
+
+const time =
+now.toLocaleTimeString(
+'ja-JP',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
+document.getElementById(
+'clockDate'
+).innerText = date;
+
+document.getElementById(
+'clockTime'
+).innerText = time;
+
+}
+
+updateClock();
+
+setInterval(
+updateClock,
+1000
+);
+
+
+
 /* 今日の予定 */
 
 const todayBox =
 document.getElementById(
 'todayBox'
 );
-
-
 
 const todayData = [
 
@@ -467,8 +562,6 @@ url:'#'
 }
 
 ];
-
-
 
 todayBox.innerHTML = `
 
@@ -497,7 +590,7 @@ ${item.text}
 
 
 
-/* 元気ボタン */
+/* 元気 */
 
 function showGood(){
 
@@ -506,8 +599,6 @@ alert(
 );
 
 }
-
-
 
 function toggleNormal(){
 
@@ -522,8 +613,6 @@ menu.style.display === 'none'
 : 'none';
 
 }
-
-
 
 function toggleDanger(){
 
@@ -550,18 +639,19 @@ fetch('data.json')
 .then(posts => {
 
 const list =
-document.getElementById('list');
-
-
+document.getElementById(
+'list'
+);
 
 posts.forEach(post => {
 
 const card =
-document.createElement('div');
+document.createElement(
+'div'
+);
 
-card.className = 'card';
-
-
+card.className =
+'card';
 
 const links = [
 
@@ -590,8 +680,6 @@ ${pair[0]}
 })
 
 .join('');
-
-
 
 card.innerHTML =
 
@@ -635,8 +723,6 @@ allowfullscreen
 
 </div>
 `;
-
-
 
 list.appendChild(card);
 
