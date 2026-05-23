@@ -28,6 +28,7 @@ color:#222;
 .wrap{
 max-width:760px;
 margin:0 auto;
+padding-bottom:100px;
 }
 
 .box{
@@ -40,26 +41,26 @@ box-shadow:
 }
 
 .title{
-font-size:54px;
+font-size:44px;
 font-weight:900;
 margin-bottom:24px;
 }
 
 .name{
-font-size:64px;
+font-size:54px;
 font-weight:900;
 margin-bottom:24px;
 }
 
 .status{
-font-size:56px;
+font-size:42px;
 font-weight:900;
 margin-bottom:24px;
 color:#22aa44;
 }
 
 .item{
-font-size:30px;
+font-size:28px;
 line-height:1.8;
 font-weight:900;
 margin-bottom:18px;
@@ -67,6 +68,33 @@ margin-bottom:18px;
 
 .gray{
 color:#666;
+}
+
+.bottom-menu{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:
+0 -4px 14px rgba(0,0,0,.10);
+}
+
+.bottom-btn{
+text-decoration:none;
+color:#222;
+font-size:18px;
+font-weight:900;
+text-align:center;
+}
+
+.bottom-icon{
+display:block;
+font-size:28px;
+margin-bottom:4px;
 }
 
 </style>
@@ -86,31 +114,193 @@ color:#666;
 👴 山口さん
 </div>
 
-<div class="status">
-😊 元気です
+<div
+id="statusBox"
+class="status"
+>
+読み込み中...
 </div>
 
-<div class="item gray">
-最終確認：今日 08:15
+<div
+id="timeBox"
+class="item gray"
+>
+---
 </div>
 
 <hr>
 
-<div class="item">
-💊 朝の薬：飲みました
-</div>
-
-<div class="item">
-💊 昼の薬：未確認
-</div>
-
-<div class="item">
-💊 夜の薬：未確認
+<div
+id="medicineBox"
+class="item"
+>
+💊 読み込み中...
 </div>
 
 </div>
 
 </div>
+
+
+
+<div class="bottom-menu">
+
+<a
+class="bottom-btn"
+href="./"
+>
+
+<span class="bottom-icon">
+🏠
+</span>
+
+ホーム
+
+</a>
+
+
+
+<a
+class="bottom-btn"
+href="./family.html"
+>
+
+<span class="bottom-icon">
+👪
+</span>
+
+家族
+
+</a>
+
+</div>
+
+
+
+<script>
+
+const GAS_URL =
+'https://script.google.com/macros/s/AKfycbyctWQYDpLEo2K3e6VqYNOJZTznMPDq77fFK70mjuWHG7k-UHwexMvKPKinooTj4pGB/exec?code=YAMA1234';
+
+
+
+async function loadData(){
+
+try{
+
+const response =
+await fetch(
+GAS_URL + '&t=' + Date.now()
+);
+
+const data =
+await response.json();
+
+const rows =
+data.rows || [];
+
+
+
+if(rows.length === 0){
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+'まだ記録なし';
+
+return;
+
+}
+
+
+
+const latest =
+rows[rows.length - 1];
+
+
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+
+'😊 ' +
+(latest.status || '');
+
+
+
+document.getElementById(
+'timeBox'
+).innerHTML =
+
+'最終確認：' +
+(latest.datetime || '');
+
+
+
+const medicineRows =
+rows.filter(
+r => r.type === '薬'
+);
+
+
+
+let medicineHtml =
+'💊 薬記録なし';
+
+
+
+if(medicineRows.length > 0){
+
+medicineHtml = '';
+
+medicineRows.reverse().forEach(r => {
+
+medicineHtml +=
+
+'💊 ' +
+
+r.status +
+
+' ： ' +
+
+r.time +
+
+'<br>';
+
+});
+
+}
+
+
+
+document.getElementById(
+'medicineBox'
+).innerHTML =
+medicineHtml;
+
+}
+
+catch(err){
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+'通信エラー';
+
+}
+
+}
+
+
+
+loadData();
+
+setInterval(
+loadData,
+10000
+);
+
+</script>
 
 </body>
 </html>
