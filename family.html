@@ -7,7 +7,6 @@
 <title>家族見守りDX</title>
 
 <style>
-
 *{
 box-sizing:border-box;
 -webkit-tap-highlight-color:transparent;
@@ -16,148 +15,87 @@ box-sizing:border-box;
 body{
 margin:0;
 padding:0;
-background:
-linear-gradient(
-180deg,
-#edf5fb 0%,
-#f8fbff 100%
-);
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Hiragino Sans",
-"Yu Gothic",
-sans-serif;
+background:#f1f4f7;
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
 color:#222;
 }
 
 .wrap{
-max-width:760px;
+max-width:720px;
 margin:0 auto;
-padding:
-28px 18px 140px;
+padding:22px 16px 120px;
 }
 
-
-
-/* 上タイトル */
-
-.main-title{
-font-size:54px;
+.header{
+font-size:38px;
 font-weight:900;
+margin-bottom:18px;
 line-height:1.35;
-margin-bottom:28px;
-color:#202020;
 }
-
-
-
-/* カード */
 
 .card{
-background:#ffffff;
-border-radius:38px;
-padding:34px 28px;
-margin-bottom:28px;
-
-box-shadow:
-0 12px 36px rgba(0,0,0,.08);
+background:#fff;
+border-radius:28px;
+padding:26px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+margin-bottom:20px;
 }
-
-
-
-/* 名前 */
 
 .name{
-font-size:62px;
+font-size:42px;
 font-weight:900;
-line-height:1.3;
-margin-bottom:26px;
+margin-bottom:16px;
 }
-
-
-
-/* 状態 */
 
 .status{
-font-size:58px;
+font-size:42px;
 font-weight:900;
-line-height:1.3;
-margin-bottom:34px;
-color:#24b04a;
+color:#1f9d4a;
+margin-bottom:16px;
 }
 
-
-
-/* 最終確認 */
-
-.time-label{
-font-size:28px;
+.label{
+font-size:20px;
 font-weight:900;
 color:#777;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .time{
-font-size:42px;
+font-size:30px;
 font-weight:900;
-line-height:1.6;
-color:#555;
-}
-
-
-
-/* 薬カード */
-
-.medicine-card{
-background:
-linear-gradient(
-180deg,
-#f8fafc 0%,
-#f1f5f9 100%
-);
-
-border-radius:30px;
-
-padding:28px;
-
-margin-top:22px;
-}
-
-.medicine-title{
-font-size:52px;
-font-weight:900;
-margin-bottom:30px;
-line-height:1.4;
-}
-
-.medicine-time{
-font-size:50px;
-font-weight:900;
-color:#222;
+color:#333;
 line-height:1.5;
 }
 
+.medicine{
+background:#f7f9fb;
+border-radius:22px;
+padding:22px;
+margin-top:22px;
+}
 
+.med-title{
+font-size:32px;
+font-weight:900;
+margin-bottom:12px;
+}
 
-/* bottom */
+.med-time{
+font-size:30px;
+font-weight:900;
+}
 
 .bottom-menu{
 position:fixed;
 left:0;
 right:0;
 bottom:0;
-
 background:#fff;
-
 display:flex;
 justify-content:space-around;
-
-padding:16px 0;
-
-box-shadow:
-0 -4px 16px rgba(0,0,0,.10);
-
+padding:14px 0;
+box-shadow:0 -4px 14px rgba(0,0,0,.10);
 z-index:999;
 }
 
@@ -171,28 +109,13 @@ text-align:center;
 
 .bottom-icon{
 display:block;
-font-size:34px;
+font-size:30px;
 margin-bottom:4px;
 }
-
-
-
-/* エラー */
 
 .error{
 color:#ef5350;
 }
-
-
-
-/* ローディング */
-
-.loading{
-font-size:34px;
-font-weight:900;
-color:#888;
-}
-
 </style>
 </head>
 
@@ -200,11 +123,9 @@ color:#888;
 
 <div class="wrap">
 
-<div class="main-title">
-🏠 家族見守りDX
+<div class="header">
+👪 家族見守りDX
 </div>
-
-
 
 <div class="card">
 
@@ -212,34 +133,19 @@ color:#888;
 👴 山口さん
 </div>
 
-<div
-id="statusBox"
-class="status"
->
+<div id="statusBox" class="status">
 読み込み中...
 </div>
 
-
-
-<div class="time-label">
+<div class="label">
 最終確認
 </div>
 
-<div
-id="timeBox"
-class="time"
->
+<div id="timeBox" class="time">
 ---
 </div>
 
-
-
-<div
-id="medicineBox"
-class="medicine-card"
->
-
-<div class="loading">
+<div id="medicineBox" class="medicine">
 読み込み中...
 </div>
 
@@ -247,59 +153,28 @@ class="medicine-card"
 
 </div>
 
-</div>
-
-
-
 <div class="bottom-menu">
-
-<a
-class="bottom-btn"
-href="./"
->
-
-<span class="bottom-icon">
-🏠
-</span>
-
+<a class="bottom-btn" href="./">
+<span class="bottom-icon">🏠</span>
 ホーム
-
 </a>
 
-
-
-<a
-class="bottom-btn"
-href="./family.html"
->
-
-<span class="bottom-icon">
-👪
-</span>
-
+<a class="bottom-btn" href="./family.html">
+<span class="bottom-icon">👪</span>
 家族
-
 </a>
-
 </div>
-
-
 
 <script>
-
 const GAS_URL =
 'https://script.google.com/macros/s/AKfycbyFUX6w7KMKZ87PR37MrFaPgW1clmiTR5LigJO43XLVQCZ7IdsGLP6HXPeNMzd9qN1L/exec?code=YAMA1234';
-
-
 
 async function loadData(){
 
 try{
 
 const response =
-await fetch(
-GAS_URL + '&t=' + Date.now()
-);
+await fetch(GAS_URL + '&t=' + Date.now());
 
 const data =
 await response.json();
@@ -307,119 +182,56 @@ await response.json();
 const rows =
 data.rows || [];
 
-
-
 if(rows.length === 0){
 
-document.getElementById(
-'statusBox'
-).innerHTML =
+document.getElementById('statusBox').innerHTML =
 'まだ記録なし';
+
+document.getElementById('timeBox').innerHTML =
+'データ未登録';
+
+document.getElementById('medicineBox').innerHTML =
+'<div class="med-title">💊 薬記録なし</div>';
 
 return;
 
 }
 
-
-
 const latest =
 rows[rows.length - 1];
 
+document.getElementById('statusBox').innerHTML =
+'😊 ' + (latest.status || '');
 
-
-document.getElementById(
-'statusBox'
-).innerHTML =
-
-'😊 ' +
-(latest.status || '');
-
-
-
-document.getElementById(
-'timeBox'
-).innerHTML =
-
-(latest.update || '');
-
-
-
-let html = '';
-
-
+document.getElementById('timeBox').innerHTML =
+latest.update || '';
 
 if(latest.medicine){
 
-html +=
+document.getElementById('medicineBox').innerHTML =
+'<div class="med-title">💊 ' + latest.medicine + '</div>' +
+'<div class="med-time">🕒 ' + (latest.medicineTime || '') + '</div>';
 
-'<div class="medicine-title">💊 '
+}else{
 
-+
-
-latest.medicine
-
-+
-
-'</div>'
-
-+
-
-'<div class="medicine-time">🕒 '
-
-+
-
-(latest.medicineTime || '')
-
-+
-
-'</div>';
+document.getElementById('medicineBox').innerHTML =
+'<div class="med-title">💊 薬記録なし</div>';
 
 }
 
-else{
+}catch(err){
 
-html =
-'<div class="loading">薬記録なし</div>';
-
-}
-
-
-
-document.getElementById(
-'medicineBox'
-).innerHTML =
-html;
-
-}
-
-catch(err){
-
-console.log(err);
-
-document.getElementById(
-'statusBox'
-).innerHTML =
+document.getElementById('statusBox').innerHTML =
 '通信エラー';
 
-document.getElementById(
-'statusBox'
-).classList.add(
-'error'
-);
+document.getElementById('statusBox').classList.add('error');
 
 }
 
 }
-
-
 
 loadData();
-
-setInterval(
-loadData,
-10000
-);
-
+setInterval(loadData,10000);
 </script>
 
 </body>
