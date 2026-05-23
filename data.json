@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-05-19T15:00:00.000Z",
+    "date": "2026/05/20",
     "id": "007",
     "title": "5月20日 四市かわら版",
     "image": "https://drive.google.com/thumbnail?id=1Pu3rQldHEQ4DXryPo4O9kTQQUitw95_R&sz=w1600",
@@ -16,6 +16,7 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "",
+    "videoText": "",
     "youtubeUrl": ""
   },
   {
@@ -35,10 +36,11 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "",
-    "youtubeUrl": ""
+    "videoText": "病院の待ち時間やおうち時間に。懐かしい昭和歌謡をゆっくりお楽しみください。",
+    "youtubeUrl": "https://www.youtube.com/embed/LTHxJzd0hRU"
   },
   {
-    "date": "2026-05-18T15:00:00.000Z",
+    "date": "2026/05/19",
     "id": "005",
     "title": "5月19日 四市かわら版",
     "image": "https://drive.google.com/thumbnail?id=1weO1_pqGhYZ2fw7mNWad8NN6diA8TQfd&sz=w1200",
@@ -54,10 +56,11 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "",
+    "videoText": "",
     "youtubeUrl": ""
   },
   {
-    "date": "2026-05-17T15:00:00.000Z",
+    "date": "2026/05/18",
     "id": "004",
     "title": "今日のお楽しみ動画です",
     "image": "",
@@ -73,10 +76,11 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "『桃太郎侍』第一話",
-    "youtubeUrl": ""
+    "videoText": "『桃太郎侍』第1話は、松平藩の若殿の双子の弟でありながら、家柄を捨てて風来坊として生きる桃太郎が、藩の乗っ取りを企む悪党たちの陰謀を、鮮やかな剣技と「ひとつ、人の世の生き血をすすり…」の数え歌の口上で退治する、痛快勧善懲悪の物語です。",
+    "youtubeUrl": "https://www.youtube.com/embed/t3WOGxojKuY"
   },
   {
-    "date": "2026-05-17T15:00:00.000Z",
+    "date": "2026/05/18",
     "id": "003",
     "title": "5月18日 四市かわら版",
     "image": "https://drive.google.com/thumbnail?id=1lF_l-Wr0c4-Do2bnLsxRXUWIo5Wbz6aG&sz=w1200",
@@ -92,10 +96,11 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "",
+    "videoText": "",
     "youtubeUrl": ""
   },
   {
-    "date": "2026-05-16T15:00:00.000Z",
+    "date": "2026/05/17",
     "id": "002",
     "title": "今日のお楽しみ動画です！病院での待ち時間などにイヤホンでお楽しみください🎧",
     "image": "",
@@ -111,10 +116,11 @@
     "info5Title": "",
     "info5Url": "",
     "videoTitle": "天下騒乱 徳川三代の陰謀』の第一部",
-    "youtubeUrl": ""
+    "videoText": "・家康の死と「秘密」： 家康が病に倒れ、側近の土井利勝に「お前はわしの隠し子だ」と告げます。利勝は、徳川の天下を盤石にするため「鬼」になる決意をします。\n• 柳生親子の対立： 政治工作に剣を利用する父・宗矩と、純粋に剣の道を極めたい息子・十兵衛が激しく衝突します。\n• 世継ぎ争い： 2代将軍・秀忠の息子である家光（竹千代）と忠長（国松）を巡り、周囲の大人たちが次期将軍の座を狙って策略を巡らせます。\n• 陰謀の始まり： 幕府を転覆させようとする伊達政宗や本田正純などの動きに対し、土井利勝や柳生宗矩が冷徹な手段で対抗していきます。\n一言で言えば、**「徳川家を存続させるために、親子や兄弟が情を捨てて激しい権力争いを繰り広げる物語」**です。",
+    "youtubeUrl": "https://www.youtube.com/embed/JXl-Z20eoMw"
   },
   {
-    "date": "2026-05-16T15:00:00.000Z",
+    "date": "2026/05/17",
     "id": "001",
     "title": "5月17日 四市かわら版",
     "image": "https://drive.google.com/thumbnail?id=1W-aF4ZWw9F4HNfH6-2qd7tHnnKRKDddk&sz=w1200",
@@ -130,6 +136,7 @@
     "info5Title": "朝霞・和光｜地域ニュースを見る",
     "info5Url": "https://asaka-wako.goguynet.jp/2026/05/07/sakashitacc/",
     "videoTitle": "",
+    "videoText": "",
     "youtubeUrl": ""
   }
 ]
