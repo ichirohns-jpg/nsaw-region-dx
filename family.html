@@ -33,23 +33,23 @@ margin:0 auto;
 .box{
 background:#fff;
 border-radius:28px;
-margin-bottom:30px;
-padding:28px;
+padding:24px;
+margin-bottom:24px;
 box-shadow:
 0 8px 24px
-rgba(0,0,0,.10);
+rgba(0,0,0,.08);
 }
 
 .title{
-font-size:46px;
+font-size:48px;
 font-weight:900;
-margin-bottom:28px;
+margin-bottom:24px;
 }
 
-.name{
-font-size:54px;
+.big{
+font-size:56px;
 font-weight:900;
-margin-bottom:26px;
+margin-bottom:20px;
 }
 
 .status{
@@ -59,32 +59,27 @@ margin-bottom:20px;
 color:#22aa44;
 }
 
-.time{
-font-size:34px;
-font-weight:900;
-margin-bottom:30px;
-color:#666;
-}
-
 .item{
-font-size:34px;
+font-size:30px;
 line-height:1.8;
-margin-bottom:18px;
 font-weight:900;
+margin-bottom:14px;
 }
 
-.map-btn{
-display:block;
-width:100%;
-padding:28px;
-border-radius:24px;
-background:#4a90e2;
-color:#fff;
-font-size:38px;
-font-weight:900;
-text-decoration:none;
-text-align:center;
-margin-top:26px;
+.red{
+color:#ef5350;
+}
+
+.green{
+color:#22aa44;
+}
+
+.blue{
+color:#1d4ed8;
+}
+
+.gray{
+color:#666;
 }
 
 </style>
@@ -100,47 +95,221 @@ margin-top:26px;
 👪 家族見守りDX
 </div>
 
-<div class="name">
+<div class="big">
 👴 山口さん
 </div>
 
-<div class="status">
-😊 元気です
+<div
+id="statusBox"
+class="status"
+>
+読み込み中...
 </div>
 
-<div class="time">
-最終確認：今日 08:15
+<div
+id="timeBox"
+class="item gray"
+>
+---
 </div>
 
 <hr>
 
-<div class="item">
-💊 朝の薬：飲みました
-</div>
-
-<div class="item">
-📅 今日の予定
-</div>
-
-<div class="item">
-🏥 10:00 歯医者
-</div>
-
-<div class="item">
-💊 朝の薬
-</div>
-
-<a
-class="map-btn"
-href="https://maps.google.com"
-target="_blank"
+<div
+id="medicineBox"
+class="item"
 >
-📍 Googleマップを見る
-</a>
+---
+</div>
 
+<div
+id="alertBox"
+class="item red"
+>
+---
+</div>
+
+<div
+id="locationBox"
+class="item blue"
+>
+---
 </div>
 
 </div>
+
+</div>
+
+<script>
+
+const GAS_URL =
+'https://script.google.com/macros/s/AKfycbxsLXiFBlcAWwIYnvcVo93rmTAWJzbKhdY258bvDuCz7wwRjT18NcYYEvvY-D1FlmXV/exec?code=YAMA1234';
+
+
+
+async function loadData(){
+
+try{
+
+const response =
+await fetch(GAS_URL);
+
+const data =
+await response.json();
+
+const rows =
+data.rows || [];
+
+
+
+if(rows.length === 0){
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+'データなし';
+
+return;
+
+}
+
+
+
+const latest =
+rows[rows.length - 1];
+
+
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+
+'😊 ' +
+(latest.status || '確認中');
+
+
+
+document.getElementById(
+'timeBox'
+).innerHTML =
+
+'最終確認：' +
+(latest.datetime || '');
+
+
+
+let medicineHtml = '';
+
+let alertHtml = '';
+
+let locationHtml = '';
+
+
+
+rows.reverse().forEach(row => {
+
+if(row.type === '薬'){
+
+medicineHtml +=
+
+'💊 ' +
+row.status +
+' ' +
+row.time +
+'<br>';
+
+}
+
+
+
+if(row.type === '緊急'){
+
+alertHtml +=
+
+'🆘 ' +
+row.status +
+' ' +
+row.time +
+'<br>';
+
+}
+
+
+
+if(row.type === '位置情報'){
+
+locationHtml +=
+
+'<a target="_blank" href="https://maps.google.com/?q=' +
+
+row.lat +
+
+',' +
+
+row.lng +
+
+'">📍 現在地を見る</a>';
+
+}
+
+});
+
+
+
+document.getElementById(
+'medicineBox'
+).innerHTML =
+
+medicineHtml ||
+
+'💊 薬記録なし';
+
+
+
+document.getElementById(
+'alertBox'
+).innerHTML =
+
+alertHtml ||
+
+'🆘 緊急記録なし';
+
+
+
+document.getElementById(
+'locationBox'
+).innerHTML =
+
+locationHtml ||
+
+'📍 位置情報なし';
+
+
+
+}
+
+catch(err){
+
+document.getElementById(
+'statusBox'
+).innerHTML =
+
+'通信エラー';
+
+}
+
+}
+
+
+
+loadData();
+
+setInterval(
+loadData,
+10000
+);
+
+</script>
 
 </body>
 </html>
