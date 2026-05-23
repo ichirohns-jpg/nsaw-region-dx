@@ -12,6 +12,7 @@
 <meta property="og:description" content="志木・新座・朝霞・和光の地域生活情報">
 <meta property="og:image" content="https://ichirohns-jpg.github.io/nsaw-region-dx/ogp.jpg">
 <meta property="og:url" content="https://ichirohns-jpg.github.io/nsaw-region-dx/">
+
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
@@ -164,7 +165,7 @@ body{
 
 
 
-/* 下固定ボタン */
+/* 下固定 */
 
 .bottom-menu{
   position:fixed;
@@ -189,8 +190,8 @@ body{
 }
 
 .bottom-icon{
-  font-size:28px;
   display:block;
+  font-size:28px;
   margin-bottom:6px;
 }
 
@@ -213,25 +214,10 @@ NSAW地域DX
 
 <!-- 今日の予定 -->
 
-<div class="today-box">
-
-<div class="today-title">
-☀ 今日の予定
-</div>
-
-<div class="today-item">
-🏥 10:00 歯医者
-</div>
-
-<div class="today-item">
-💊 朝の薬
-</div>
-
-<div class="today-item">
-🗑 明日は燃えるごみ
-</div>
-
-</div>
+<div
+  class="today-box"
+  id="todayBox"
+></div>
 
 
 
@@ -275,8 +261,43 @@ NSAW地域DX
 
 <script>
 
+
+
+/* 今日の予定 */
+
+const todayBox =
+document.getElementById(
+  'todayBox'
+);
+
+todayBox.innerHTML = `
+
+<div class="today-title">
+☀ 今日の予定
+</div>
+
+<div class="today-item">
+🏥 10:00 歯医者
+</div>
+
+<div class="today-item">
+💊 朝の薬
+</div>
+
+<div class="today-item">
+🗑 明日は燃えるごみ
+</div>
+
+`;
+
+
+
+/* 記事 */
+
 fetch('data.json')
+
 .then(res => res.json())
+
 .then(posts => {
 
   const list =
