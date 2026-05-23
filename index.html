@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>家族確認画面</title>
+<title>NSAW地域DX</title>
 
 <style>
 
@@ -26,101 +26,262 @@ body{
 }
 
 .wrap{
-  max-width:700px;
+  max-width:760px;
   margin:0 auto;
 }
 
-.title{
-  font-size:42px;
-  font-weight:900;
-  margin:
-  10px 0
-  30px;
-}
-
+.clock-box,
+.today-box,
+.voice-result,
+.health-box,
 .card{
   background:#fff;
   border-radius:28px;
-  padding:28px;
-  margin-bottom:28px;
+  margin-bottom:34px;
   box-shadow:
   0 8px 24px
   rgba(0,0,0,.10);
 }
 
-.name{
+.clock-box{
+  text-align:center;
+  padding:28px;
+}
+
+.clock-date{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.clock-time{
+  font-size:72px;
+  font-weight:900;
+}
+
+.main-title{
+  font-size:44px;
+  font-weight:900;
+  margin:14px 0 28px;
+}
+
+
+
+/* 今日の予定 */
+
+.today-box{
+  background:#fff8dc;
+  padding:24px;
+}
+
+.today-title{
+  font-size:36px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.today-link{
+  text-decoration:none;
+  color:#222;
+  display:block;
+}
+
+.today-item{
+  font-size:28px;
+  line-height:1.8;
+  margin-bottom:12px;
+}
+
+
+
+/* 音声 */
+
+.voice-btn{
+  width:100%;
+  border:none;
+  border-radius:22px;
+  padding:26px;
+  margin-bottom:18px;
+  background:#4a90e2;
+  color:#fff;
+  font-size:32px;
+  font-weight:900;
+}
+
+.voice-result{
+  padding:24px;
+  font-size:26px;
+  line-height:1.8;
+  white-space:pre-wrap;
+}
+
+.voice-save{
+  display:block;
+  width:100%;
+  border:none;
+  border-radius:20px;
+  padding:22px;
+  margin-top:22px;
+  background:#5cc96b;
+  color:#fff;
+  font-size:28px;
+  font-weight:900;
+}
+
+
+
+/* 元気 */
+
+.health-box{
+  padding:24px;
+}
+
+.health-title{
   font-size:36px;
   font-weight:900;
   margin-bottom:20px;
 }
 
-.line{
-  font-size:28px;
-  line-height:1.9;
-  margin-bottom:14px;
-  word-break:keep-all;
-}
-
-.good{
-  color:#1b8f3c;
-  font-weight:900;
-}
-
-.bad{
-  color:#d93025;
-  font-weight:900;
-}
-
-.time{
-  color:#666;
-  font-size:22px;
-}
-
-.map-btn{
-  display:block;
+.health-btn{
   width:100%;
+  border:none;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:18px;
+  font-size:30px;
+  font-weight:900;
+}
+
+.good-btn{
+  background:#5cc96b;
+  color:#fff;
+}
+
+.normal-btn{
+  background:#ffd54f;
+}
+
+.danger-btn{
+  background:#ef5350;
+  color:#fff;
+}
+
+.sub-btn{
+  width:100%;
+  border:none;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:14px;
+  background:#f3f5f7;
+  font-size:24px;
+  font-weight:900;
+}
+
+.danger-call{
+  display:block;
   text-decoration:none;
   text-align:center;
-  border-radius:20px;
+  background:#ef5350;
+  color:#fff;
+  border-radius:18px;
   padding:22px;
-  margin-top:22px;
-  background:#2f6df6;
-  color:#fff;
-  font-size:28px;
+  margin-bottom:14px;
+  font-size:26px;
   font-weight:900;
 }
 
-.refresh-btn{
+
+
+/* 記事 */
+
+.card{
+  overflow:hidden;
+}
+
+.card img{
   width:100%;
-  border:none;
-  border-radius:22px;
+  display:block;
+}
+
+.card-body{
   padding:24px;
-  margin-bottom:30px;
-  background:#4a90e2;
-  color:#fff;
-  font-size:30px;
+}
+
+.date{
+  font-size:18px;
+  color:#666;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:32px;
   font-weight:900;
+  margin-bottom:18px;
 }
 
-.section-title{
-  font-size:30px;
-  font-weight:900;
-  margin:
-  26px 0
-  18px;
+.text{
+  font-size:22px;
+  line-height:1.9;
+  white-space:pre-wrap;
 }
 
-hr{
-  border:none;
-  border-top:
-  2px solid #ddd;
-  margin:
-  22px 0;
-}
-
-.empty{
-  color:#777;
+.video-title{
   font-size:24px;
+  font-weight:900;
+  margin:28px 0 14px;
+}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;
+  border-radius:22px;
+  overflow:hidden;
+  background:#000;
+}
+
+.video-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+
+
+/* 下固定 */
+
+.bottom-menu{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+  box-shadow:
+  0 -4px 14px
+  rgba(0,0,0,.12);
+}
+
+.bottom-btn{
+  text-decoration:none;
+  color:#222;
+  font-size:18px;
+  font-weight:900;
+  text-align:center;
+}
+
+.bottom-icon{
+  display:block;
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.footer-space{
+  height:100px;
 }
 
 </style>
@@ -130,47 +291,204 @@ hr{
 
 <div class="wrap">
 
-<div class="title">
-👨 家族確認画面
+<div class="clock-box">
+<div class="clock-date" id="clockDate"></div>
+<div class="clock-time" id="clockTime"></div>
+</div>
+
+<div class="main-title">
+NSAW地域DX
+</div>
+
+<div class="today-box" id="todayBox"></div>
+
+<button
+class="voice-btn"
+onclick="startVoiceInput()"
+>
+🎤 話して予定追加
+</button>
+
+<div
+class="voice-result"
+id="voiceResult"
+>
+ここに話した内容が表示されます
+</div>
+
+<div class="health-box">
+
+<div class="health-title">
+😊 今日の状態
 </div>
 
 <button
-class="refresh-btn"
-onclick="loadData()"
+class="health-btn good-btn"
+onclick="showGood()"
 >
-🔄 更新する
+😊 元気です
 </button>
 
-<div id="familyList"></div>
+<button
+class="health-btn normal-btn"
+onclick="toggleNormal()"
+>
+😐 ちょっと不調
+</button>
+
+<div
+id="normalMenu"
+style="display:none;"
+>
+
+<button
+class="sub-btn"
+onclick="takeMedicine()"
+>
+💊 薬を飲みました
+</button>
+
+<button class="sub-btn">
+体調が悪い
+</button>
+
+<button class="sub-btn">
+転んだ
+</button>
+
+<button class="sub-btn">
+薬がない
+</button>
+
+<button class="sub-btn">
+食べ物がない
+</button>
+
+<button class="sub-btn">
+病院に行きたい
+</button>
+
+<button class="sub-btn">
+誰かに電話したい
+</button>
 
 </div>
+
+<button
+class="health-btn danger-btn"
+onclick="toggleDanger()"
+>
+🆘 困っています
+</button>
+
+<div
+id="dangerMenu"
+style="display:none;"
+>
+
+<a
+class="danger-call"
+href="tel:119"
+>
+🚑 119
+</a>
+
+<a
+class="danger-call"
+href="tel:110"
+>
+🚓 110
+</a>
+
+</div>
+
+</div>
+
+<div id="list"></div>
+
+<div class="footer-space"></div>
+
+</div>
+
+
+
+<div class="bottom-menu">
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">🏠</span>
+ホーム
+</a>
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">📅</span>
+予定
+</a>
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">🗺</span>
+地図
+</a>
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">😊</span>
+元気
+</a>
+
+</div>
+
+
 
 <script>
 
 
 
-function loadData(){
+/* 時計 */
 
+function updateClock(){
 
+const now =
+new Date();
 
-const genkiData =
+document.getElementById(
+'clockDate'
+).innerText =
 
-JSON.parse(
-localStorage.getItem(
-'genkiData'
-)
-)
-
-||
-
+now.toLocaleDateString(
+'ja-JP',
 {
-status:'未確認',
-time:'--:--'
-};
+year:'numeric',
+month:'long',
+day:'numeric',
+weekday:'long'
+}
+);
+
+document.getElementById(
+'clockTime'
+).innerText =
+
+now.toLocaleTimeString(
+'ja-JP',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
+}
+
+updateClock();
+
+setInterval(
+updateClock,
+1000
+);
 
 
 
-const todayData =
+/* 今日の予定 */
+
+let todayData =
 
 JSON.parse(
 localStorage.getItem(
@@ -180,93 +498,576 @@ localStorage.getItem(
 
 ||
 
-[];
+[
+{
+icon:'🏥',
+text:'10:00 歯医者',
+url:'#'
+},
+
+{
+icon:'💊',
+text:'朝の薬',
+url:'#'
+}
+];
 
 
 
-const todayHtml =
+function renderToday(){
 
-todayData.length
+document.getElementById(
+'todayBox'
+).innerHTML =
 
-?
+'<div class="today-title">☀ 今日の予定</div>'
+
++
 
 todayData.map(item =>
 
-`
-<div class="line">
-${item.icon}
-${item.text}
-</div>
-`
+'<a class="today-link" href="' +
+item.url +
+'" target="_blank">' +
 
-).join('')
+'<div class="today-item">' +
+item.icon +
+' ' +
+item.text +
+'</div></a>'
 
-:
-
-`
-<div class="empty">
-今日の予定はありません
-</div>
-`;
+).join('');
 
 
 
-const familyHtml =
+localStorage.setItem(
+'todayData',
+JSON.stringify(todayData)
+);
 
-`
-<div class="card">
+}
 
-<div class="name">
-👴 山口さん
-</div>
-
-<div class="line good">
-😊 ${genkiData.status}
-</div>
-
-<div class="time">
-最終確認：今日 ${genkiData.time}
-</div>
-
-<hr>
-
-<div class="line">
-💊 朝の薬：
-<span class="good">
-飲みました
-</span>
-</div>
-
-<div class="section-title">
-📅 今日の予定
-</div>
-
-${todayHtml}
-
-<a
-class="map-btn"
-href="https://maps.google.com"
-target="_blank"
->
-📍 Googleマップを見る
-</a>
-
-</div>
-`;
+renderToday();
 
 
+
+/* 音声 */
+
+function startVoiceInput(){
+
+const SpeechRecognition =
+
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+
+
+if(!SpeechRecognition){
 
 document.getElementById(
-'familyList'
-).innerHTML =
+'voiceResult'
+).innerText =
 
-familyHtml;
+'⚠ この端末では音声入力できません';
+
+return;
 
 }
 
 
 
-loadData();
+const recognition =
+new SpeechRecognition();
+
+recognition.lang = 'ja-JP';
+
+recognition.interimResults = false;
+
+recognition.continuous = false;
+
+
+
+recognition.onstart = function(){
+
+document.getElementById(
+'voiceResult'
+).innerText =
+
+'🎤 聞き取り中...';
+
+};
+
+
+
+recognition.onresult = function(event){
+
+const text =
+
+event.results[0][0]
+.transcript;
+
+
+
+const parsed =
+parseScheduleText(text);
+
+
+
+const calendarUrl =
+createGoogleCalendarUrl(parsed);
+
+
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'<div>🎤 ' +
+text +
+'</div>'
+
++
+
+'<div style="margin-top:18px;font-weight:900;">AI整理結果</div>'
+
++
+
+'<div>📅 日付：' +
+parsed.date +
+'</div>'
+
++
+
+'<div>⏰ 時間：' +
+parsed.time +
+'</div>'
+
++
+
+'<div>🏥 内容：' +
+parsed.title +
+'</div>'
+
++
+
+'<button class="voice-save" onclick="saveSchedule(' +
+
+JSON.stringify(parsed)
+.replace(/"/g,'&quot;')
+
++
+
+')">' +
+
+'☀ 今日の予定へ追加'
+
++
+
+'</button>'
+
++
+
+'<a class="voice-save" href="' +
+calendarUrl +
+'" target="_blank">' +
+
+'📅 Googleカレンダーへ登録'
+
++
+
+'</a>';
+
+};
+
+recognition.start();
+
+}
+
+
+
+/* AI整理 */
+
+function parseScheduleText(text){
+
+let date = '未整理';
+
+let time = '未整理';
+
+let title = text;
+
+
+
+const monthDay =
+
+text.match(
+/(\d{1,2})月(\d{1,2})日/
+);
+
+if(monthDay){
+
+date =
+monthDay[1] +
+'月' +
+monthDay[2] +
+'日';
+
+}
+
+
+
+if(text.includes('時半')){
+
+const halfMatch =
+
+text.match(
+/(\d{1,2})時半/
+);
+
+if(halfMatch){
+
+time =
+halfMatch[1]
+.padStart(2,'0')
++
+':30';
+
+}
+
+}
+
+else{
+
+const timeMatch =
+
+text.match(
+/(\d{1,2})時\s*(\d{1,2})?分?/
+);
+
+if(timeMatch){
+
+const hour =
+timeMatch[1];
+
+let minute =
+timeMatch[2]
+? timeMatch[2]
+: '00';
+
+time =
+hour.padStart(2,'0')
++
+':'
++
+minute.padStart(2,'0');
+
+}
+
+}
+
+
+
+if(text.includes('歯医者')){
+
+title = '歯医者';
+
+}
+
+else if(text.includes('病院')){
+
+title = '病院';
+
+}
+
+else if(text.includes('薬')){
+
+title = '薬';
+
+}
+
+
+
+return {
+
+date:date,
+time:time,
+title:title
+
+};
+
+}
+
+
+
+/* Googleカレンダー */
+
+function createGoogleCalendarUrl(parsed){
+
+const title =
+encodeURIComponent(
+parsed.title || '予定'
+);
+
+const details =
+encodeURIComponent(
+'NSAW地域DXから登録'
+);
+
+return
+
+'https://calendar.google.com/calendar/render?action=TEMPLATE'
+
++
+
+'&text=' +
+title
+
++
+
+'&details=' +
+details;
+
+}
+
+
+
+/* 保存 */
+
+function saveSchedule(parsed){
+
+todayData.unshift({
+
+icon:'📅',
+
+text:
+parsed.date +
+' ' +
+parsed.time +
+' ' +
+parsed.title,
+
+url:'#'
+
+});
+
+
+
+renderToday();
+
+
+
+document.getElementById(
+'voiceResult'
+).innerHTML =
+
+'✅ 今日の予定へ追加しました';
+
+}
+
+
+
+/* 元気 */
+
+function showGood(){
+
+const now =
+new Date();
+
+const time =
+
+now.toLocaleTimeString(
+'ja-JP',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
+const genkiData = {
+
+status:'元気です',
+time:time
+
+};
+
+localStorage.setItem(
+'genkiData',
+JSON.stringify(genkiData)
+);
+
+alert(
+'😊 元気を記録しました'
+);
+
+}
+
+
+
+/* 薬 */
+
+function takeMedicine(){
+
+const now =
+new Date();
+
+const time =
+
+now.toLocaleTimeString(
+'ja-JP',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
+const medicineData = {
+
+status:'飲みました',
+time:time
+
+};
+
+localStorage.setItem(
+'medicineData',
+JSON.stringify(medicineData)
+);
+
+alert(
+'💊 薬を記録しました'
+);
+
+}
+
+
+
+/* メニュー */
+
+function toggleNormal(){
+
+const menu =
+
+document.getElementById(
+'normalMenu'
+);
+
+menu.style.display =
+
+menu.style.display === 'none'
+
+? 'block'
+
+: 'none';
+
+}
+
+
+
+function toggleDanger(){
+
+const menu =
+
+document.getElementById(
+'dangerMenu'
+);
+
+menu.style.display =
+
+menu.style.display === 'none'
+
+? 'block'
+
+: 'none';
+
+}
+
+
+
+/* 記事 */
+
+fetch('data.json')
+
+.then(res => res.json())
+
+.then(posts => {
+
+const list =
+
+document.getElementById(
+'list'
+);
+
+
+
+posts.forEach(post => {
+
+const card =
+
+document.createElement(
+'div'
+);
+
+card.className = 'card';
+
+
+
+card.innerHTML =
+
+(post.image
+
+? '<img src="' +
+post.image +
+'">'
+
+: '')
+
++
+
+'<div class="card-body">'
+
++
+
+'<div class="date">' +
+post.date +
+'</div>'
+
++
+
+'<div class="title">' +
+post.title +
+'</div>'
+
++
+
+'<div class="text">' +
+post.text +
+'</div>'
+
++
+
+(post.youtubeUrl
+
+? '<div class="video-title">' +
+post.videoTitle +
+'</div>'
+
++
+
+'<div class="video-wrap"><iframe src="' +
+post.youtubeUrl +
+'" allowfullscreen></iframe></div>'
+
+: '')
+
++
+
+'</div>';
+
+
+
+list.appendChild(card);
+
+});
+
+});
 
 </script>
 
