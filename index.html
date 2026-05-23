@@ -30,10 +30,7 @@ body{
   margin:0 auto;
 }
 
-.clock-box,
-.today-box,
-.voice-result,
-.health-box{
+.box{
   background:#fff;
   border-radius:28px;
   margin-bottom:34px;
@@ -41,6 +38,10 @@ body{
   0 8px 24px
   rgba(0,0,0,.10);
 }
+
+
+
+/* 時計 */
 
 .clock-box{
   text-align:center;
@@ -58,6 +59,10 @@ body{
   font-weight:900;
 }
 
+
+
+/* タイトル */
+
 .main-title{
   font-size:44px;
   font-weight:900;
@@ -66,7 +71,7 @@ body{
 
 
 
-/* 予定 */
+/* 今日の予定 */
 
 .today-box{
   background:#fff8dc;
@@ -74,15 +79,15 @@ body{
 }
 
 .today-title{
-  font-size:36px;
+  font-size:38px;
   font-weight:900;
   margin-bottom:18px;
 }
 
 .today-item{
   font-size:28px;
-  line-height:1.8;
-  margin-bottom:12px;
+  line-height:1.9;
+  margin-bottom:14px;
   word-break:keep-all;
 }
 
@@ -94,18 +99,18 @@ body{
   width:100%;
   border:none;
   border-radius:22px;
-  padding:26px;
+  padding:28px;
   margin-bottom:18px;
   background:#4a90e2;
   color:#fff;
-  font-size:32px;
+  font-size:34px;
   font-weight:900;
 }
 
 .voice-result{
-  padding:24px;
+  padding:28px;
   font-size:26px;
-  line-height:1.8;
+  line-height:1.9;
   white-space:pre-wrap;
 }
 
@@ -133,7 +138,7 @@ body{
 }
 
 .health-title{
-  font-size:36px;
+  font-size:42px;
   font-weight:900;
   margin-bottom:20px;
 }
@@ -142,9 +147,9 @@ body{
   width:100%;
   border:none;
   border-radius:20px;
-  padding:24px;
+  padding:26px;
   margin-bottom:18px;
-  font-size:30px;
+  font-size:34px;
   font-weight:900;
 }
 
@@ -155,6 +160,12 @@ body{
 
 .normal-btn{
   background:#ffd54f;
+  color:#1d4ed8;
+}
+
+.danger-btn{
+  background:#ef5350;
+  color:#fff;
 }
 
 .sub-btn{
@@ -170,7 +181,7 @@ body{
 
 
 
-/* 下 */
+/* 下メニュー */
 
 .bottom-menu{
   position:fixed;
@@ -211,7 +222,11 @@ body{
 
 <div class="wrap">
 
-<div class="clock-box">
+
+
+<!-- 時計 -->
+
+<div class="box clock-box">
 
 <div
 class="clock-date"
@@ -227,18 +242,29 @@ id="clockTime"
 
 
 
+<!-- タイトル -->
+
 <div class="main-title">
 NSAW地域DX
 </div>
 
 
 
-<div
-class="today-box"
-id="todayBox"
-></div>
+<!-- 今日の予定 -->
+
+<div class="box today-box">
+
+<div class="today-title">
+☀ 今日の予定
+</div>
+
+<div id="todayList"></div>
+
+</div>
 
 
+
+<!-- 音声 -->
 
 <button
 class="voice-btn"
@@ -247,10 +273,8 @@ onclick="startVoiceInput()"
 🎤 話して予定追加
 </button>
 
-
-
 <div
-class="voice-result"
+class="box voice-result"
 id="voiceResult"
 >
 ここに話した内容が表示されます
@@ -258,7 +282,9 @@ id="voiceResult"
 
 
 
-<div class="health-box">
+<!-- 状態 -->
+
+<div class="box health-box">
 
 <div class="health-title">
 😊 今日の状態
@@ -290,15 +316,50 @@ onclick="takeMedicine()"
 💊 薬を飲みました
 </button>
 
-</div>
+<button class="sub-btn">
+体調が悪い
+</button>
+
+<button class="sub-btn">
+転んだ
+</button>
+
+<button class="sub-btn">
+薬がない
+</button>
+
+<button class="sub-btn">
+食べ物がない
+</button>
+
+<button class="sub-btn">
+病院に行きたい
+</button>
+
+<button class="sub-btn">
+誰かに電話したい
+</button>
 
 </div>
+
+<button
+class="health-btn danger-btn"
+onclick="showDanger()"
+>
+🆘 困っています
+</button>
+
+</div>
+
+
 
 <div class="footer-space"></div>
 
 </div>
 
 
+
+<!-- 下メニュー -->
 
 <div class="bottom-menu">
 
@@ -325,15 +386,13 @@ onclick="takeMedicine()"
 
 
 
+/* GAS */
+
 const GAS_URL =
 'https://script.google.com/macros/s/AKfycbwHzZrES4KA7Levp619vnzmF9V38zRX-tzwPuu527BUIfH_K2pTuu-pPT0cZg_gTo6h/exec';
 
-
-
 const USER_CODE =
 'YAMA1234';
-
-
 
 const USER_NAME =
 '山口さん';
@@ -384,7 +443,7 @@ updateClock,
 
 
 
-/* 今日の予定 */
+/* 予定 */
 
 let todayData =
 
@@ -396,19 +455,25 @@ localStorage.getItem(
 
 ||
 
-[];
+[
+{
+icon:'🏥',
+text:'10:00 歯医者'
+},
+
+{
+icon:'💊',
+text:'朝の薬'
+}
+];
 
 
 
 function renderToday(){
 
 document.getElementById(
-'todayBox'
+'todayList'
 ).innerHTML =
-
-'<div class="today-title">☀ 今日の予定</div>'
-
-+
 
 todayData.map(item =>
 
@@ -486,9 +551,9 @@ title;
 
 function parseScheduleText(text){
 
-let date = '未整理';
+let date = '今日';
 
-let time = '未整理';
+let time = '未設定';
 
 let title = text;
 
@@ -532,11 +597,37 @@ halfMatch[1]
 
 }
 
+else{
+
+const timeMatch =
+
+text.match(
+/(\d{1,2})時/
+);
+
+if(timeMatch){
+
+time =
+timeMatch[1]
+.padStart(2,'0')
++
+':00';
+
+}
+
+}
+
 
 
 if(text.includes('歯医者')){
 
 title = '歯医者';
+
+}
+
+else if(text.includes('病院')){
+
+title = '病院';
 
 }
 
@@ -680,13 +771,15 @@ calendarUrl +
 
 };
 
+
+
 recognition.start();
 
 }
 
 
 
-/* 予定保存 */
+/* 保存 */
 
 function saveSchedule(parsed){
 
@@ -840,7 +933,7 @@ alert(
 
 
 
-/* メニュー */
+/* 不調 */
 
 function toggleNormal(){
 
@@ -857,6 +950,18 @@ menu.style.display === 'none'
 ? 'block'
 
 : 'none';
+
+}
+
+
+
+/* 緊急 */
+
+function showDanger(){
+
+alert(
+'🆘 困っています'
+);
 
 }
 
