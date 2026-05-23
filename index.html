@@ -31,10 +31,6 @@ max-width:760px;
 margin:0 auto;
 }
 
-
-
-/* 共通 */
-
 .box{
 background:#fff;
 border-radius:28px;
@@ -51,93 +47,6 @@ font-weight:900;
 margin-bottom:20px;
 }
 
-
-
-/* 時計 */
-
-.clock-box{
-text-align:center;
-padding:24px;
-}
-
-.clock-date{
-font-size:28px;
-font-weight:900;
-margin-bottom:8px;
-color:#666;
-}
-
-.clock-time{
-font-size:64px;
-font-weight:900;
-}
-
-
-
-/* タイトル */
-
-.main-title{
-font-size:48px;
-font-weight:900;
-margin:10px 0 24px;
-}
-
-
-
-/* 今日の予定 */
-
-.today-box{
-background:#fff8dc;
-}
-
-.today-item{
-font-size:28px;
-line-height:1.8;
-margin-bottom:12px;
-font-weight:900;
-}
-
-
-
-/* 音声 */
-
-.voice-btn{
-width:100%;
-border:none;
-border-radius:24px;
-padding:28px;
-margin-bottom:18px;
-background:#4a90e2;
-color:#fff;
-font-size:36px;
-font-weight:900;
-}
-
-.voice-result{
-font-size:26px;
-line-height:1.8;
-white-space:pre-wrap;
-}
-
-.voice-save{
-display:block;
-width:100%;
-text-align:center;
-text-decoration:none;
-border:none;
-border-radius:20px;
-padding:22px;
-margin-top:18px;
-background:#5cc96b;
-color:#fff;
-font-size:28px;
-font-weight:900;
-}
-
-
-
-/* 状態 */
-
 .health-btn{
 width:100%;
 border:none;
@@ -152,31 +61,6 @@ font-weight:900;
 background:#5cc96b;
 color:#fff;
 }
-
-.normal-btn{
-background:#ffd54f;
-color:#1d4ed8;
-}
-
-.danger-btn{
-background:#ef5350;
-color:#fff;
-}
-
-.sub-btn{
-width:100%;
-border:none;
-border-radius:18px;
-padding:20px;
-margin-bottom:14px;
-background:#f3f5f7;
-font-size:26px;
-font-weight:900;
-}
-
-
-
-/* 薬 */
 
 .medicine-btn{
 width:100%;
@@ -197,120 +81,12 @@ margin-bottom:18px;
 line-height:1.7;
 }
 
-.cancel-btn{
-border:none;
-border-radius:12px;
-padding:10px 16px;
-background:#ddd;
-font-size:18px;
-font-weight:900;
-margin-left:12px;
-}
-
-
-
-/* 下メニュー */
-
-.bottom-menu{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:12px 0;
-box-shadow:
-0 -4px 14px
-rgba(0,0,0,.10);
-}
-
-.bottom-btn{
-text-decoration:none;
-color:#222;
-font-size:18px;
-font-weight:900;
-text-align:center;
-}
-
-.bottom-icon{
-display:block;
-font-size:28px;
-margin-bottom:4px;
-}
-
-.footer-space{
-height:100px;
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="wrap">
-
-
-
-<!-- 時計 -->
-
-<div class="box clock-box">
-
-<div
-class="clock-date"
-id="clockDate"
-></div>
-
-<div
-class="clock-time"
-id="clockTime"
-></div>
-
-</div>
-
-
-
-<!-- タイトル -->
-
-<div class="main-title">
-NSAW地域DX
-</div>
-
-
-
-<!-- 今日の予定 -->
-
-<div class="box today-box">
-
-<div class="section-title">
-☀ 今日の予定
-</div>
-
-<div id="todayList"></div>
-
-</div>
-
-
-
-<!-- 音声 -->
-
-<button
-class="voice-btn"
-onclick="startVoiceInput()"
->
-🎤 話して予定追加
-</button>
-
-<div
-class="box voice-result"
-id="voiceResult"
->
-ここに話した内容が表示されます
-</div>
-
-
-
-<!-- 状態 -->
 
 <div class="box">
 
@@ -325,80 +101,9 @@ onclick="showGood()"
 😊 元気です
 </button>
 
-<button
-class="health-btn normal-btn"
-onclick="toggleNormal()"
->
-😐 ちょっと不調
-</button>
-
-<div
-id="normalMenu"
-style="display:none;"
->
-
-<button class="sub-btn">
-体調が悪い
-</button>
-
-<button class="sub-btn">
-転んだ
-</button>
-
-<button class="sub-btn">
-食欲がない
-</button>
-
-<button class="sub-btn">
-病院へ行きたい
-</button>
-
-<button class="sub-btn">
-誰かと話したい
-</button>
-
-</div>
-
-<button
-class="health-btn danger-btn"
-onclick="toggleDanger()"
->
-🆘 困っています
-</button>
-
-<div
-id="dangerMenu"
-style="display:none;"
->
-
-<button
-class="sub-btn"
-onclick="call119()"
->
-🚑 119へ電話
-</button>
-
-<button
-class="sub-btn"
-onclick="call110()"
->
-🚓 110へ電話
-</button>
-
-<button
-class="sub-btn"
-onclick="getLocation()"
->
-📍 現在地を開く
-</button>
-
-</div>
-
 </div>
 
 
-
-<!-- 薬 -->
 
 <div class="box">
 
@@ -448,45 +153,12 @@ class="medicine-result"
 
 </div>
 
-
-
-<div class="footer-space"></div>
-
 </div>
-
-
-
-<!-- 下 -->
-
-<div class="bottom-menu">
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">📅</span>
-予定
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">😊</span>
-元気
-</a>
-
-</div>
-
-
 
 <script>
 
-
-
-/* GAS */
-
 const GAS_URL =
-'https://script.google.com/macros/s/AKfycbxsLXiFBlcAWwIYnvcVo93rmTAWJzbKhdY258bvDuCz7wwRjT18NcYYEvvY-D1FlmXV/exec';
+'https://script.google.com/macros/s/AKfycbyVLKBp9HiMTvBT9GAPtpYKg6ppmUOKkpRQQbIFOudhXk9X_pU8ecRKUurtUcKKWD04/exec';
 
 const USER_CODE =
 'YAMA1234';
@@ -496,32 +168,10 @@ const USER_NAME =
 
 
 
-/* 時計 */
+function getNowTime(){
 
-function updateClock(){
-
-const now =
-new Date();
-
-document.getElementById(
-'clockDate'
-).innerText =
-
-now.toLocaleDateString(
-'ja-JP',
-{
-year:'numeric',
-month:'long',
-day:'numeric',
-weekday:'long'
-}
-);
-
-document.getElementById(
-'clockTime'
-).innerText =
-
-now.toLocaleTimeString(
+return new Date()
+.toLocaleTimeString(
 'ja-JP',
 {
 hour:'2-digit',
@@ -531,90 +181,6 @@ minute:'2-digit'
 
 }
 
-updateClock();
-
-setInterval(
-updateClock,
-1000
-);
-
-
-
-/* 今日の予定 */
-
-let todayData =
-
-JSON.parse(
-localStorage.getItem(
-'todayData'
-)
-)
-
-||
-
-[];
-
-
-
-function renderToday(){
-
-const today =
-new Date();
-
-const month =
-today.getMonth() + 1;
-
-const day =
-today.getDate();
-
-
-
-const filtered =
-
-todayData.filter(item =>
-
-item.text.includes(
-month + '月' + day + '日'
-)
-
-);
-
-
-
-if(filtered.length === 0){
-
-document.getElementById(
-'todayList'
-).innerHTML =
-
-'<div class="today-item">今日の予定はありません</div>';
-
-return;
-
-}
-
-
-
-document.getElementById(
-'todayList'
-).innerHTML =
-
-filtered.map(item =>
-
-'<div class="today-item">' +
-
-item.icon +
-' ' +
-item.text +
-
-'</div>'
-
-).join('');
-
-}
-
-renderToday();
-
 
 
 /* GAS送信 */
@@ -622,362 +188,26 @@ renderToday();
 function sendToGas(data){
 
 fetch(
+
 GAS_URL,
+
 {
+
 method:'POST',
+
+mode:'no-cors',
 
 headers:{
 'Content-Type':
-'application/json'
+'text/plain'
 },
 
 body:
 JSON.stringify(data)
 
 }
+
 );
-
-}
-
-
-
-/* カレンダー */
-
-function createGoogleCalendarUrl(parsed){
-
-const now =
-new Date();
-
-const year =
-now.getFullYear();
-
-const month =
-parsed.date.match(/\d+/)[0]
-.padStart(2,'0');
-
-const day =
-parsed.date.match(/\d+/g)[1]
-.padStart(2,'0');
-
-const hour =
-parsed.time.split(':')[0]
-.padStart(2,'0');
-
-const minute =
-parsed.time.split(':')[1]
-.padStart(2,'0');
-
-
-
-const start =
-year +
-month +
-day +
-'T' +
-hour +
-minute +
-'00';
-
-
-
-const end =
-year +
-month +
-day +
-'T' +
-hour +
-'5900';
-
-
-
-const title =
-encodeURIComponent(
-parsed.title
-);
-
-
-
-return
-
-'https://calendar.google.com/calendar/render?action=TEMPLATE'
-
-+
-
-'&text=' +
-title
-
-+
-
-'&dates=' +
-start +
-'/' +
-end;
-
-}
-
-
-
-/* AI */
-
-function parseScheduleText(text){
-
-let date = '今日';
-
-let time = '未設定';
-
-let title = text;
-
-
-
-const monthDay =
-
-text.match(
-/(\d{1,2})月(\d{1,2})日/
-);
-
-if(monthDay){
-
-date =
-monthDay[1] +
-'月' +
-monthDay[2] +
-'日';
-
-}
-
-
-
-if(text.includes('時半')){
-
-const halfMatch =
-
-text.match(
-/(\d{1,2})時半/
-);
-
-if(halfMatch){
-
-time =
-halfMatch[1]
-.padStart(2,'0')
-+
-':30';
-
-}
-
-}
-
-else{
-
-const hourMatch =
-
-text.match(
-/(\d{1,2})時/
-);
-
-if(hourMatch){
-
-time =
-hourMatch[1]
-.padStart(2,'0')
-+
-':00';
-
-}
-
-}
-
-
-
-if(text.includes('歯医者')){
-title = '歯医者';
-}
-
-if(text.includes('病院')){
-title = '病院';
-}
-
-
-
-return {
-
-date:date,
-time:time,
-title:title
-
-};
-
-}
-
-
-
-/* 音声 */
-
-function startVoiceInput(){
-
-const SpeechRecognition =
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
-
-
-
-if(!SpeechRecognition){
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'⚠ 音声入力できません';
-
-return;
-
-}
-
-
-
-const recognition =
-new SpeechRecognition();
-
-recognition.lang = 'ja-JP';
-
-recognition.interimResults = false;
-
-
-
-recognition.onstart = function(){
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'🎤 聞き取り中...';
-
-};
-
-
-
-recognition.onresult = function(event){
-
-const text =
-event.results[0][0].transcript;
-
-
-
-const parsed =
-parseScheduleText(text);
-
-
-
-const calendarUrl =
-createGoogleCalendarUrl(parsed);
-
-
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'<div>🎤 ' +
-text +
-'</div>'
-
-+
-
-'<div style="margin-top:18px;font-weight:900;">AI整理結果</div>'
-
-+
-
-'<div>📅 日付：' +
-parsed.date +
-'</div>'
-
-+
-
-'<div>⏰ 時間：' +
-parsed.time +
-'</div>'
-
-+
-
-'<div>🏥 内容：' +
-parsed.title +
-'</div>'
-
-+
-
-'<button class="voice-save" onclick="saveSchedule(' +
-
-JSON.stringify(parsed)
-.replace(/"/g,'&quot;')
-
-+
-
-')">📅 予定に追加</button>'
-
-+
-
-'<a class="voice-save" href="' +
-calendarUrl +
-'" target="_blank">📅 Googleカレンダーへ登録</a>';
-
-};
-
-
-
-recognition.onerror = function(){
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'⚠ 音声入力エラー';
-
-};
-
-
-
-recognition.start();
-
-}
-
-
-
-/* 保存 */
-
-function saveSchedule(parsed){
-
-todayData.unshift({
-
-icon:'📅',
-
-text:
-
-parsed.date +
-' ' +
-parsed.time +
-' ' +
-parsed.title
-
-});
-
-
-
-localStorage.setItem(
-'todayData',
-JSON.stringify(todayData)
-);
-
-
-
-renderToday();
-
-
-
-document.getElementById(
-'voiceResult'
-).innerHTML =
-
-'✅ 予定へ追加しました';
 
 }
 
@@ -1008,24 +238,7 @@ time:time
 
 
 alert(
-'😊 元気を記録しました'
-);
-
-}
-
-
-
-/* 時間 */
-
-function getNowTime(){
-
-return new Date()
-.toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
+'😊 元気を送信しました'
 );
 
 }
@@ -1046,9 +259,7 @@ document.getElementById(
 ).innerHTML =
 
 '✅ 飲みました ' +
-time +
-
-' <button class="cancel-btn" onclick="cancelMorningMedicine()">取り消し</button>';
+time;
 
 
 
@@ -1069,16 +280,6 @@ time:time
 
 
 
-function cancelMorningMedicine(){
-
-document.getElementById(
-'morningResult'
-).innerHTML = '';
-
-}
-
-
-
 /* 昼 */
 
 function takeLunchMedicine(){
@@ -1093,9 +294,7 @@ document.getElementById(
 ).innerHTML =
 
 '✅ 飲みました ' +
-time +
-
-' <button class="cancel-btn" onclick="cancelLunchMedicine()">取り消し</button>';
+time;
 
 
 
@@ -1116,16 +315,6 @@ time:time
 
 
 
-function cancelLunchMedicine(){
-
-document.getElementById(
-'lunchResult'
-).innerHTML = '';
-
-}
-
-
-
 /* 夜 */
 
 function takeNightMedicine(){
@@ -1140,9 +329,7 @@ document.getElementById(
 ).innerHTML =
 
 '✅ 飲みました ' +
-time +
-
-' <button class="cancel-btn" onclick="cancelNightMedicine()">取り消し</button>';
+time;
 
 
 
@@ -1158,151 +345,6 @@ status:'夜の薬',
 time:time
 
 });
-
-}
-
-
-
-function cancelNightMedicine(){
-
-document.getElementById(
-'nightResult'
-).innerHTML = '';
-
-}
-
-
-
-/* 不調 */
-
-function toggleNormal(){
-
-const menu =
-document.getElementById(
-'normalMenu'
-);
-
-menu.style.display =
-
-menu.style.display === 'none'
-
-? 'block'
-: 'none';
-
-}
-
-
-
-/* 緊急 */
-
-function toggleDanger(){
-
-const menu =
-document.getElementById(
-'dangerMenu'
-);
-
-menu.style.display =
-
-menu.style.display === 'none'
-
-? 'block'
-: 'none';
-
-}
-
-
-
-function call119(){
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'緊急',
-
-status:'119',
-
-time:getNowTime()
-
-});
-
-
-
-window.location.href =
-'tel:119';
-
-}
-
-
-
-function call110(){
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'緊急',
-
-status:'110',
-
-time:getNowTime()
-
-});
-
-
-
-window.location.href =
-'tel:110';
-
-}
-
-
-
-function getLocation(){
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-const lat =
-position.coords.latitude;
-
-const lng =
-position.coords.longitude;
-
-
-
-sendToGas({
-
-code:USER_CODE,
-name:USER_NAME,
-
-type:'位置情報',
-
-status:'現在地',
-
-time:getNowTime(),
-
-lat:lat,
-lng:lng
-
-});
-
-
-
-window.open(
-'https://maps.google.com/?q=' +
-lat +
-',' +
-lng
-);
-
-}
-
-);
 
 }
 
