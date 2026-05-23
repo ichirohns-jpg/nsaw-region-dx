@@ -4,129 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>家族確認画面</title>
+<title>家族見守りDX</title>
 
 <style>
 
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  padding:18px;
-  background:#eef3f8;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Hiragino Sans",
-  "Yu Gothic",
-  sans-serif;
-  color:#222;
+margin:0;
+padding:18px;
+background:#eef3f8;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Sans",
+"Yu Gothic",
+sans-serif;
+color:#222;
 }
 
 .wrap{
-  max-width:700px;
-  margin:0 auto;
+max-width:760px;
+margin:0 auto;
+}
+
+.box{
+background:#fff;
+border-radius:28px;
+margin-bottom:30px;
+padding:28px;
+box-shadow:
+0 8px 24px
+rgba(0,0,0,.10);
 }
 
 .title{
-  font-size:42px;
-  font-weight:900;
-  margin:
-  10px 0
-  30px;
-}
-
-.card{
-  background:#fff;
-  border-radius:28px;
-  padding:28px;
-  margin-bottom:28px;
-  box-shadow:
-  0 8px 24px
-  rgba(0,0,0,.10);
+font-size:46px;
+font-weight:900;
+margin-bottom:28px;
 }
 
 .name{
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:20px;
+font-size:54px;
+font-weight:900;
+margin-bottom:26px;
 }
 
-.line{
-  font-size:28px;
-  line-height:1.9;
-  margin-bottom:14px;
-  word-break:keep-all;
-}
-
-.good{
-  color:#1b8f3c;
-  font-weight:900;
-}
-
-.bad{
-  color:#d93025;
-  font-weight:900;
+.status{
+font-size:48px;
+font-weight:900;
+margin-bottom:20px;
+color:#22aa44;
 }
 
 .time{
-  color:#666;
-  font-size:22px;
-  margin-bottom:12px;
+font-size:34px;
+font-weight:900;
+margin-bottom:30px;
+color:#666;
+}
+
+.item{
+font-size:34px;
+line-height:1.8;
+margin-bottom:18px;
+font-weight:900;
 }
 
 .map-btn{
-  display:block;
-  width:100%;
-  text-decoration:none;
-  text-align:center;
-  border-radius:20px;
-  padding:22px;
-  margin-top:22px;
-  background:#2f6df6;
-  color:#fff;
-  font-size:28px;
-  font-weight:900;
-}
-
-.refresh-btn{
-  width:100%;
-  border:none;
-  border-radius:22px;
-  padding:24px;
-  margin-bottom:30px;
-  background:#4a90e2;
-  color:#fff;
-  font-size:30px;
-  font-weight:900;
-}
-
-.section-title{
-  font-size:30px;
-  font-weight:900;
-  margin:
-  26px 0
-  18px;
-}
-
-hr{
-  border:none;
-  border-top:
-  2px solid #ddd;
-  margin:
-  22px 0;
-}
-
-.empty{
-  color:#777;
-  font-size:24px;
-}
-
-.warn{
-  color:#d93025;
-  font-weight:900;
+display:block;
+width:100%;
+padding:28px;
+border-radius:24px;
+background:#4a90e2;
+color:#fff;
+font-size:38px;
+font-weight:900;
+text-decoration:none;
+text-align:center;
+margin-top:26px;
 }
 
 </style>
@@ -136,163 +94,41 @@ hr{
 
 <div class="wrap">
 
+<div class="box">
+
 <div class="title">
-👨 家族確認画面
+👪 家族見守りDX
 </div>
-
-<button
-class="refresh-btn"
-onclick="loadData()"
->
-🔄 更新する
-</button>
-
-<div id="familyList"></div>
-
-</div>
-
-<script>
-
-function loadData(){
-
-
-
-const genkiData =
-
-JSON.parse(
-localStorage.getItem(
-'genkiData'
-)
-)
-
-||
-
-{
-status:'未確認',
-time:'--:--'
-};
-
-
-
-const medicineData =
-
-JSON.parse(
-localStorage.getItem(
-'medicineData'
-)
-)
-
-||
-
-{
-status:'未確認',
-time:'--:--'
-};
-
-
-
-const todayData =
-
-JSON.parse(
-localStorage.getItem(
-'todayData'
-)
-)
-
-||
-
-[];
-
-
-
-const todayHtml =
-
-todayData.length
-
-?
-
-todayData.map(item =>
-
-`
-<div class="line">
-${item.icon}
-${item.text}
-</div>
-`
-
-).join('')
-
-:
-
-`
-<div class="empty">
-今日の予定はありません
-</div>
-`;
-
-
-
-const medicineHtml =
-
-medicineData.status === '飲みました'
-
-?
-
-`
-<div class="line">
-💊 朝の薬：
-<span class="good">
-${medicineData.status}
-</span>
-</div>
-
-<div class="time">
-確認時間：
-${medicineData.time}
-</div>
-`
-
-:
-
-`
-<div class="line">
-💊 朝の薬：
-<span class="warn">
-未確認
-</span>
-</div>
-`;
-
-
-
-const familyHtml =
-
-`
-<div class="card">
 
 <div class="name">
 👴 山口さん
 </div>
 
-<div class="line good">
-😊 ${genkiData.status}
+<div class="status">
+😊 元気です
 </div>
 
 <div class="time">
-最終確認：今日 ${genkiData.time}
+最終確認：今日 08:15
 </div>
 
 <hr>
 
-${medicineHtml}
+<div class="item">
+💊 朝の薬：飲みました
+</div>
 
-<hr>
-
-<div class="section-title">
+<div class="item">
 📅 今日の予定
 </div>
 
-${todayHtml}
+<div class="item">
+🏥 10:00 歯医者
+</div>
+
+<div class="item">
+💊 朝の薬
+</div>
 
 <a
 class="map-btn"
@@ -303,23 +139,8 @@ target="_blank"
 </a>
 
 </div>
-`;
 
-
-
-document.getElementById(
-'familyList'
-).innerHTML =
-
-familyHtml;
-
-}
-
-
-
-loadData();
-
-</script>
+</div>
 
 </body>
 </html>
