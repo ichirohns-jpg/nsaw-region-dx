@@ -87,7 +87,7 @@ body{
   background:#fff8dc;
   border-radius:28px;
   padding:24px;
-  margin-bottom:36px;
+  margin-bottom:20px;
   box-shadow:
   0 6px 18px
   rgba(0,0,0,.08);
@@ -109,6 +109,32 @@ body{
   font-size:28px;
   line-height:1.8;
   margin-bottom:12px;
+}
+
+
+
+/* 音声 */
+
+.voice-btn{
+  width:100%;
+  border:none;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:36px;
+  background:#4a90e2;
+  color:#fff;
+  font-size:30px;
+  font-weight:900;
+}
+
+.voice-result{
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  margin-top:-18px;
+  margin-bottom:36px;
+  font-size:26px;
+  line-height:1.7;
 }
 
 
@@ -347,6 +373,22 @@ id="todayBox"
 
 
 
+<!-- 音声 -->
+
+<button
+class="voice-btn"
+onclick="startVoiceInput()"
+>
+🎤 話して追加
+</button>
+
+<div
+class="voice-result"
+id="voiceResult"
+></div>
+
+
+
 <!-- 元気 -->
 
 <div class="health-box">
@@ -446,7 +488,7 @@ href="tel:09012345678"
 
 
 
-<!-- 記事一覧 -->
+<!-- 記事 -->
 
 <div id="list"></div>
 
@@ -587,6 +629,47 @@ ${item.text}
 </a>
 
 `).join('');
+
+
+
+/* 音声 */
+
+function startVoiceInput(){
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+
+alert('音声入力非対応');
+
+return;
+
+}
+
+const recognition =
+new SpeechRecognition();
+
+recognition.lang = 'ja-JP';
+
+recognition.start();
+
+recognition.onresult =
+function(event){
+
+const text =
+event.results[0][0]
+.transcript;
+
+document.getElementById(
+'voiceResult'
+).innerText =
+'🎤 ' + text;
+
+};
+
+}
 
 
 
