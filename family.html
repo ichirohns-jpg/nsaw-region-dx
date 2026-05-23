@@ -61,24 +61,11 @@ color:#22aa44;
 }
 
 .time{
-font-size:30px;
+font-size:28px;
 font-weight:900;
 margin-bottom:28px;
 color:#666;
 line-height:1.6;
-}
-
-.hr{
-height:2px;
-background:#ddd;
-margin:28px 0;
-border-radius:999px;
-}
-
-.sub-title{
-font-size:38px;
-font-weight:900;
-margin-bottom:24px;
 }
 
 .item{
@@ -86,7 +73,7 @@ background:#f5f7fa;
 border-radius:20px;
 padding:22px;
 margin-bottom:18px;
-font-size:30px;
+font-size:28px;
 font-weight:900;
 line-height:1.6;
 }
@@ -154,17 +141,11 @@ class="time"
 ---
 </div>
 
-<div class="hr"></div>
-
-<div class="sub-title">
-💊 今日の薬
-</div>
-
 <div
 id="medicineBox"
 >
 <div class="item">
-読み込み中...
+💊 読み込み中...
 </div>
 </div>
 
@@ -211,74 +192,7 @@ href="./family.html"
 <script>
 
 const GAS_URL =
-'https://script.google.com/macros/s/AKfycbyctWQYDpLEo2K3e6VqYNOJZTznMPDq77fFK70mjuWHG7k-UHwexMvKPKinooTj4pGB/exec?code=YAMA1234';
-
-
-
-function formatDate(dateStr){
-
-try{
-
-const d =
-new Date(dateStr);
-
-if(isNaN(d)){
-return '---';
-}
-
-return
-
-d.getFullYear()
-
-+
-
-'/'
-
-+
-
-String(
-d.getMonth()+1
-).padStart(2,'0')
-
-+
-
-'/'
-
-+
-
-String(
-d.getDate()
-).padStart(2,'0')
-
-+
-
-' '
-
-+
-
-String(
-d.getHours()
-).padStart(2,'0')
-
-+
-
-':'
-
-+
-
-String(
-d.getMinutes()
-).padStart(2,'0');
-
-}
-
-catch(err){
-
-return '---';
-
-}
-
-}
+'https://script.google.com/macros/s/AKfycbzEfMIty3nwXxLeNKR7lPd3WcPtZVQj139UoxLIblHFM2395CJ8BHHsR1hbGaYgTKiz/exec?code=YAMA1234';
 
 
 
@@ -309,13 +223,13 @@ document.getElementById(
 document.getElementById(
 'timeBox'
 ).innerHTML =
-'まだデータがありません';
+'データ未登録';
 
 document.getElementById(
 'medicineBox'
 ).innerHTML =
 
-'<div class="item">💊 記録なし</div>';
+'<div class="item">💊 薬記録なし</div>';
 
 return;
 
@@ -333,7 +247,7 @@ document.getElementById(
 ).innerHTML =
 
 '😊 ' +
-(latest.status || '確認中');
+(latest.status || '');
 
 
 
@@ -343,9 +257,7 @@ document.getElementById(
 
 '最終確認： ' +
 
-formatDate(
-latest.datetime
-);
+(latest.datetime || '');
 
 
 
@@ -363,7 +275,7 @@ let html = '';
 if(medicineRows.length === 0){
 
 html =
-'<div class="item">💊 記録なし</div>';
+'<div class="item">💊 薬記録なし</div>';
 
 }
 
