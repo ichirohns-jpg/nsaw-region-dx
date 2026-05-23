@@ -16,7 +16,12 @@ body{
   margin:0;
   padding:18px;
   background:#eef3f8;
-  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Hiragino Sans",
+  "Yu Gothic",
+  sans-serif;
   color:#222;
 }
 
@@ -24,6 +29,10 @@ body{
   max-width:760px;
   margin:0 auto;
 }
+
+
+
+/* 時計 */
 
 .clock-box,
 .today-box,
@@ -54,11 +63,19 @@ body{
   font-weight:900;
 }
 
+
+
+/* タイトル */
+
 .main-title{
   font-size:44px;
   font-weight:900;
   margin:14px 0 28px;
 }
+
+
+
+/* 今日の予定 */
 
 .today-box{
   background:#fff8dc;
@@ -83,6 +100,10 @@ body{
   margin-bottom:12px;
 }
 
+
+
+/* 音声 */
+
 .voice-btn{
   width:100%;
   border:none;
@@ -99,13 +120,12 @@ body{
   padding:24px;
   font-size:26px;
   line-height:1.8;
+  white-space:pre-wrap;
 }
 
 .voice-save{
   display:block;
   width:100%;
-  text-decoration:none;
-  text-align:center;
   border:none;
   border-radius:20px;
   padding:22px;
@@ -115,6 +135,10 @@ body{
   font-size:28px;
   font-weight:900;
 }
+
+
+
+/* 元気 */
 
 .health-box{
   padding:24px;
@@ -174,6 +198,10 @@ body{
   font-weight:900;
 }
 
+
+
+/* 記事 */
+
 .card{
   overflow:hidden;
 }
@@ -205,20 +233,6 @@ body{
   white-space:pre-wrap;
 }
 
-.link-btn{
-  display:block;
-  width:100%;
-  background:#2f6df6;
-  color:#fff;
-  text-decoration:none;
-  text-align:center;
-  font-size:24px;
-  font-weight:900;
-  border-radius:18px;
-  padding:18px;
-  margin-top:14px;
-}
-
 .video-title{
   font-size:24px;
   font-weight:900;
@@ -241,6 +255,10 @@ body{
   height:100%;
   border:none;
 }
+
+
+
+/* 下固定 */
 
 .bottom-menu{
   position:fixed;
@@ -281,16 +299,42 @@ body{
 
 <div class="wrap">
 
+
+
+<!-- 時計 -->
+
 <div class="clock-box">
-<div class="clock-date" id="clockDate"></div>
-<div class="clock-time" id="clockTime"></div>
+
+<div
+class="clock-date"
+id="clockDate"
+></div>
+
+<div
+class="clock-time"
+id="clockTime"
+></div>
+
 </div>
+
+
 
 <div class="main-title">
 NSAW地域DX
 </div>
 
-<div class="today-box" id="todayBox"></div>
+
+
+<!-- 今日の予定 -->
+
+<div
+class="today-box"
+id="todayBox"
+></div>
+
+
+
+<!-- 音声 -->
 
 <button
 class="voice-btn"
@@ -305,6 +349,10 @@ id="voiceResult"
 >
 ここに話した内容が表示されます
 </div>
+
+
+
+<!-- 元気 -->
 
 <div class="health-box">
 
@@ -387,11 +435,19 @@ href="tel:110"
 
 </div>
 
+
+
+<!-- 記事 -->
+
 <div id="list"></div>
 
 <div class="footer-space"></div>
 
 </div>
+
+
+
+<!-- 下固定 -->
 
 <div class="bottom-menu">
 
@@ -416,6 +472,8 @@ href="tel:110"
 </a>
 
 </div>
+
+
 
 <script>
 
@@ -679,21 +737,43 @@ monthDay[2] +
 
 
 
-const hourMatch =
+/* 時間 */
+
+const timeMatch =
 
 text.match(
-/(\d{1,2})時/
+/(\d{1,2})時\s*(\d{1,2})?分?/
 );
 
-if(hourMatch){
+if(timeMatch){
+
+const hour =
+timeMatch[1];
+
+let minute =
+timeMatch[2];
+
+if(!minute){
+
+minute = '00';
+
+}
+
+minute =
+minute.padStart(2,'0');
 
 time =
-hourMatch[1] +
-':00';
+hour.padStart(2,'0')
++
+':'
++
+minute;
 
 }
 
 
+
+/* 内容 */
 
 if(text.includes('歯医者')){
 
