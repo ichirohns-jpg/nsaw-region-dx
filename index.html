@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>家族見守りDX</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>NSAW 地域DX</title>
 
 <style>
+
 *{
 box-sizing:border-box;
 -webkit-tap-highlight-color:transparent;
@@ -14,328 +18,232 @@ box-sizing:border-box;
 
 body{
 margin:0;
-padding:0;
-background:#f1f4f7;
-font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+background:#eef3f8;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Sans",
+"Yu Gothic",
+sans-serif;
 color:#222;
 }
 
 .wrap{
-max-width:720px;
+max-width:760px;
 margin:0 auto;
-padding:22px 16px 120px;
+padding:20px 16px 120px;
 }
 
-.header{
-font-size:38px;
+.hero{
+background:#fff;
+border-radius:30px;
+padding:28px;
+margin-bottom:24px;
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+
+.hero-title{
+font-size:44px;
 font-weight:900;
 line-height:1.4;
-margin-bottom:20px;
+margin-bottom:18px;
+}
+
+.hero-desc{
+font-size:25px;
+font-weight:700;
+line-height:1.8;
+color:#444;
+}
+
+.grid{
+display:flex;
+flex-direction:column;
+gap:20px;
 }
 
 .card{
+display:block;
+text-decoration:none;
 background:#fff;
 border-radius:28px;
-padding:26px;
-margin-bottom:22px;
-box-shadow:0 8px 24px rgba(0,0,0,.08);
+padding:28px;
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+color:#222;
+}
+
+.icon{
+font-size:54px;
+margin-bottom:16px;
 }
 
 .card-title{
 font-size:34px;
 font-weight:900;
-margin-bottom:20px;
+margin-bottom:12px;
 }
 
-.btn{
-width:100%;
-border:none;
-border-radius:22px;
-padding:28px 20px;
-margin-bottom:16px;
-font-size:34px;
-font-weight:900;
-line-height:1.4;
-}
-
-.green{
-background:#58c86b;
-color:#fff;
-}
-
-.gray{
-background:#f4f6f8;
-color:#222;
-}
-
-.result{
+.card-desc{
 font-size:24px;
-font-weight:900;
-line-height:1.6;
-margin-bottom:10px;
-color:#1f9d4a;
+line-height:1.8;
+font-weight:700;
+color:#555;
 }
 
-.bottom-menu{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:14px 0;
-box-shadow:0 -4px 14px rgba(0,0,0,.10);
-z-index:999;
-}
-
-.bottom-btn{
-text-decoration:none;
-color:#222;
-font-size:16px;
-font-weight:900;
+.bottom{
+margin-top:30px;
+font-size:20px;
+font-weight:700;
+line-height:1.8;
+color:#666;
 text-align:center;
-width:25%;
-}
-
-.bottom-icon{
-display:block;
-font-size:28px;
-margin-bottom:4px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="wrap">
 
-<div class="header">
-🏠 家族見守りDX
+<div class="hero">
+
+<div class="hero-title">
+📰 NSAW 地域DX
 </div>
 
-<div class="card">
+<div class="hero-desc">
+志木・新座・朝霞・和光の
+暮らしを支える地域DXです。
+</div>
+
+</div>
+
+
+
+<div class="grid">
+
+<a
+class="card"
+href="./consult.html"
+>
+
+<div class="icon">
+🤖
+</div>
 
 <div class="card-title">
-😊 今日の状態
+AI相談DX
 </div>
 
-<button
-class="btn green"
-onclick="showGood()"
+<div class="card-desc">
+病院・介護・薬・空き家・家族などを、
+AIへ相談できます。
+</div>
+
+</a>
+
+
+
+<a
+class="card"
+href="./profile.html"
 >
-😊 元気です
-</button>
 
-<div
-id="goodResult"
-class="result"
-></div>
-
+<div class="icon">
+⚙️
 </div>
-
-<div class="card">
 
 <div class="card-title">
-💊 今日の薬
+地域設定DX
 </div>
 
-<button
-class="btn gray"
-onclick="takeMorningMedicine()"
+<div class="card-desc">
+4市対応。
+市・町名・丁目を保存できます。
+</div>
+
+</a>
+
+
+
+<a
+class="card"
+href="./map.html"
 >
-💊 朝の薬
-</button>
 
-<div
-id="morningResult"
-class="result"
-></div>
+<div class="icon">
+🗺
+</div>
 
-<button
-class="btn gray"
-onclick="takeLunchMedicine()"
+<div class="card-title">
+地域マップDX
+</div>
+
+<div class="card-desc">
+病院・薬局・コンビニ・
+生活施設を地図で探せます。
+</div>
+
+</a>
+
+
+
+<a
+class="card"
+href="./family.html"
 >
-💊 昼の薬
-</button>
 
-<div
-id="lunchResult"
-class="result"
-></div>
+<div class="icon">
+👪
+</div>
 
-<button
-class="btn gray"
-onclick="takeNightMedicine()"
+<div class="card-title">
+家族見守りDX
+</div>
+
+<div class="card-desc">
+家族の見守り・連絡・
+地域支援につなげます。
+</div>
+
+</a>
+
+
+
+<a
+class="card"
+href="./kawaraban.html"
 >
-💊 夜の薬
-</button>
 
-<div
-id="nightResult"
-class="result"
-></div>
-
+<div class="icon">
+📰
 </div>
 
+<div class="card-title">
+地域瓦版DX
 </div>
 
-<div class="bottom-menu">
+<div class="card-desc">
+4市の暮らし情報・回覧板・
+地域ニュースを確認できます。
+</div>
 
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./family.html">
-<span class="bottom-icon">👪</span>
-家族
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺</span>
-地図
-</a>
-
-<a class="bottom-btn" href="./consult.html">
-<span class="bottom-icon">🤖</span>
-相談
 </a>
 
 </div>
 
-<script>
 
-const GAS_URL =
-'https://script.google.com/macros/s/AKfycbyFUX6w7KMKZ87PR37MrFaPgW1clmiTR5LigJO43XLVQCZ7IdsGLP6HXPeNMzd9qN1L/exec';
 
-const USER_CODE = 'YAMA1234';
-const USER_NAME = '山口さん';
+<div class="bottom">
+NSAW 地域DX<br>
+志木・新座・朝霞・和光
+</div>
 
-window.sending = false;
-
-function getNowTime(){
-
-return new Date().toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-);
-
-}
-
-function sendToGas(data){
-
-fetch(
-GAS_URL,
-{
-method:'POST',
-mode:'no-cors',
-headers:{
-'Content-Type':'text/plain'
-},
-body:JSON.stringify(data)
-}
-);
-
-setTimeout(()=>{
-window.sending=false;
-},3000);
-
-}
-
-function showGood(){
-
-if(window.sending)return;
-window.sending=true;
-
-const time = getNowTime();
-
-document.getElementById(
-'goodResult'
-).innerHTML =
-'✅ 元気確認 ' + time;
-
-sendToGas({
-code:USER_CODE,
-name:USER_NAME,
-type:'元気',
-status:'元気です',
-time:time
-});
-
-}
-
-function takeMorningMedicine(){
-
-if(window.sending)return;
-window.sending=true;
-
-const time = getNowTime();
-
-document.getElementById(
-'morningResult'
-).innerHTML =
-'✅ 飲みました ' + time;
-
-sendToGas({
-code:USER_CODE,
-name:USER_NAME,
-type:'薬',
-status:'朝の薬',
-time:time
-});
-
-}
-
-function takeLunchMedicine(){
-
-if(window.sending)return;
-window.sending=true;
-
-const time = getNowTime();
-
-document.getElementById(
-'lunchResult'
-).innerHTML =
-'✅ 飲みました ' + time;
-
-sendToGas({
-code:USER_CODE,
-name:USER_NAME,
-type:'薬',
-status:'昼の薬',
-time:time
-});
-
-}
-
-function takeNightMedicine(){
-
-if(window.sending)return;
-window.sending=true;
-
-const time = getNowTime();
-
-document.getElementById(
-'nightResult'
-).innerHTML =
-'✅ 飲みました ' + time;
-
-sendToGas({
-code:USER_CODE,
-name:USER_NAME,
-type:'薬',
-status:'夜の薬',
-time:time
-});
-
-}
-
-</script>
+</div>
 
 </body>
 </html>
