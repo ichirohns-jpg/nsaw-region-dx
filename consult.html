@@ -31,11 +31,13 @@ document.getElementById('output');
 
 if(!msg) return;
 
-output.innerText = "通信中...";
+output.innerText =
+"通信中...";
 
 try {
 
-const res = await fetch(GAS_URL, {
+const res =
+await fetch(GAS_URL, {
 
 method: 'POST',
 
@@ -45,25 +47,31 @@ message: msg
 
 });
 
-if (!res.ok)
+if (!res.ok){
+
 throw new Error(
 `HTTPエラー: ${res.status}`
 );
 
+}
+
 const data =
 await res.json();
 
-if (data.success) {
+
+
+/* =====================
+   DEBUG表示
+===================== */
 
 output.innerText =
-data.reply;
+JSON.stringify(
+data,
+null,
+2
+);
 
-} else {
 
-output.innerText =
-`エラー: ${data.error}`;
-
-}
 
 } catch (err) {
 
