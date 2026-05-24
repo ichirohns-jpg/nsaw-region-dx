@@ -141,15 +141,16 @@ margin-bottom:4px;
 </div>
 
 <div class="desc">
-薬・病院・介護・お金・家族・空き家など、困っていることを短く書くだけで大丈夫です。
+病院・薬・介護・家族・空き家など、
+短く書くだけで大丈夫です。
 </div>
 
 <textarea
 id="consultText"
 placeholder="例：
-薬を飲み忘れることが増えた
-家族との会話が減った
-実家が空き家になりそう"
+近くの病院へ通院したい
+薬を飲み忘れる
+家族と話せない"
 ></textarea>
 
 <button
@@ -205,12 +206,12 @@ const GAS_URL =
 
 
 
-async function startConsult(){
+function startConsult(){
 
 const text =
-document.getElementById('consultText')
-.value
-.trim();
+document.getElementById(
+'consultText'
+).value.trim();
 
 
 
@@ -224,79 +225,48 @@ return;
 
 
 
-document.getElementById('result').innerHTML =
+document.getElementById(
+'result'
+).innerHTML =
 
 '🤖 AIが整理しています...';
 
 
 
-try{
+window.handleAI = function(data){
 
-const response =
-
-await fetch(
-
-GAS_URL,
-
-{
-
-method:'POST',
-
-headers:{
-'Content-Type':'text/plain'
-},
-
-body:JSON.stringify({
-
-mode:'consult',
-
-code:'YAMA1234',
-
-name:'山口さん',
-
-type:'AI相談',
-
-status:'相談送信',
-
-time:new Date()
-.toLocaleTimeString(
-'ja-JP',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-),
-
-text:text
-
-})
-
-}
-
-);
-
-
-
-const data =
-await response.json();
-
-
-
-document.getElementById('result').innerHTML =
+document.getElementById(
+'result'
+).innerHTML =
 
 '🤖 AI相談結果\n\n' +
 
-data.answer;
+(data.answer || 'AI回答取得失敗');
+
+};
 
 
 
-}catch(err){
+const script =
+document.createElement('script');
 
-document.getElementById('result').innerHTML =
 
-'AI接続エラー';
 
-}
+script.src =
+
+GAS_URL +
+
+'?mode=consult' +
+
+'&callback=handleAI' +
+
+'&text=' +
+
+encodeURIComponent(text);
+
+
+
+document.body.appendChild(script);
 
 }
 
