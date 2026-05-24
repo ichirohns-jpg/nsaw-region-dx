@@ -148,11 +148,11 @@ text-align:center;
 text-decoration:none;
 background:#58c86b;
 color:#fff;
-font-size:28px;
+font-size:26px;
 font-weight:900;
-padding:24px;
+padding:22px;
 border-radius:22px;
-margin-top:20px;
+margin-top:16px;
 }
 
 .archive{
@@ -401,6 +401,43 @@ return url;
 
 
 /* =========================
+   Date変換
+========================= */
+
+function formatDate(value){
+
+if(!value)return '';
+
+if(typeof value === 'string'){
+
+if(value.includes('Date(')){
+
+const nums =
+value.match(/\d+/g);
+
+if(nums){
+
+return (
+nums[0] + '/' +
+(Number(nums[1]) + 1) + '/' +
+nums[2]
+);
+
+}
+
+}
+
+return value;
+
+}
+
+return value;
+
+}
+
+
+
+/* =========================
    JSONP
 ========================= */
 
@@ -432,10 +469,9 @@ const c = row.c;
 
 
 const date =
-getCell(c[0]);
-
-const articleId =
-getCell(c[1]);
+formatDate(
+getCell(c[0])
+);
 
 const title =
 getCell(c[2]);
@@ -443,12 +479,8 @@ getCell(c[2]);
 const detail =
 getCell(c[4]);
 
-
-
 const mediaUrl =
-getCell(c[17]);
-
-
+getCell(c[18]);
 
 const displayType =
 getCell(c[21]);
@@ -509,6 +541,46 @@ mediaUrl +
 
 
 /* =========================
+   各市リンク
+========================= */
+
+let infoButtons = '';
+
+
+
+for(let i = 5; i <= 14; i += 2){
+
+const infoTitle =
+getCell(c[i]);
+
+const infoUrl =
+getCell(c[i + 1]);
+
+
+
+if(infoTitle && infoUrl){
+
+infoButtons +=
+
+'<a class="link-btn" ' +
+
+'href="' +
+infoUrl +
+'" ' +
+
+'target="_blank">' +
+
+infoTitle +
+
+'</a>';
+
+}
+
+}
+
+
+
+/* =========================
    Card
 ========================= */
 
@@ -533,6 +605,8 @@ mediaHtml +
 '<div class="desc">' +
 detail +
 '</div>' +
+
+infoButtons +
 
 '</div>';
 
