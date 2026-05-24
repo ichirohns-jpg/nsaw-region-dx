@@ -86,8 +86,16 @@ border-radius:22px;
 padding:28px;
 font-size:32px;
 font-weight:900;
-background:#58c86b;
 color:#fff;
+margin-bottom:16px;
+}
+
+.voice-btn{
+background:#4da3ff;
+}
+
+.send-btn{
+background:#58c86b;
 }
 
 .result{
@@ -152,7 +160,7 @@ margin-bottom:4px;
 
 <div class="desc">
 病院・介護・薬・家族・空き家など、
-短く書くだけで大丈夫です。
+話すだけでも大丈夫です。
 </div>
 
 <textarea
@@ -161,8 +169,15 @@ placeholder="例：薬を飲み忘れることが増えた"
 ></textarea>
 
 <button
+id="voiceBtn"
+class="btn voice-btn"
+>
+🎤 話して入力する
+</button>
+
+<button
 id="sendBtn"
-class="btn"
+class="btn send-btn"
 >
 🤖 AIに相談する
 </button>
@@ -207,6 +222,86 @@ const GAS_URL =
 window.APP_CONFIG.GAS_URL;
 
 
+
+/* =====================
+   音声入力
+===================== */
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+
+
+if(SpeechRecognition){
+
+const recognition =
+new SpeechRecognition();
+
+recognition.lang = 'ja-JP';
+
+recognition.interimResults = false;
+
+recognition.continuous = false;
+
+
+
+document
+.getElementById("voiceBtn")
+.addEventListener(
+"click",
+() => {
+
+recognition.start();
+
+document
+.getElementById("output")
+.innerText =
+"🎤 聞き取っています...";
+
+}
+);
+
+
+
+recognition.onresult =
+(event) => {
+
+const text =
+event.results[0][0].transcript;
+
+document
+.getElementById("input")
+.value = text;
+
+document
+.getElementById("output")
+.innerText =
+"🎤 入力しました\n\n" +
+text;
+
+};
+
+
+
+recognition.onerror =
+(event) => {
+
+document
+.getElementById("output")
+.innerText =
+"音声入力エラー\n\n" +
+event.error;
+
+};
+
+}
+
+
+
+/* =====================
+   AI送信
+===================== */
 
 document
 .getElementById("sendBtn")
