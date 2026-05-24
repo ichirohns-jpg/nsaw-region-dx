@@ -2,109 +2,78 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>AI相談DX</title>
-
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#f1f4f7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222}
-.wrap{max-width:720px;margin:0 auto;padding:22px 16px 120px}
-.header{font-size:38px;font-weight:900;margin-bottom:20px;line-height:1.4}
-.card{background:#fff;border-radius:28px;padding:26px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.title{font-size:34px;font-weight:900;margin-bottom:18px}
-.desc{font-size:24px;line-height:1.8;font-weight:700;color:#444;margin-bottom:24px}
-textarea{width:100%;height:190px;border:none;border-radius:22px;padding:22px;font-size:26px;background:#f7f9fb;resize:none;outline:none;line-height:1.7;margin-bottom:22px}
-.btn{width:100%;border:none;border-radius:22px;padding:28px;font-size:32px;font-weight:900;background:#58c86b;color:#fff}
-.result{margin-top:24px;font-size:25px;font-weight:900;line-height:1.8;color:#222;white-space:pre-wrap;background:#f7f9fb;border-radius:22px;padding:22px;min-height:180px}
-.bottom-menu{position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;padding:14px 0;box-shadow:0 -4px 14px rgba(0,0,0,.10);z-index:999}
-.bottom-btn{text-decoration:none;color:#222;font-size:16px;font-weight:900;text-align:center;width:25%}
-.bottom-icon{display:block;font-size:28px;margin-bottom:4px}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI相談DX 最小構成</title>
 </head>
 
 <body>
 
-<div class="wrap">
+<textarea id="input" placeholder="相談内容を入力"></textarea>
 
-<div class="header">🤖 AI相談DX</div>
+<button id="sendBtn">送信</button>
 
-<div class="card">
-
-<div class="title">困っていることを書いてください</div>
-
-<div class="desc">
-病院・薬・介護・家族・空き家など、短く書くだけで大丈夫です。
-</div>
-
-<textarea id="consultText" placeholder="例：薬を飲み忘れる"></textarea>
-
-<button class="btn" onclick="askAI()">🤖 AIに相談する</button>
-
-<div id="output" class="result">ここにAI相談結果が表示されます</div>
-
-</div>
-</div>
-
-<div class="bottom-menu">
-<a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
-<a class="bottom-btn" href="./family.html"><span class="bottom-icon">👪</span>家族</a>
-<a class="bottom-btn" href="./map.html"><span class="bottom-icon">🗺</span>地図</a>
-<a class="bottom-btn" href="./consult.html"><span class="bottom-icon">🤖</span>相談</a>
-</div>
+<div id="output"></div>
 
 <script>
-const gasUrl =
-'https://script.google.com/macros/s/AKfycbxZ5dCMbH4rA9ncx0qRFroyW1O5YyjgBzjES4gM2yVSaQMFC4LlUz0XNna0YBBdlFuk/exec';
 
-async function askAI(){
+const GAS_URL =
+"https://script.google.com/macros/s/AKfycbxZ5dCMbH4rA9ncx0qRFroyW1O5YyjgBzjES4gM2yVSaQMFC4LlUz0XNna0YBBdlFuk/exec";
 
-  const userMessage =
-  document.getElementById('consultText').value.trim();
+document
+.getElementById('sendBtn')
+.addEventListener('click', async () => {
 
-  if(!userMessage){
-    alert('困りごとを入力してください');
-    return;
-  }
+const msg =
+document.getElementById('input').value;
 
-  document.getElementById('output').innerText =
-  '🤖 AIが整理しています...';
+const output =
+document.getElementById('output');
 
-  try{
+if(!msg) return;
 
-    const response = await fetch(gasUrl,{
-      method:'POST',
-      mode:'cors',
-      redirect:'follow',
-      headers:{
-        'Content-Type':'text/plain'
-      },
-      body:JSON.stringify({
-        message:userMessage
-      })
-    });
+output.innerText = "通信中...";
 
-    if(!response.ok){
-      throw new Error('HTTPエラー: ' + response.status);
-    }
+try {
 
-    const resText = await response.text();
-    const data = JSON.parse(resText);
+const res = await fetch(GAS_URL, {
 
-    document.getElementById('output').innerText =
-    '🤖 AI相談結果\n\n' +
-    (data.result || 'AI回答取得失敗');
+method: 'POST',
 
-  }catch(error){
+body: JSON.stringify({
+message: msg
+})
 
-    console.error('エラー詳細:', error);
+});
 
-    document.getElementById('output').innerText =
-    'AI接続エラーが発生しました。';
+if (!res.ok)
+throw new Error(
+`HTTPエラー: ${res.status}`
+);
 
-  }
+const data =
+await res.json();
+
+if (data.success) {
+
+output.innerText =
+data.reply;
+
+} else {
+
+output.innerText =
+`エラー: ${data.error}`;
 
 }
+
+} catch (err) {
+
+output.innerText =
+`通信失敗: ${err.message}`;
+
+}
+
+});
+
 </script>
 
 </body>
