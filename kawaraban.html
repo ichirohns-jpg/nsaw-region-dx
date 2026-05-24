@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>地域瓦版DX</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+margin:0;
+background:#eef3f8;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Sans",
+"Yu Gothic",
+sans-serif;
+color:#222;
+}
+
+.wrap{
+max-width:760px;
+margin:0 auto;
+padding:20px 16px 140px;
+}
+
+.hero{
+background:#fff;
+border-radius:30px;
+padding:28px;
+margin-bottom:24px;
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+
+.hero-title{
+font-size:42px;
+font-weight:900;
+line-height:1.4;
+margin-bottom:18px;
+}
+
+.hero-desc{
+font-size:24px;
+line-height:1.8;
+font-weight:700;
+color:#555;
+}
+
+.section-title{
+font-size:34px;
+font-weight:900;
+margin:26px 0 18px;
+}
+
+#news-area{
+display:flex;
+flex-direction:column;
+gap:22px;
+}
+
+.card{
+background:#fff;
+border-radius:28px;
+padding:24px;
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+
+.city{
+display:inline-block;
+background:#4da3ff;
+color:#fff;
+font-size:20px;
+font-weight:900;
+padding:8px 16px;
+border-radius:999px;
+margin-bottom:16px;
+}
+
+.title{
+font-size:32px;
+font-weight:900;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.date{
+font-size:20px;
+font-weight:700;
+color:#666;
+margin-bottom:18px;
+}
+
+.desc{
+font-size:24px;
+line-height:1.9;
+font-weight:700;
+color:#444;
+margin-bottom:20px;
+white-space:pre-wrap;
+}
+
+.image-scroll{
+display:flex;
+overflow-x:auto;
+gap:14px;
+padding-bottom:10px;
+margin-bottom:20px;
+scroll-snap-type:x mandatory;
+}
+
+.image-scroll img{
+width:240px;
+height:430px;
+object-fit:cover;
+border-radius:20px;
+flex-shrink:0;
+scroll-snap-align:start;
+background:#ddd;
+}
+
+.link-btn{
+display:block;
+width:100%;
+text-align:center;
+text-decoration:none;
+background:#58c86b;
+color:#fff;
+font-size:28px;
+font-weight:900;
+padding:24px;
+border-radius:22px;
+margin-top:10px;
+}
+
+.archive{
+background:#fff;
+border-radius:28px;
+padding:24px;
+margin-top:30px;
+box-shadow:
+0 8px 24px rgba(0,0,0,.08);
+}
+
+.archive-btn{
+display:block;
+text-decoration:none;
+background:#f4f6f8;
+color:#222;
+font-size:28px;
+font-weight:900;
+padding:22px;
+border-radius:22px;
+margin-bottom:16px;
+text-align:center;
+}
+
+.loading{
+font-size:28px;
+font-weight:900;
+text-align:center;
+padding:50px 20px;
+color:#666;
+}
+
+.bottom-menu{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+box-shadow:
+0 -4px 14px rgba(0,0,0,.10);
+z-index:999;
+}
+
+.bottom-btn{
+text-decoration:none;
+color:#222;
+font-size:16px;
+font-weight:900;
+text-align:center;
+width:25%;
+}
+
+.bottom-icon{
+display:block;
+font-size:28px;
+margin-bottom:4px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="hero">
+
+<div class="hero-title">
+📰 地域瓦版DX
+</div>
+
+<div class="hero-desc">
+志木・新座・朝霞・和光の
+暮らし情報・回覧板・地域ニュースを
+まとめています。
+</div>
+
+</div>
+
+
+
+<div class="section-title">
+最新の記事
+</div>
+
+
+
+<div
+id="news-area"
+>
+
+<div class="loading">
+読み込み中...
+</div>
+
+</div>
+
+
+
+<div class="archive">
+
+<div class="section-title">
+過去の記事
+</div>
+
+<a class="archive-btn" href="#">
+2026年5月の記事
+</a>
+
+<a class="archive-btn" href="#">
+2026年4月の記事
+</a>
+
+<a class="archive-btn" href="#">
+2026年3月の記事
+</a>
+
+</div>
+
+</div>
+
+
+
+<div class="bottom-menu">
+
+<a class="bottom-btn" href="./">
+<span class="bottom-icon">🏠</span>
+ホーム
+</a>
+
+<a class="bottom-btn" href="./profile.html">
+<span class="bottom-icon">⚙️</span>
+地域
+</a>
+
+<a class="bottom-btn" href="./map.html">
+<span class="bottom-icon">🗺</span>
+地図
+</a>
+
+<a class="bottom-btn" href="./consult.html">
+<span class="bottom-icon">🤖</span>
+相談
+</a>
+
+</div>
+
+
+
+<script>
+
+const SHEET_ID =
+'13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
+
+
+
+const JSONP_URL =
+'https://docs.google.com/spreadsheets/d/' +
+SHEET_ID +
+'/gviz/tq?tqx=out:json';
+
+
+
+function getCell(cell){
+
+if(!cell)return '';
+
+if(cell.v !== undefined)return cell.v;
+
+if(cell.f !== undefined)return cell.f;
+
+return '';
+
+}
+
+
+
+window.google = {
+visualization:{
+Query:{
+setResponse:function(res){
+
+const rows =
+res.table.rows || [];
+
+const area =
+document.getElementById(
+'news-area'
+);
+
+area.innerHTML = '';
+
+
+
+rows.reverse();
+
+
+
+rows.slice(0,5).forEach(row => {
+
+const c = row.c;
+
+
+
+const date =
+getCell(c[0]);
+
+const city =
+getCell(c[1]);
+
+const title =
+getCell(c[2]);
+
+const desc =
+getCell(c[3]);
+
+const image1 =
+getCell(c[4]);
+
+const image2 =
+getCell(c[5]);
+
+const image3 =
+getCell(c[6]);
+
+const image4 =
+getCell(c[7]);
+
+const image5 =
+getCell(c[8]);
+
+const link =
+getCell(c[9]);
+
+
+
+let images = '';
+
+[
+image1,
+image2,
+image3,
+image4,
+image5
+].forEach(img => {
+
+if(img){
+
+images +=
+'<img src="' +
+img +
+'">';
+
+}
+
+});
+
+
+
+const html =
+
+'<div class="card">' +
+
+'<div class="city">' +
+city +
+'</div>' +
+
+'<div class="title">' +
+title +
+'</div>' +
+
+'<div class="date">' +
+date +
+'</div>' +
+
+'<div class="desc">' +
+desc +
+'</div>' +
+
+'<div class="image-scroll">' +
+images +
+'</div>' +
+
+'<a class="link-btn" href="' +
+link +
+'" target="_blank">' +
+'詳しく見る' +
+'</a>' +
+
+'</div>';
+
+
+
+area.insertAdjacentHTML(
+'beforeend',
+html
+);
+
+});
+
+}
+}
+}
+};
+
+
+
+const script =
+document.createElement('script');
+
+script.src = JSONP_URL;
+
+document.body.appendChild(script);
+
+</script>
+
+</body>
+</html>
