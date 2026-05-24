@@ -27,20 +27,12 @@ margin:0 auto;
 padding:22px 16px 120px;
 }
 
-
-
-/* タイトル */
-
 .header{
 font-size:38px;
 font-weight:900;
 line-height:1.4;
 margin-bottom:20px;
 }
-
-
-
-/* カード */
 
 .card{
 background:#fff;
@@ -52,19 +44,11 @@ box-shadow:
 0 8px 24px rgba(0,0,0,.08);
 }
 
-
-
-/* 見出し */
-
 .card-title{
 font-size:34px;
 font-weight:900;
 margin-bottom:20px;
 }
-
-
-
-/* ボタン */
 
 .btn{
 width:100%;
@@ -78,27 +62,15 @@ font-weight:900;
 line-height:1.4;
 }
 
-
-
-/* 緑 */
-
 .green{
 background:#58c86b;
 color:#fff;
 }
 
-
-
-/* グレー */
-
 .gray{
 background:#f4f6f8;
 color:#222;
 }
-
-
-
-/* 結果 */
 
 .result{
 font-size:24px;
@@ -107,10 +79,6 @@ line-height:1.6;
 margin-bottom:10px;
 color:#1f9d4a;
 }
-
-
-
-/* bottom */
 
 .bottom-menu{
 position:fixed;
@@ -279,6 +247,12 @@ const USER_NAME =
 
 
 
+/* 連打防止 */
+
+window.sending = false;
+
+
+
 function getNowTime(){
 
 return new Date()
@@ -317,6 +291,16 @@ JSON.stringify(data)
 
 );
 
+
+
+/* 3秒解除 */
+
+setTimeout(()=>{
+
+window.sending=false;
+
+},3000);
+
 }
 
 
@@ -324,6 +308,9 @@ JSON.stringify(data)
 /* 元気 */
 
 function showGood(){
+
+if(window.sending)return;
+window.sending=true;
 
 const time =
 getNowTime();
@@ -359,6 +346,9 @@ time:time
 
 function takeMorningMedicine(){
 
+if(window.sending)return;
+window.sending=true;
+
 const time =
 getNowTime();
 
@@ -393,6 +383,9 @@ time:time
 
 function takeLunchMedicine(){
 
+if(window.sending)return;
+window.sending=true;
+
 const time =
 getNowTime();
 
@@ -426,6 +419,9 @@ time:time
 /* 夜 */
 
 function takeNightMedicine(){
+
+if(window.sending)return;
+window.sending=true;
 
 const time =
 getNowTime();
