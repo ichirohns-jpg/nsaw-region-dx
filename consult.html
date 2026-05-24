@@ -3,308 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>AI相談DX</title>
-
 <style>
-*{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-body{
-margin:0;
-padding:0;
-background:#f1f4f7;
-font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
-color:#222;
-}
-
-.wrap{
-max-width:720px;
-margin:0 auto;
-padding:22px 16px 120px;
-}
-
-.header{
-font-size:38px;
-font-weight:900;
-margin-bottom:20px;
-line-height:1.4;
-}
-
-.card{
-background:#fff;
-border-radius:28px;
-padding:26px;
-margin-bottom:22px;
-box-shadow:0 8px 24px rgba(0,0,0,.08);
-}
-
-.title{
-font-size:34px;
-font-weight:900;
-margin-bottom:18px;
-line-height:1.5;
-}
-
-.desc{
-font-size:24px;
-line-height:1.8;
-font-weight:700;
-color:#444;
-margin-bottom:24px;
-}
-
-textarea{
-width:100%;
-height:190px;
-border:none;
-border-radius:22px;
-padding:22px;
-font-size:26px;
-background:#f7f9fb;
-resize:none;
-outline:none;
-line-height:1.7;
-margin-bottom:22px;
-}
-
-.btn{
-width:100%;
-border:none;
-border-radius:22px;
-padding:28px;
-font-size:32px;
-font-weight:900;
-background:#58c86b;
-color:#fff;
-}
-
-.result{
-margin-top:24px;
-font-size:25px;
-font-weight:900;
-line-height:1.8;
-color:#222;
-white-space:pre-wrap;
-background:#f7f9fb;
-border-radius:22px;
-padding:22px;
-}
-
-.bottom-menu{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:14px 0;
-box-shadow:0 -4px 14px rgba(0,0,0,.10);
-z-index:999;
-}
-
-.bottom-btn{
-text-decoration:none;
-color:#222;
-font-size:16px;
-font-weight:900;
-text-align:center;
-width:25%;
-}
-
-.bottom-icon{
-display:block;
-font-size:28px;
-margin-bottom:4px;
-}
+body{margin:0;padding:0;background:#f1f4f7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222}
+.wrap{max-width:720px;margin:0 auto;padding:22px 16px 120px}
+.header{font-size:38px;font-weight:900;margin-bottom:20px}
+.card{background:#fff;border-radius:28px;padding:26px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.title{font-size:34px;font-weight:900;margin-bottom:18px}
+.desc{font-size:24px;line-height:1.8;font-weight:700;color:#444;margin-bottom:24px}
+textarea{width:100%;height:190px;border:none;border-radius:22px;padding:22px;font-size:26px;background:#f7f9fb;resize:none;outline:none;line-height:1.7;margin-bottom:22px}
+.btn{width:100%;border:none;border-radius:22px;padding:28px;font-size:32px;font-weight:900;background:#58c86b;color:#fff}
+.result{margin-top:24px;font-size:25px;font-weight:900;line-height:1.8;color:#222;white-space:pre-wrap;background:#f7f9fb;border-radius:22px;padding:22px}
+.bottom-menu{position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;padding:14px 0;box-shadow:0 -4px 14px rgba(0,0,0,.10)}
+.bottom-btn{text-decoration:none;color:#222;font-size:16px;font-weight:900;text-align:center;width:25%}
+.bottom-icon{display:block;font-size:28px;margin-bottom:4px}
 </style>
 </head>
-
 <body>
 
 <div class="wrap">
-
-<div class="header">
-🤖 AI相談DX
-</div>
+<div class="header">🤖 AI相談DX</div>
 
 <div class="card">
+<div class="title">困っていることを書いてください</div>
+<div class="desc">薬・病院・介護・お金・家族・空き家など、短く書くだけで大丈夫です。</div>
 
-<div class="title">
-困っていることを書いてください
+<textarea id="consultText" placeholder="例：薬を飲み忘れることが増えた"></textarea>
+
+<button class="btn" onclick="startConsult()">🤖 AIに相談する</button>
+
+<div id="result" class="result">ここに相談結果が表示されます</div>
 </div>
-
-<div class="desc">
-介護・薬・病院・お金・家族・空き家など、困っていることを短く書くだけで大丈夫です。
-</div>
-
-<textarea
-id="consultText"
-placeholder="例：
-薬を飲み忘れることが増えた
-病院へ行くのが不安
-実家が空き家になりそうで心配"
-></textarea>
-
-<button
-class="btn"
-onclick="startConsult()"
->
-🤖 相談する
-</button>
-
-<div
-id="result"
-class="result"
->
-ここに相談結果が表示されます
-</div>
-
-</div>
-
 </div>
 
 <div class="bottom-menu">
-
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./family.html">
-<span class="bottom-icon">👪</span>
-家族
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺</span>
-地図
-</a>
-
-<a class="bottom-btn" href="./consult.html">
-<span class="bottom-icon">🤖</span>
-相談
-</a>
-
+<a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
+<a class="bottom-btn" href="./family.html"><span class="bottom-icon">👪</span>家族</a>
+<a class="bottom-btn" href="./map.html"><span class="bottom-icon">🗺</span>地図</a>
+<a class="bottom-btn" href="./consult.html"><span class="bottom-icon">🤖</span>相談</a>
 </div>
 
 <script>
+const GAS_URL =
+'https://script.google.com/macros/s/AKfycbyFUX6w7KMKZ87PR37MrFaPgW1clmiTR5LigJO43XLVQCZ7IdsGLP6HXPeNMzd9qN1L/exec';
 
 function startConsult(){
 
-const text =
-document.getElementById('consultText').value;
+const text = document.getElementById('consultText').value.trim();
 
 if(!text){
 alert('困りごとを入力してください');
 return;
 }
 
-let answer = '';
+document.getElementById('result').innerHTML =
+'🤖 AIが整理しています...';
 
-if(text.includes('薬') || text.includes('飲み忘れ')){
+fetch(GAS_URL,{
+method:'POST',
+mode:'no-cors',
+headers:{'Content-Type':'text/plain'},
+body:JSON.stringify({
+mode:'consult',
+code:'YAMA1234',
+name:'山口さん',
+type:'AI相談',
+status:'相談送信',
+time:new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'}),
+text:text
+})
+});
 
-answer =
-'💊 薬の相談\n\n' +
-'薬の飲み忘れが増えている時は、本人だけで頑張らせないことが大切です。\n\n' +
-'まずやること\n' +
-'・薬カレンダーを使う\n' +
-'・家族に飲んだ時間を共有する\n' +
-'・かかりつけ医や薬局に相談する\n\n' +
-'相談先\n' +
-'・地域包括支援センター\n' +
-'・かかりつけ薬局\n' +
-'・かかりつけ医';
-
-}
-
-else if(text.includes('病院') || text.includes('通院')){
-
-answer =
-'🏥 病院・通院の相談\n\n' +
-'通院が不安な時は、移動・付き添い・予約管理を分けて考えると整理しやすいです。\n\n' +
-'まずやること\n' +
-'・通院日を家族と共有する\n' +
-'・送迎できる人を確認する\n' +
-'・無理なら地域包括支援センターへ相談する\n\n' +
-'相談先\n' +
-'・地域包括支援センター\n' +
-'・かかりつけ医\n' +
-'・市役所の高齢者相談窓口';
+document.getElementById('result').innerHTML =
+'✅ 相談内容を送信しました。\n\n' +
+'内容：\n' + text + '\n\n' +
+'AI相談とGiftHub通知はGAS側で処理されます。';
 
 }
-
-else if(text.includes('お金') || text.includes('年金') || text.includes('生活費')){
-
-answer =
-'💰 お金の相談\n\n' +
-'お金の不安は一人で抱えると悪化しやすいです。早めに相談先へつなぐことが大切です。\n\n' +
-'まずやること\n' +
-'・支払いで困っている内容をメモする\n' +
-'・家族に共有する\n' +
-'・市役所や社会福祉協議会へ相談する\n\n' +
-'相談先\n' +
-'・市役所\n' +
-'・社会福祉協議会\n' +
-'・地域包括支援センター';
-
-}
-
-else if(text.includes('空き家') || text.includes('実家') || text.includes('相続')){
-
-answer =
-'🏠 住まい・空き家の相談\n\n' +
-'空き家は突然生まれるものではなく、体調・家族・相続・お金の問題が重なって起きます。\n\n' +
-'まずやること\n' +
-'・家の名義を確認する\n' +
-'・家族で早めに話す\n' +
-'・住まいの今後を整理する\n\n' +
-'相談先\n' +
-'・地域包括支援センター\n' +
-'・市役所の空き家相談\n' +
-'・必要に応じて司法書士や不動産相談';
-
-}
-
-else if(text.includes('家族') || text.includes('ひとり') || text.includes('不安')){
-
-answer =
-'👪 家族・見守りの相談\n\n' +
-'不安がある時は、まず「何に困っているか」を短く共有することが大切です。\n\n' +
-'まずやること\n' +
-'・家族へ今の状態を伝える\n' +
-'・毎日の元気確認を続ける\n' +
-'・困った時の連絡先を決める\n\n' +
-'相談先\n' +
-'・家族\n' +
-'・地域包括支援センター\n' +
-'・市役所の相談窓口';
-
-}
-
-else{
-
-answer =
-'🤖 相談内容を整理しました\n\n' +
-'今の内容は、ひとりで抱えず、家族や地域の相談先と共有した方がよい相談です。\n\n' +
-'まずやること\n' +
-'・困っていることをメモする\n' +
-'・家族に見せる\n' +
-'・地域包括支援センターへ相談する\n\n' +
-'相談先\n' +
-'・地域包括支援センター\n' +
-'・市役所\n' +
-'・社会福祉協議会';
-
-}
-
-document.getElementById('result').innerHTML = answer;
-
-}
-
 </script>
 
 </body>
