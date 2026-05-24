@@ -389,6 +389,33 @@ if(data.reply){
 output.innerText =
 data.reply;
 
+
+
+/* =====================
+   音声読み上げ
+===================== */
+
+speechSynthesis.cancel();
+
+const speech =
+new SpeechSynthesisUtterance(
+data.reply
+);
+
+speech.lang = 'ja-JP';
+
+speech.rate = 1;
+
+speech.pitch = 1;
+
+speech.volume = 1;
+
+speechSynthesis.speak(
+speech
+);
+
+
+
 return;
 
 }
