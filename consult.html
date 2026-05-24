@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>AI相談DX</title>
+
+<script src="./config.js"></script>
+
 </head>
 
 <body>
@@ -13,14 +20,21 @@
 <textarea
 id="input"
 placeholder="相談内容を入力"
-style="width:100%;height:180px;font-size:20px;"
+style="
+width:100%;
+height:180px;
+font-size:20px;
+"
 ></textarea>
 
 <br><br>
 
 <button
 id="sendBtn"
-style="font-size:24px;padding:12px 24px;"
+style="
+font-size:24px;
+padding:12px 24px;
+"
 >
 送信
 </button>
@@ -29,7 +43,10 @@ style="font-size:24px;padding:12px 24px;"
 
 <div
 id="output"
-style="white-space:pre-wrap;font-size:22px;"
+style="
+white-space:pre-wrap;
+font-size:22px;
+"
 >
 ここにAI回答が表示されます
 </div>
@@ -37,7 +54,7 @@ style="white-space:pre-wrap;font-size:22px;"
 <script>
 
 const GAS_URL =
-"https://script.google.com/macros/s/AKfycbxNK_8iG01PJAECkqdEP412wQEA1XZ-vf4x5pUkOnUr98S2BR2Sjxp3wUmPFzbmHOdw/exec";
+window.APP_CONFIG.GAS_URL;
 
 
 
@@ -111,6 +128,37 @@ JSON.parse(text);
 output.innerText =
 "JSON解析失敗\n\n" +
 text;
+
+return;
+
+}
+
+
+
+/* =====================
+   AI返答
+===================== */
+
+if(data.reply){
+
+output.innerText =
+data.reply;
+
+return;
+
+}
+
+
+
+/* =====================
+   ERROR
+===================== */
+
+if(data.error){
+
+output.innerText =
+"エラー:\n\n" +
+data.error;
 
 return;
 
