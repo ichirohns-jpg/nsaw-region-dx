@@ -107,7 +107,7 @@ font-size:24px;
 line-height:1.9;
 font-weight:700;
 color:#444;
-margin-bottom:20px;
+margin-top:18px;
 white-space:pre-wrap;
 }
 
@@ -116,7 +116,7 @@ display:flex;
 overflow-x:auto;
 gap:14px;
 padding-bottom:10px;
-margin-bottom:20px;
+margin:18px 0;
 scroll-snap-type:x mandatory;
 }
 
@@ -130,6 +130,17 @@ scroll-snap-align:start;
 background:#ddd;
 }
 
+.video-wrap{
+margin:18px 0;
+}
+
+.video-wrap iframe{
+width:100%;
+height:220px;
+border:none;
+border-radius:20px;
+}
+
 .link-btn{
 display:block;
 width:100%;
@@ -141,7 +152,7 @@ font-size:28px;
 font-weight:900;
 padding:24px;
 border-radius:22px;
-margin-top:10px;
+margin-top:20px;
 }
 
 .archive{
@@ -233,9 +244,7 @@ margin-bottom:4px;
 
 
 
-<div
-id="news-area"
->
+<div id="news-area">
 
 <div class="loading">
 読み込み中...
@@ -282,7 +291,7 @@ id="news-area"
 </a>
 
 <a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺</span>
+<span class="bottom-icon">🗺️</span>
 地図
 </a>
 
@@ -323,6 +332,78 @@ return '';
 
 
 
+/* =========================
+   YouTube判定
+========================= */
+
+function isYoutube(url){
+
+return (
+url.includes('youtube.com')
+||
+url.includes('youtu.be')
+);
+
+}
+
+
+
+/* =========================
+   画像判定
+========================= */
+
+function isImage(url){
+
+return (
+url.includes('.jpg')
+||
+url.includes('.jpeg')
+||
+url.includes('.png')
+||
+url.includes('.webp')
+||
+url.includes('drive.google.com')
+);
+
+}
+
+
+
+/* =========================
+   YouTube変換
+========================= */
+
+function youtubeEmbed(url){
+
+if(url.includes('watch?v=')){
+
+return url.replace(
+'watch?v=',
+'embed/'
+);
+
+}
+
+if(url.includes('youtu.be/')){
+
+const id =
+url.split('youtu.be/')[1];
+
+return 'https://www.youtube.com/embed/' + id;
+
+}
+
+return url;
+
+}
+
+
+
+/* =========================
+   JSONP
+========================= */
+
 window.google = {
 visualization:{
 Query:{
@@ -353,64 +434,90 @@ const c = row.c;
 const date =
 getCell(c[0]);
 
-const city =
+const articleId =
 getCell(c[1]);
 
 const title =
 getCell(c[2]);
 
-const desc =
-getCell(c[3]);
-
-const image1 =
+const detail =
 getCell(c[4]);
 
-const image2 =
-getCell(c[5]);
 
-const image3 =
-getCell(c[6]);
 
-const image4 =
-getCell(c[7]);
-
-const image5 =
-getCell(c[8]);
-
-const link =
-getCell(c[9]);
+const mediaUrl =
+getCell(c[17]);
 
 
 
-let images = '';
+const displayType =
+getCell(c[21]);
 
-[
-image1,
-image2,
-image3,
-image4,
-image5
-].forEach(img => {
 
-if(img){
 
-images +=
-'<img src="' +
-img +
-'">';
+let mediaHtml = '';
+
+
+
+/* =========================
+   YouTube
+========================= */
+
+if(
+mediaUrl &&
+isYoutube(mediaUrl)
+){
+
+mediaHtml =
+
+'<div class="video-wrap">' +
+
+'<iframe ' +
+'src="' +
+youtubeEmbed(mediaUrl) +
+'" ' +
+'allowfullscreen>' +
+'</iframe>' +
+
+'</div>';
 
 }
 
-});
 
 
+/* =========================
+   Image
+========================= */
+
+else if(
+mediaUrl &&
+isImage(mediaUrl)
+){
+
+mediaHtml =
+
+'<div class="image-scroll">' +
+
+'<img src="' +
+mediaUrl +
+'">' +
+
+'</div>';
+
+}
+
+
+
+/* =========================
+   Card
+========================= */
 
 const html =
 
 '<div class="card">' +
 
 '<div class="city">' +
-city +
+displayType +
 '</div>' +
 
 '<div class="title">' +
@@ -421,19 +528,11 @@ title +
 date +
 '</div>' +
 
+mediaHtml +
+
 '<div class="desc">' +
-desc +
+detail +
 '</div>' +
-
-'<div class="image-scroll">' +
-images +
-'</div>' +
-
-'<a class="link-btn" href="' +
-link +
-'" target="_blank">' +
-'詳しく見る' +
-'</a>' +
 
 '</div>';
 
