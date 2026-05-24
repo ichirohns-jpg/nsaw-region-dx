@@ -4,102 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>地域マップ</title>
+<title>地域マップDX</title>
+
+<script src="./config.js"></script>
 
 <style>
-
-*{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-body{
-margin:0;
-padding:0;
-background:#f1f4f7;
-font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
-color:#222;
-}
-
-.wrap{
-max-width:720px;
-margin:0 auto;
-padding:22px 16px 120px;
-}
-
-.header{
-font-size:38px;
-font-weight:900;
-margin-bottom:18px;
-line-height:1.35;
-}
-
-.card{
-background:#fff;
-border-radius:28px;
-padding:26px;
-margin-bottom:20px;
-box-shadow:0 8px 24px rgba(0,0,0,.08);
-}
-
-.title{
-font-size:32px;
-font-weight:900;
-margin-bottom:20px;
-}
-
-.btn{
-width:100%;
-border:none;
-border-radius:22px;
-padding:26px;
-margin-bottom:16px;
-font-size:30px;
-font-weight:900;
-background:#58c86b;
-color:#fff;
-}
-
-.gray{
-background:#f4f6f8;
-color:#222;
-}
-
-.result{
-font-size:24px;
-font-weight:900;
-line-height:1.6;
-margin-top:12px;
-}
-
-.bottom-menu{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:14px 0;
-box-shadow:0 -4px 14px rgba(0,0,0,.10);
-z-index:999;
-}
-
-.bottom-btn{
-text-decoration:none;
-color:#222;
-font-size:16px;
-font-weight:900;
-text-align:center;
-width:25%;
-}
-
-.bottom-icon{
-display:block;
-font-size:28px;
-margin-bottom:4px;
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#f1f4f7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222}
+.wrap{max-width:720px;margin:0 auto;padding:22px 16px 120px}
+.header{font-size:38px;font-weight:900;margin-bottom:20px}
+.card{background:#fff;border-radius:28px;padding:26px;margin-bottom:22px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.title{font-size:34px;font-weight:900;margin-bottom:18px}
+.desc{font-size:24px;line-height:1.8;font-weight:700;color:#444;margin-bottom:24px}
+.btn{width:100%;border:none;border-radius:22px;padding:26px;margin-bottom:16px;font-size:30px;font-weight:900;background:#58c86b;color:#fff}
+.gray{background:#f4f6f8;color:#222}
+.result{font-size:23px;font-weight:900;line-height:1.8;background:#f7f9fb;border-radius:22px;padding:20px;margin-top:12px;white-space:pre-wrap}
+.bottom-menu{position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;padding:14px 0;box-shadow:0 -4px 14px rgba(0,0,0,.10);z-index:999}
+.bottom-btn{text-decoration:none;color:#222;font-size:16px;font-weight:900;text-align:center;width:25%}
+.bottom-icon{display:block;font-size:28px;margin-bottom:4px}
 </style>
 </head>
 
@@ -107,186 +29,104 @@ margin-bottom:4px;
 
 <div class="wrap">
 
-<div class="header">
-🗺 地域マップ
-</div>
-
-
+<div class="header">🗺 地域マップDX</div>
 
 <div class="card">
-
-<div class="title">
-📍 現在地
+<div class="title">📍 現在地から探す</div>
+<div class="desc">
+現在地を取得して、近くの病院・薬局・コンビニをGoogleマップで開きます。
 </div>
 
-<button
-class="btn"
-onclick="getLocation()"
->
-📍 現在地を確認
-</button>
+<button class="btn" onclick="getLocation()">📍 現在地を取得</button>
 
-<div
-id="result"
-class="result"
->
-まだ取得していません
+<div id="result" class="result">まだ現在地を取得していません</div>
 </div>
-
-</div>
-
-
 
 <div class="card">
+<div class="title">よく使う地図</div>
 
-<div class="title">
-🏥 よく使う地図
-</div>
-
-<button
-class="btn gray"
-onclick="openMap('hospital')"
->
-🏥 病院
-</button>
-
-<button
-class="btn gray"
-onclick="openMap('drugstore')"
->
-💊 薬局
-</button>
-
-<button
-class="btn gray"
-onclick="openMap('convenience store')"
->
-🏪 コンビニ
-</button>
-
+<button class="btn gray" onclick="openMap('病院')">🏥 近くの病院</button>
+<button class="btn gray" onclick="openMap('薬局')">💊 近くの薬局</button>
+<button class="btn gray" onclick="openMap('コンビニ')">🏪 近くのコンビニ</button>
+<button class="btn gray" onclick="openMap('トイレ')">🚻 近くのトイレ</button>
 </div>
 
 </div>
-
-
 
 <div class="bottom-menu">
-
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./family.html">
-<span class="bottom-icon">👪</span>
-家族
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺</span>
-地図
-</a>
-
-<a class="bottom-btn" href="#">
-<span class="bottom-icon">🤖</span>
-相談
-</a>
-
+<a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
+<a class="bottom-btn" href="./family.html"><span class="bottom-icon">👪</span>家族</a>
+<a class="bottom-btn" href="./map.html"><span class="bottom-icon">🗺</span>地図</a>
+<a class="bottom-btn" href="./consult.html"><span class="bottom-icon">🤖</span>相談</a>
 </div>
 
-
-
 <script>
-
 let currentLat = null;
 let currentLng = null;
 
-
-
 function getLocation(){
 
+const result = document.getElementById('result');
+
 if(!navigator.geolocation){
-
-document.getElementById('result').innerHTML =
-'位置情報に対応していません';
-
+result.innerText = 'この端末は位置情報に対応していません';
 return;
-
 }
 
-
+result.innerText = '現在地を取得しています...';
 
 navigator.geolocation.getCurrentPosition(
+function(position){
 
-(position)=>{
+currentLat = position.coords.latitude;
+currentLng = position.coords.longitude;
 
-currentLat =
-position.coords.latitude;
-
-currentLng =
-position.coords.longitude;
-
-
-
-document.getElementById('result').innerHTML =
-
-'📍 取得成功<br><br>' +
-
-currentLat +
-
-'<br>' +
-
-currentLng;
+result.innerText =
+'現在地を取得しました\n\n' +
+'緯度：' + currentLat + '\n' +
+'経度：' + currentLng + '\n\n' +
+'下のボタンから地図を開けます。';
 
 },
-
-()=>{
-
-document.getElementById('result').innerHTML =
-'位置情報を取得できません';
-
+function(error){
+result.innerText =
+'位置情報を取得できませんでした。\n\n' +
+'スマホの位置情報許可を確認してください。';
+},
+{
+enableHighAccuracy:true,
+timeout:10000,
+maximumAge:0
 }
-
 );
-
 }
-
-
 
 function openMap(keyword){
 
-if(currentLat === null){
+let url = '';
 
-alert('先に現在地を取得してください');
+if(currentLat && currentLng){
 
-return;
-
-}
-
-
-
-const url =
-
+url =
 'https://www.google.com/maps/search/' +
-
 encodeURIComponent(keyword) +
-
 '/@' +
-
 currentLat +
-
 ',' +
-
 currentLng +
-
 ',15z';
 
+}else{
 
+url =
+'https://www.google.com/maps/search/' +
+encodeURIComponent(keyword + ' near me');
+
+}
 
 window.open(url,'_blank');
 
 }
-
 </script>
 
 </body>
