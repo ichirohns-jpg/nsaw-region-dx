@@ -102,14 +102,15 @@ z-index:999;
 .bottom-btn{
 text-decoration:none;
 color:#222;
-font-size:18px;
+font-size:16px;
 font-weight:900;
 text-align:center;
+width:25%;
 }
 
 .bottom-icon{
 display:block;
-font-size:30px;
+font-size:28px;
 margin-bottom:4px;
 }
 
@@ -153,7 +154,10 @@ color:#ef5350;
 
 </div>
 
+
+
 <div class="bottom-menu">
+
 <a class="bottom-btn" href="./">
 <span class="bottom-icon">🏠</span>
 ホーム
@@ -163,11 +167,27 @@ color:#ef5350;
 <span class="bottom-icon">👪</span>
 家族
 </a>
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">🗺</span>
+地図
+</a>
+
+<a class="bottom-btn" href="#">
+<span class="bottom-icon">🤖</span>
+相談
+</a>
+
 </div>
 
+
+
 <script>
+
 const GAS_URL =
 'https://script.google.com/macros/s/AKfycbyFUX6w7KMKZ87PR37MrFaPgW1clmiTR5LigJO43XLVQCZ7IdsGLP6HXPeNMzd9qN1L/exec?code=YAMA1234';
+
+
 
 async function loadData(){
 
@@ -181,6 +201,8 @@ await response.json();
 
 const rows =
 data.rows || [];
+
+
 
 if(rows.length === 0){
 
@@ -197,20 +219,33 @@ return;
 
 }
 
+
+
 const latest =
 rows[rows.length - 1];
+
+
 
 document.getElementById('statusBox').innerHTML =
 '😊 ' + (latest.status || '');
 
+
+
 document.getElementById('timeBox').innerHTML =
 latest.update || '';
+
+
 
 if(latest.medicine){
 
 document.getElementById('medicineBox').innerHTML =
-'<div class="med-title">💊 ' + latest.medicine + '</div>' +
-'<div class="med-time">🕒 ' + (latest.medicineTime || '') + '</div>';
+'<div class="med-title">💊 ' +
+latest.medicine +
+'</div>' +
+
+'<div class="med-time">🕒 ' +
+(latest.medicineTime || '') +
+'</div>';
 
 }else{
 
@@ -230,8 +265,12 @@ document.getElementById('statusBox').classList.add('error');
 
 }
 
+
+
 loadData();
+
 setInterval(loadData,10000);
+
 </script>
 
 </body>
