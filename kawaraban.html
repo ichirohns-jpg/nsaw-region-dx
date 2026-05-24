@@ -473,14 +473,22 @@ formatDate(
 getCell(c[0])
 );
 
+
+
 const title =
 getCell(c[2]);
+
+
 
 const detail =
 getCell(c[4]);
 
+
+
 const mediaUrl =
-getCell(c[18]);
+getCell(c[17]);
+
+
 
 const displayType =
 getCell(c[21]);
@@ -541,14 +549,15 @@ mediaUrl +
 
 
 /* =========================
-   各市リンク
+   スプレッドシートの
+   本物リンクだけ読む
 ========================= */
 
 let infoButtons = '';
 
 
 
-for(let i = 5; i <= 14; i += 2){
+for(let i = 5; i <= 15; i += 2){
 
 const infoTitle =
 getCell(c[i]);
@@ -558,7 +567,11 @@ getCell(c[i + 1]);
 
 
 
-if(infoTitle && infoUrl){
+if(
+infoTitle &&
+infoUrl &&
+infoUrl.startsWith('http')
+){
 
 infoButtons +=
 
