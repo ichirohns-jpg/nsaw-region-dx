@@ -3,25 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>地域瓦版DX</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
 body{
   margin:0;
   background:#eef3f8;
-  font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Hiragino Sans",
-  "Yu Gothic",
-  sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
   color:#222;
 }
 
@@ -183,7 +173,6 @@ body{
   font-size:28px;
   margin-bottom:4px;
 }
-
 </style>
 </head>
 
@@ -191,515 +180,212 @@ body{
 
 <div class="wrap">
 
-<div class="hero">
+  <div class="hero">
+    <div class="hero-title">📰 地域瓦版DX</div>
+    <div class="hero-desc">
+      志木・新座・朝霞・和光の<br>
+      暮らし情報・地域ニュース
+    </div>
+  </div>
 
-<div class="hero-title">
-📰 地域瓦版DX
-</div>
+  <div class="section-title">最新の記事</div>
+  <div id="latest-area">
+    <div class="loading">読み込み中...</div>
+  </div>
 
-<div class="hero-desc">
-志木・新座・朝霞・和光の
-暮らし情報・地域ニュース
-</div>
-
-</div>
-
-
-
-<div class="section-title">
-最新の記事
-</div>
-
-<div id="latest-area">
-
-<div class="loading">
-読み込み中...
-</div>
+  <div class="section-title">過去の記事</div>
+  <div id="archive-area"></div>
 
 </div>
-
-
-
-<div class="section-title">
-過去の記事
-</div>
-
-<div id="archive-area">
-
-</div>
-
-</div>
-
-
 
 <div class="bottom-menu">
-
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./profile.html">
-<span class="bottom-icon">⚙️</span>
-地域
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺️</span>
-地図
-</a>
-
-<a class="bottom-btn" href="./consult.html">
-<span class="bottom-icon">🤖</span>
-相談
-</a>
-
+  <a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
+  <a class="bottom-btn" href="./profile.html"><span class="bottom-icon">⚙️</span>地域</a>
+  <a class="bottom-btn" href="./map.html"><span class="bottom-icon">🗺️</span>地図</a>
+  <a class="bottom-btn" href="./consult.html"><span class="bottom-icon">🤖</span>相談</a>
 </div>
 
-
-
 <script>
-
 const SHEET_ID =
 '13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
-
-
 
 const JSONP_URL =
 'https://docs.google.com/spreadsheets/d/' +
 SHEET_ID +
 '/gviz/tq?tqx=out:json';
 
-
-
 function val(cell){
-
-if(!cell)return '';
-
-if(cell.v !== undefined)return String(cell.v);
-
-if(cell.f !== undefined)return String(cell.f);
-
-return '';
-
+  if(!cell)return '';
+  if(cell.v !== undefined)return String(cell.v);
+  if(cell.f !== undefined)return String(cell.f);
+  return '';
 }
-
-
-
-/* =========================
-   日付変換
-========================= */
 
 function fmtDate(v){
-
-if(!v)return '';
-
-if(v.includes('Date(')){
-
-const n = v.match(/\d+/g);
-
-if(n){
-
-return (
-n[0] + '/' +
-(Number(n[1])+1) + '/' +
-n[2]
-);
-
+  if(!v)return '';
+  if(v.includes('Date(')){
+    const n = v.match(/\d+/g);
+    if(n){
+      return n[0] + '/' + (Number(n[1]) + 1) + '/' + n[2];
+    }
+  }
+  return v;
 }
-
-}
-
-return v;
-
-}
-
-
-
-/* =========================
-   Drive画像変換
-========================= */
 
 function driveImage(url){
+  if(!url)return '';
 
-if(!url)return '';
+  if(url.includes('drive.google.com')){
+    const m =
+      url.match(/\/d\/([^/]+)/) ||
+      url.match(/id=([^&]+)/);
 
-if(url.includes('drive.google.com')){
+    if(m && m[1]){
+      return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w1200';
+    }
+  }
 
-const m =
-url.match(/\/d\/([^/]+)/)
-||
-url.match(/id=([^&]+)/);
-
-if(m && m[1]){
-
-return (
-'https://drive.google.com/thumbnail?id=' +
-m[1] +
-'&sz=w1200'
-);
-
+  return url;
 }
-
-}
-
-return url;
-
-}
-
-
-
-/* =========================
-   YouTube変換
-========================= */
 
 function youtube(url){
+  if(!url)return '';
 
-if(url.includes('watch?v=')){
+  if(url.includes('watch?v=')){
+    return url.replace('watch?v=','embed/');
+  }
 
-return url.replace(
-'watch?v=',
-'embed/'
-);
+  if(url.includes('youtu.be/')){
+    const id = url.split('youtu.be/')[1].split('?')[0];
+    return 'https://www.youtube.com/embed/' + id;
+  }
 
+  return url;
 }
-
-if(url.includes('youtu.be/')){
-
-const id =
-url.split('youtu.be/')[1]
-.split('?')[0];
-
-return (
-'https://www.youtube.com/embed/' +
-id
-);
-
-}
-
-return url;
-
-}
-
-
-
-/* =========================
-   カード生成
-========================= */
 
 function createCard(c){
 
-/* =========================
-   固定列
-========================= */
+  const date = fmtDate(val(c[0]));        // A 日付
+  const title = val(c[2]);                // C 瓦版タイトル
+  const imageUrl = val(c[3]);             // D 瓦版画像URL
+  const detail = val(c[4]);               // E 説明文
 
-const date =
-fmtDate(
-val(c[0])
-);
+  const videoTitle = val(c[15]);          // P 動画タイトル
+  const videoDetail = val(c[16]);         // Q 動画詳細
+  const mediaUrl = val(c[17]);            // R メディアURL
 
-const title =
-val(c[2]);
+  const displayType = val(c[21]) || '地域情報'; // V 表示タイプ
 
-const imageUrl =
-val(c[3]);
+  let mediaHtml = '';
 
-const detail =
-val(c[4]);
+  if(imageUrl){
+    mediaHtml +=
+      '<div class="image-scroll">' +
+      '<img src="' + driveImage(imageUrl) + '">' +
+      '</div>';
+  }
 
-const videoTitle =
-val(c[15]);
+  if(
+    mediaUrl &&
+    (
+      mediaUrl.includes('youtube.com') ||
+      mediaUrl.includes('youtu.be')
+    )
+  ){
+    mediaHtml +=
+      '<div class="video-wrap">' +
+      '<iframe src="' + youtube(mediaUrl) + '" allowfullscreen></iframe>' +
+      '</div>';
+  }
 
-const videoDetail =
-val(c[16]);
+  let buttons = '';
 
-const mediaUrl =
-val(c[17]);
+  const links = [
+    { title: val(c[5]),  url: val(c[6])  },  // F/G
+    { title: val(c[7]),  url: val(c[8])  },  // H/I
+    { title: val(c[9]),  url: val(c[10]) },  // J/K
+    { title: val(c[11]), url: val(c[12]) },  // L/M
+    { title: val(c[13]), url: val(c[14]) }   // N/O
+  ];
 
-const displayType =
-val(c[21]) || '地域情報';
+  links.forEach(link => {
+    if(link.title && link.url && link.url.startsWith('http')){
+      buttons +=
+        '<a class="link-btn" href="' +
+        link.url +
+        '" target="_blank">' +
+        link.title +
+        '</a>';
+    }
+  });
 
+  if(videoTitle && mediaUrl && mediaUrl.startsWith('http')){
+    buttons +=
+      '<a class="link-btn" href="' +
+      mediaUrl +
+      '" target="_blank">' +
+      videoTitle +
+      '</a>';
+  }
 
+  let fullDetail = detail;
 
-/* =========================
-   画像・動画
-========================= */
+  if(videoDetail){
+    fullDetail += '\n\n' + videoDetail;
+  }
 
-let mediaHtml = '';
-
-
-
-/* D列画像 */
-
-if(imageUrl){
-
-mediaHtml +=
-
-'<div class="image-scroll">' +
-
-'<img src="' +
-driveImage(imageUrl) +
-'">' +
-
-'</div>';
-
+  return (
+    '<div class="card">' +
+      '<div class="city">' + displayType + '</div>' +
+      '<div class="title">' + title + '</div>' +
+      '<div class="date">' + date + '</div>' +
+      mediaHtml +
+      '<div class="desc">' + fullDetail + '</div>' +
+      buttons +
+    '</div>'
+  );
 }
-
-
-
-/* R列動画 */
-
-if(
-mediaUrl &&
-(
-mediaUrl.includes('youtube.com')
-||
-mediaUrl.includes('youtu.be')
-)
-){
-
-mediaHtml +=
-
-'<div class="video-wrap">' +
-
-'<iframe ' +
-'src="' +
-youtube(mediaUrl) +
-'" ' +
-'allowfullscreen>' +
-
-'</iframe>' +
-
-'</div>';
-
-}
-
-
-
-/* =========================
-   各市リンク
-========================= */
-
-let buttons = '';
-
-
-
-const links = [
-
-{
-title: val(c[5]),
-url: val(c[6])
-},
-
-{
-title: val(c[7]),
-url: val(c[8])
-},
-
-{
-title: val(c[9]),
-url: val(c[10])
-},
-
-{
-title: val(c[11]),
-url: val(c[12])
-},
-
-{
-title: val(c[13]),
-url: val(c[14])
-}
-
-];
-
-
-
-links.forEach(link => {
-
-if(
-link.title &&
-link.url &&
-link.url.startsWith('http')
-){
-
-buttons +=
-
-'<a class="link-btn" ' +
-
-'href="' +
-link.url +
-'" ' +
-
-'target="_blank">' +
-
-link.title +
-
-'</a>';
-
-}
-
-});
-
-
-
-/* =========================
-   動画ボタン
-========================= */
-
-if(
-videoTitle &&
-mediaUrl &&
-mediaUrl.startsWith('http')
-){
-
-buttons +=
-
-'<a class="link-btn" ' +
-
-'href="' +
-mediaUrl +
-'" ' +
-
-'target="_blank">' +
-
-videoTitle +
-
-'</a>';
-
-}
-
-
-
-/* =========================
-   説明文
-========================= */
-
-let fullDetail = detail;
-
-if(videoDetail){
-
-fullDetail +=
-'\n\n' +
-videoDetail;
-
-}
-
-
-
-/* =========================
-   カード完成
-========================= */
-
-return (
-
-'<div class="card">' +
-
-'<div class="city">' +
-displayType +
-'</div>' +
-
-'<div class="title">' +
-title +
-'</div>' +
-
-'<div class="date">' +
-date +
-'</div>' +
-
-mediaHtml +
-
-'<div class="desc">' +
-fullDetail +
-'</div>' +
-
-buttons +
-
-'</div>'
-
-);
-
-}
-
-
-
-/* =========================
-   JSONP
-========================= */
 
 window.google = {
-visualization:{
-Query:{
-setResponse:function(res){
+  visualization:{
+    Query:{
+      setResponse:function(res){
 
-const rows =
-res.table.rows || [];
+        const rows = res.table.rows || [];
 
+        const latest =
+        document.getElementById('latest-area');
 
+        const archive =
+        document.getElementById('archive-area');
 
-const latest =
-document.getElementById(
-'latest-area'
-);
+        latest.innerHTML = '';
+        archive.innerHTML = '';
 
-const archive =
-document.getElementById(
-'archive-area'
-);
+        rows.reverse();
 
+        rows.slice(0,5).forEach(row=>{
+          latest.insertAdjacentHTML(
+            'beforeend',
+            createCard(row.c)
+          );
+        });
 
+        rows.slice(5).forEach(row=>{
+          archive.insertAdjacentHTML(
+            'beforeend',
+            createCard(row.c)
+          );
+        });
 
-latest.innerHTML = '';
-archive.innerHTML = '';
-
-
-
-rows.reverse();
-
-
-
-/* =========================
-   最新5件
-========================= */
-
-rows.slice(0,5).forEach(row => {
-
-latest.insertAdjacentHTML(
-'beforeend',
-createCard(row.c)
-);
-
-});
-
-
-
-/* =========================
-   6件目以降
-========================= */
-
-rows.slice(5).forEach(row => {
-
-archive.insertAdjacentHTML(
-'beforeend',
-createCard(row.c)
-);
-
-});
-
-}
-}
-}
+      }
+    }
+  }
 };
 
-
-
-const s =
-document.createElement('script');
-
+const s = document.createElement('script');
 s.src = JSONP_URL;
-
 document.body.appendChild(s);
-
 </script>
 
 </body>
