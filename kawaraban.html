@@ -59,13 +59,30 @@ body{
 }
 
 .month-title{
+  background:#fff;
+  border-radius:22px;
+  padding:22px;
   font-size:30px;
   font-weight:900;
-  margin:34px 0 18px;
+  margin-top:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
-#latest-area,
-#archive-area{
+.month-btn{
+  width:100%;
+  border:none;
+  background:none;
+  font-size:30px;
+  font-weight:900;
+  text-align:left;
+}
+
+.month-content{
+  display:none;
+  margin-top:18px;
+}
+
+#latest-area{
   display:flex;
   flex-direction:column;
   gap:22px;
@@ -75,6 +92,7 @@ body{
   background:#fff;
   border-radius:28px;
   padding:24px;
+  margin-bottom:22px;
   box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
@@ -377,6 +395,25 @@ return url;
 
 
 
+function toggleMonth(id){
+
+const el =
+document.getElementById(id);
+
+if(el.style.display === 'block'){
+
+el.style.display = 'none';
+
+}else{
+
+el.style.display = 'block';
+
+}
+
+}
+
+
+
 function createCard(c){
 
 const date =
@@ -648,20 +685,44 @@ groups[month].push(row);
 
 
 
-Object.keys(groups).forEach(month => {
+Object.keys(groups).forEach((month,index) => {
+
+const id =
+'month-' + index;
+
+
 
 archive.insertAdjacentHTML(
 'beforeend',
+
 '<div class="month-title">' +
-month +
+
+'<button class="month-btn" onclick="toggleMonth(\'' +
+id +
+'\')">' +
+
+'▶ ' + month +
+
+'</button>' +
+
+'<div class="month-content" id="' +
+id +
+'"></div>' +
+
 '</div>'
+
 );
+
+
+
+const area =
+document.getElementById(id);
 
 
 
 groups[month].forEach(row => {
 
-archive.insertAdjacentHTML(
+area.insertAdjacentHTML(
 'beforeend',
 createCard(row.c)
 );
