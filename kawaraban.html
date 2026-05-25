@@ -58,7 +58,8 @@ font-weight:900;
 margin:26px 0 18px;
 }
 
-#news-area{
+#latest-area,
+#archive-area{
 display:flex;
 flex-direction:column;
 gap:22px;
@@ -147,27 +148,6 @@ border-radius:22px;
 margin-top:16px;
 }
 
-.archive{
-background:#fff;
-border-radius:28px;
-padding:24px;
-margin-top:30px;
-box-shadow:0 8px 24px rgba(0,0,0,.08);
-}
-
-.archive-btn{
-display:block;
-text-decoration:none;
-background:#f4f6f8;
-color:#222;
-font-size:28px;
-font-weight:900;
-padding:22px;
-border-radius:22px;
-margin-bottom:16px;
-text-align:center;
-}
-
 .loading{
 font-size:28px;
 font-weight:900;
@@ -224,11 +204,13 @@ margin-bottom:4px;
 
 </div>
 
+
+
 <div class="section-title">
 最新の記事
 </div>
 
-<div id="news-area">
+<div id="latest-area">
 
 <div class="loading">
 読み込み中...
@@ -236,23 +218,19 @@ margin-bottom:4px;
 
 </div>
 
-<div class="archive">
+
 
 <div class="section-title">
 過去の記事
 </div>
 
-<a class="archive-btn" href="#">
-2026年5月の記事
-</a>
-
-<a class="archive-btn" href="#">
-2026年4月の記事
-</a>
+<div id="archive-area">
 
 </div>
 
 </div>
+
+
 
 <div class="bottom-menu">
 
@@ -277,6 +255,8 @@ margin-bottom:4px;
 </a>
 
 </div>
+
+
 
 <script>
 
@@ -310,7 +290,8 @@ if(!v)return '';
 
 if(v.includes('Date(')){
 
-const n=v.match(/\\d+/g);
+const n =
+v.match(/\\d+/g);
 
 if(n){
 
@@ -360,32 +341,7 @@ return url;
 
 
 
-window.google = {
-visualization:{
-Query:{
-setResponse:function(res){
-
-const rows =
-res.table.rows || [];
-
-const area =
-document.getElementById(
-'news-area'
-);
-
-area.innerHTML = '';
-
-
-
-rows.reverse();
-
-
-
-rows.slice(0,5).forEach(row => {
-
-const c = row.c;
-
-
+function createCard(c){
 
 const date =
 fmtDate(
@@ -409,10 +365,6 @@ val(c[17]);
 let mediaHtml = '';
 
 
-
-/* =====================
-   YouTube
-===================== */
 
 if(
 mediaUrl &&
@@ -441,10 +393,6 @@ youtube(mediaUrl) +
 
 
 
-/* =====================
-   Image
-===================== */
-
 else if(mediaUrl){
 
 mediaHtml =
@@ -462,7 +410,7 @@ mediaUrl +
 
 
 /* =====================
-   Links
+   各市リンク
 ===================== */
 
 let buttons = '';
@@ -505,11 +453,7 @@ bt +
 
 
 
-/* =====================
-   Card
-===================== */
-
-const html =
+return (
 
 '<div class="card">' +
 
@@ -533,13 +477,71 @@ detail +
 
 buttons +
 
-'</div>';
+'</div>'
+
+);
+
+}
 
 
 
-area.insertAdjacentHTML(
+/* =====================
+   JSONP
+===================== */
+
+window.google = {
+visualization:{
+Query:{
+setResponse:function(res){
+
+const rows =
+res.table.rows || [];
+
+const latest =
+document.getElementById(
+'latest-area'
+);
+
+const archive =
+document.getElementById(
+'archive-area'
+);
+
+
+
+latest.innerHTML = '';
+archive.innerHTML = '';
+
+
+
+rows.reverse();
+
+
+
+/* =====================
+   最新5件
+===================== */
+
+rows.slice(0,5).forEach(row => {
+
+latest.insertAdjacentHTML(
 'beforeend',
-html
+createCard(row.c)
+);
+
+});
+
+
+
+/* =====================
+   6件目以降
+===================== */
+
+rows.slice(5).forEach(row => {
+
+archive.insertAdjacentHTML(
+'beforeend',
+createCard(row.c)
 );
 
 });
