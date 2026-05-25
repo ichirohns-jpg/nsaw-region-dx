@@ -645,10 +645,6 @@ rows.reverse();
 
 
 
-/* =========================
-   最新5件
-========================= */
-
 rows.slice(0,5).forEach(row => {
 
 latest.insertAdjacentHTML(
@@ -659,10 +655,6 @@ createCard(row.c)
 });
 
 
-
-/* =========================
-   月別アーカイブ
-========================= */
 
 const groups = {};
 
@@ -701,7 +693,11 @@ archive.insertAdjacentHTML(
 id +
 '\')">' +
 
-'▶ ' + month +
+'▶ ' +
+month +
+'（' +
+groups[month].length +
+'件）' +
 
 '</button>' +
 
