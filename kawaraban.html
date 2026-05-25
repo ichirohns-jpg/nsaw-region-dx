@@ -228,8 +228,6 @@ body{
 
 </div>
 
-
-
 <div class="section-title">
 最新の記事
 </div>
@@ -242,8 +240,6 @@ body{
 
 </div>
 
-
-
 <div class="section-title">
 過去の記事
 </div>
@@ -253,8 +249,6 @@ body{
 </div>
 
 </div>
-
-
 
 <div class="bottom-menu">
 
@@ -280,8 +274,6 @@ body{
 
 </div>
 
-
-
 <script>
 
 const SHEET_ID =
@@ -291,8 +283,6 @@ const JSONP_URL =
 'https://docs.google.com/spreadsheets/d/' +
 SHEET_ID +
 '/gviz/tq?tqx=out:json';
-
-
 
 function val(cell){
 
@@ -305,8 +295,6 @@ if(cell.f !== undefined)return String(cell.f);
 return '';
 
 }
-
-
 
 function fmtDate(v){
 
@@ -331,8 +319,6 @@ n[2]
 return v;
 
 }
-
-
 
 function driveImage(url){
 
@@ -360,8 +346,6 @@ m[1] +
 return url;
 
 }
-
-
 
 function youtube(url){
 
@@ -393,26 +377,31 @@ return url;
 
 }
 
-
-
-function toggleMonth(id){
+function toggleMonth(id,event){
 
 const el =
 document.getElementById(id);
+
+const btn =
+event.target;
 
 if(el.style.display === 'block'){
 
 el.style.display = 'none';
 
+btn.innerHTML =
+btn.innerHTML.replace('▼','▶');
+
 }else{
 
 el.style.display = 'block';
 
-}
+btn.innerHTML =
+btn.innerHTML.replace('▶','▼');
 
 }
 
-
+}
 
 function createCard(c){
 
@@ -440,11 +429,7 @@ val(c[17]);
 const displayType =
 val(c[21]) || '地域情報';
 
-
-
 let mediaHtml = '';
-
-
 
 if(imageUrl){
 
@@ -459,8 +444,6 @@ driveImage(imageUrl) +
 '</div>';
 
 }
-
-
 
 if(
 mediaUrl &&
@@ -485,11 +468,7 @@ youtube(mediaUrl) +
 
 }
 
-
-
 let buttons = '';
-
-
 
 const links = [
 
@@ -520,8 +499,6 @@ url: val(c[14])
 
 ];
 
-
-
 links.forEach(link => {
 
 if(
@@ -544,8 +521,6 @@ link.title +
 
 });
 
-
-
 if(
 videoTitle &&
 mediaUrl &&
@@ -564,8 +539,6 @@ videoTitle +
 
 }
 
-
-
 let fullDetail = detail;
 
 if(videoDetail){
@@ -575,8 +548,6 @@ fullDetail +=
 videoDetail;
 
 }
-
-
 
 return (
 
@@ -608,12 +579,6 @@ buttons +
 
 }
 
-
-
-/* =========================
-   JSONP
-========================= */
-
 window.google = {
 visualization:{
 Query:{
@@ -621,8 +586,6 @@ setResponse:function(res){
 
 const rows =
 res.table.rows || [];
-
-
 
 const latest =
 document.getElementById(
@@ -634,16 +597,10 @@ document.getElementById(
 'archive-area'
 );
 
-
-
 latest.innerHTML = '';
 archive.innerHTML = '';
 
-
-
 rows.reverse();
-
-
 
 rows.slice(0,5).forEach(row => {
 
@@ -654,16 +611,17 @@ createCard(row.c)
 
 });
 
-
-
 const groups = {};
-
-
 
 rows.slice(5).forEach(row => {
 
+const monthRaw =
+val(row.c[22]);
+
 const month =
-val(row.c[22]) || 'その他';
+monthRaw.includes('Date(')
+? '2026/05'
+: (monthRaw || '2026/05');
 
 if(!groups[month]){
 
@@ -675,16 +633,12 @@ groups[month].push(row);
 
 });
 
-
-
 Object.keys(groups)
 .sort((a,b)=>b.localeCompare(a,'ja'))
 .forEach((month,index) => {
 
 const id =
 'month-' + index;
-
-
 
 archive.insertAdjacentHTML(
 'beforeend',
@@ -693,7 +647,7 @@ archive.insertAdjacentHTML(
 
 '<button class="month-btn" onclick="toggleMonth(\'' +
 id +
-'\')">' +
+'\',event)">' +
 
 '▶ ' +
 month +
@@ -711,12 +665,8 @@ id +
 
 );
 
-
-
 const area =
 document.getElementById(id);
-
-
 
 groups[month].forEach(row => {
 
@@ -733,8 +683,6 @@ createCard(row.c)
 }
 }
 };
-
-
 
 const s =
 document.createElement('script');
