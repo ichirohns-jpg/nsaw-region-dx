@@ -3,173 +3,561 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>地域瓦版DX</title>
+
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#eef3f8;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#222}
-.wrap{max-width:760px;margin:0 auto;padding:20px 16px 140px}
-.hero,.card,.archive{background:#fff;border-radius:28px;padding:24px;margin-bottom:22px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.hero-title{font-size:42px;font-weight:900;line-height:1.4}
-.hero-desc,.desc{font-size:24px;line-height:1.8;font-weight:700;color:#444;white-space:pre-wrap}
-.section-title{font-size:34px;font-weight:900;margin:26px 0 18px}
-.city{display:inline-block;background:#4da3ff;color:#fff;font-size:20px;font-weight:900;padding:8px 16px;border-radius:999px;margin-bottom:14px}
-.title{font-size:32px;font-weight:900;line-height:1.6;margin-bottom:12px}
-.date{font-size:20px;font-weight:700;color:#666;margin-bottom:14px}
-.image-scroll{display:flex;overflow-x:auto;gap:14px;margin:18px 0}
-.image-scroll img{width:240px;height:430px;object-fit:cover;border-radius:20px;flex-shrink:0;background:#ddd}
-.video-wrap{margin:18px 0}
-.video-wrap iframe,.video-wrap video{width:100%;border:none;border-radius:20px}
-.link-btn{display:block;text-align:center;text-decoration:none;background:#58c86b;color:#fff;font-size:26px;font-weight:900;padding:22px;border-radius:22px;margin-top:16px}
-.loading{font-size:28px;font-weight:900;text-align:center;padding:50px 20px;color:#666}
-.bottom-menu{position:fixed;left:0;right:0;bottom:0;background:#fff;display:flex;justify-content:space-around;padding:14px 0;box-shadow:0 -4px 14px rgba(0,0,0,.10);z-index:999}
-.bottom-btn{text-decoration:none;color:#222;font-size:16px;font-weight:900;text-align:center;width:25%}
-.bottom-icon{display:block;font-size:28px;margin-bottom:4px}
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+margin:0;
+background:#eef3f8;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Sans",
+"Yu Gothic",
+sans-serif;
+color:#222;
+}
+
+.wrap{
+max-width:760px;
+margin:0 auto;
+padding:20px 16px 140px;
+}
+
+.hero{
+background:#fff;
+border-radius:30px;
+padding:28px;
+margin-bottom:24px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.hero-title{
+font-size:42px;
+font-weight:900;
+margin-bottom:18px;
+}
+
+.hero-desc{
+font-size:24px;
+line-height:1.8;
+font-weight:700;
+color:#555;
+}
+
+.section-title{
+font-size:34px;
+font-weight:900;
+margin:26px 0 18px;
+}
+
+#news-area{
+display:flex;
+flex-direction:column;
+gap:22px;
+}
+
+.card{
+background:#fff;
+border-radius:28px;
+padding:24px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.city{
+display:inline-block;
+background:#4da3ff;
+color:#fff;
+font-size:20px;
+font-weight:900;
+padding:8px 16px;
+border-radius:999px;
+margin-bottom:16px;
+}
+
+.title{
+font-size:32px;
+font-weight:900;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.date{
+font-size:20px;
+font-weight:700;
+color:#666;
+margin-bottom:18px;
+}
+
+.desc{
+font-size:24px;
+line-height:1.9;
+font-weight:700;
+color:#444;
+margin-top:18px;
+white-space:pre-wrap;
+}
+
+.image-scroll{
+display:flex;
+overflow-x:auto;
+gap:14px;
+padding-bottom:10px;
+margin:18px 0;
+}
+
+.image-scroll img{
+width:240px;
+height:430px;
+object-fit:cover;
+border-radius:20px;
+flex-shrink:0;
+background:#ddd;
+}
+
+.video-wrap{
+margin:18px 0;
+}
+
+.video-wrap iframe{
+width:100%;
+height:220px;
+border:none;
+border-radius:20px;
+}
+
+.link-btn{
+display:block;
+width:100%;
+text-align:center;
+text-decoration:none;
+background:#58c86b;
+color:#fff;
+font-size:26px;
+font-weight:900;
+padding:22px;
+border-radius:22px;
+margin-top:16px;
+}
+
+.archive{
+background:#fff;
+border-radius:28px;
+padding:24px;
+margin-top:30px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.archive-btn{
+display:block;
+text-decoration:none;
+background:#f4f6f8;
+color:#222;
+font-size:28px;
+font-weight:900;
+padding:22px;
+border-radius:22px;
+margin-bottom:16px;
+text-align:center;
+}
+
+.loading{
+font-size:28px;
+font-weight:900;
+text-align:center;
+padding:50px 20px;
+color:#666;
+}
+
+.bottom-menu{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+box-shadow:0 -4px 14px rgba(0,0,0,.10);
+z-index:999;
+}
+
+.bottom-btn{
+text-decoration:none;
+color:#222;
+font-size:16px;
+font-weight:900;
+text-align:center;
+width:25%;
+}
+
+.bottom-icon{
+display:block;
+font-size:28px;
+margin-bottom:4px;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="wrap">
-  <div class="hero">
-    <div class="hero-title">📰 地域瓦版DX</div>
-    <div class="hero-desc">志木・新座・朝霞・和光の暮らし情報・地域ニュースをまとめています。</div>
-  </div>
 
-  <div class="section-title">最新の記事</div>
-  <div id="news-area"><div class="loading">読み込み中...</div></div>
+<div class="hero">
 
-  <div class="archive">
-    <div class="section-title">過去の記事</div>
-    <a class="link-btn" href="#">2026年5月の記事</a>
-    <a class="link-btn" href="#">2026年4月の記事</a>
-  </div>
+<div class="hero-title">
+📰 地域瓦版DX
+</div>
+
+<div class="hero-desc">
+志木・新座・朝霞・和光の
+暮らし情報・地域ニュース
+</div>
+
+</div>
+
+<div class="section-title">
+最新の記事
+</div>
+
+<div id="news-area">
+
+<div class="loading">
+読み込み中...
+</div>
+
+</div>
+
+<div class="archive">
+
+<div class="section-title">
+過去の記事
+</div>
+
+<a class="archive-btn" href="#">
+2026年5月の記事
+</a>
+
+<a class="archive-btn" href="#">
+2026年4月の記事
+</a>
+
+</div>
+
 </div>
 
 <div class="bottom-menu">
-  <a class="bottom-btn" href="./"><span class="bottom-icon">🏠</span>ホーム</a>
-  <a class="bottom-btn" href="./profile.html"><span class="bottom-icon">⚙️</span>地域</a>
-  <a class="bottom-btn" href="./map.html"><span class="bottom-icon">🗺️</span>地図</a>
-  <a class="bottom-btn" href="./consult.html"><span class="bottom-icon">🤖</span>相談</a>
+
+<a class="bottom-btn" href="./">
+<span class="bottom-icon">🏠</span>
+ホーム
+</a>
+
+<a class="bottom-btn" href="./profile.html">
+<span class="bottom-icon">⚙️</span>
+地域
+</a>
+
+<a class="bottom-btn" href="./map.html">
+<span class="bottom-icon">🗺️</span>
+地図
+</a>
+
+<a class="bottom-btn" href="./consult.html">
+<span class="bottom-icon">🤖</span>
+相談
+</a>
+
 </div>
 
 <script>
-const SHEET_ID='13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
-const JSONP_URL='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json';
+
+const SHEET_ID =
+'13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
+
+const JSONP_URL =
+'https://docs.google.com/spreadsheets/d/' +
+SHEET_ID +
+'/gviz/tq?tqx=out:json';
+
+
 
 function val(cell){
-  if(!cell)return '';
-  if(cell.v!==undefined)return String(cell.v);
-  if(cell.f!==undefined)return String(cell.f);
-  return '';
+
+if(!cell)return '';
+
+if(cell.v !== undefined)return String(cell.v);
+
+if(cell.f !== undefined)return String(cell.f);
+
+return '';
+
 }
+
+
 
 function fmtDate(v){
-  if(!v)return '';
-  if(v.includes('Date(')){
-    const n=v.match(/\d+/g);
-    if(n)return n[0]+'/'+(Number(n[1])+1)+'/'+n[2];
-  }
-  return v;
+
+if(!v)return '';
+
+if(v.includes('Date(')){
+
+const n=v.match(/\\d+/g);
+
+if(n){
+
+return (
+n[0] + '/' +
+(Number(n[1])+1) + '/' +
+n[2]
+);
+
 }
 
-function urls(text){
-  if(!text)return [];
-  return text.match(/https?:\/\/[^\s　]+/g)||[];
 }
+
+return v;
+
+}
+
+
 
 function youtube(url){
-  if(url.includes('watch?v='))return url.replace('watch?v=','embed/');
-  if(url.includes('youtu.be/')){
-    const id=url.split('youtu.be/')[1].split(/[?&]/)[0];
-    return 'https://www.youtube.com/embed/'+id;
-  }
-  return url;
+
+if(url.includes('watch?v=')){
+
+return url.replace(
+'watch?v=',
+'embed/'
+);
+
 }
 
-function driveId(url){
-  const m=url.match(/\/d\/([^/]+)/)||url.match(/id=([^&]+)/);
-  return m?m[1]:'';
+if(url.includes('youtu.be/')){
+
+const id =
+url.split('youtu.be/')[1]
+.split('?')[0];
+
+return (
+'https://www.youtube.com/embed/' +
+id
+);
+
 }
 
-function imageSrc(url){
-  if(url.includes('drive.google.com')){
-    const id=driveId(url);
-    if(id)return 'https://drive.google.com/thumbnail?id='+id+'&sz=w1200';
-  }
-  return url;
+return url;
+
 }
 
-function isYouTube(u){return u.includes('youtube.com')||u.includes('youtu.be')}
-function isVideo(u){return u.match(/\.(mp4|mov|webm)(\?|$)/i)}
-function isImage(u){return u.match(/\.(jpg|jpeg|png|webp)(\?|$)/i)||u.includes('drive.google.com')||u.includes('googleusercontent')}
 
-window.google={visualization:{Query:{setResponse:function(res){
-  const cols=res.table.cols.map(c=>c.label||'');
-  const rows=res.table.rows||[];
-  const area=document.getElementById('news-area');
-  area.innerHTML='';
 
-  function col(names){
-    for(const name of names){
-      const i=cols.findIndex(h=>h===name);
-      if(i>=0)return i;
-    }
-    return -1;
-  }
+window.google = {
+visualization:{
+Query:{
+setResponse:function(res){
 
-  const iDate=col(['日付','投稿日','公開日']);
-  const iCity=col(['市','市名','表示タイプ','分類']);
-  const iTitle=col(['タイトル','情報タイトル','動画タイトル']);
-  const iDetail=col(['詳細','内容','説明','動画詳細','画像下の説明文']);
-  const iMedia=col(['メディアURL','画像URL','動画URL','埋め込みメディアURL']);
+const rows =
+res.table.rows || [];
 
-  rows.reverse().slice(0,5).forEach(row=>{
-    const c=row.c;
-    const date=fmtDate(val(c[iDate]));
-    const city=val(c[iCity])||'地域情報';
-    const title=val(c[iTitle])||'無題';
-    const detail=val(c[iDetail]);
-    const mediaText=val(c[iMedia]);
+const area =
+document.getElementById(
+'news-area'
+);
 
-    let mediaHtml='';
-    urls(mediaText).slice(0,5).forEach(u=>{
-      if(isYouTube(u)){
-        mediaHtml+='<div class="video-wrap"><iframe src="'+youtube(u)+'" height="220" allowfullscreen></iframe></div>';
-      }else if(isVideo(u)){
-        mediaHtml+='<div class="video-wrap"><video controls><source src="'+u+'"></video></div>';
-      }else if(isImage(u)){
-        mediaHtml+='<div class="image-scroll"><img src="'+imageSrc(u)+'"></div>';
-      }
-    });
+area.innerHTML = '';
 
-    let buttons='';
-    for(let n=1;n<=6;n++){
-      const ti=col(['情報'+n+'タイトル','リンク'+n+'タイトル','ボタン'+n+'タイトル']);
-      const ui=col(['情報'+n+'URL','リンク'+n+'URL','ボタン'+n+'URL']);
-      if(ti>=0 && ui>=0){
-        const bt=val(c[ti]);
-        const bu=val(c[ui]);
-        if(bt && bu && bu.startsWith('http')){
-          buttons+='<a class="link-btn" href="'+bu+'" target="_blank">'+bt+'</a>';
-        }
-      }
-    }
 
-    area.insertAdjacentHTML('beforeend',
-      '<div class="card">'+
-      '<div class="city">'+city+'</div>'+
-      '<div class="title">'+title+'</div>'+
-      '<div class="date">'+date+'</div>'+
-      mediaHtml+
-      '<div class="desc">'+detail+'</div>'+
-      buttons+
-      '</div>'
-    );
-  });
-}}}};
 
-const s=document.createElement('script');
-s.src=JSONP_URL;
+rows.reverse();
+
+
+
+rows.slice(0,5).forEach(row => {
+
+const c = row.c;
+
+
+
+const date =
+fmtDate(
+val(c[0])
+);
+
+const city =
+val(c[21]);
+
+const title =
+val(c[2]);
+
+const detail =
+val(c[4]);
+
+const mediaUrl =
+val(c[17]);
+
+
+
+let mediaHtml = '';
+
+
+
+/* =====================
+   YouTube
+===================== */
+
+if(
+mediaUrl &&
+(
+mediaUrl.includes('youtube.com')
+||
+mediaUrl.includes('youtu.be')
+)
+){
+
+mediaHtml =
+
+'<div class="video-wrap">' +
+
+'<iframe ' +
+'src="' +
+youtube(mediaUrl) +
+'" ' +
+'allowfullscreen>' +
+
+'</iframe>' +
+
+'</div>';
+
+}
+
+
+
+/* =====================
+   Image
+===================== */
+
+else if(mediaUrl){
+
+mediaHtml =
+
+'<div class="image-scroll">' +
+
+'<img src="' +
+mediaUrl +
+'">' +
+
+'</div>';
+
+}
+
+
+
+/* =====================
+   Links
+===================== */
+
+let buttons = '';
+
+
+
+for(let i=5;i<=15;i+=2){
+
+const bt =
+val(c[i]);
+
+const bu =
+val(c[i+1]);
+
+
+
+if(
+bt &&
+bu &&
+bu.startsWith('http')
+){
+
+buttons +=
+
+'<a class="link-btn" ' +
+
+'href="' +
+bu +
+'" ' +
+
+'target="_blank">' +
+
+bt +
+
+'</a>';
+
+}
+
+}
+
+
+
+/* =====================
+   Card
+===================== */
+
+const html =
+
+'<div class="card">' +
+
+'<div class="city">' +
+city +
+'</div>' +
+
+'<div class="title">' +
+title +
+'</div>' +
+
+'<div class="date">' +
+date +
+'</div>' +
+
+mediaHtml +
+
+'<div class="desc">' +
+detail +
+'</div>' +
+
+buttons +
+
+'</div>';
+
+
+
+area.insertAdjacentHTML(
+'beforeend',
+html
+);
+
+});
+
+}
+}
+}
+};
+
+
+
+const s =
+document.createElement('script');
+
+s.src = JSONP_URL;
+
 document.body.appendChild(s);
+
 </script>
 
 </body>
