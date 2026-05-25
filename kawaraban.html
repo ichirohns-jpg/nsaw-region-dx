@@ -2,210 +2,257 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>地域瓦版DX</title>
+<title>NSAW 地域瓦版</title>
+
+<meta name="description" content="志木・新座・朝霞・和光の地域情報を見やすく届ける地域テレビ型DX">
+
+<meta property="og:title" content="NSAW 地域瓦版">
+<meta property="og:description" content="志木・新座・朝霞・和光の地域情報">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ichirohns-jpg.github.io/nsaw-kurashi-01/ogp.jpg">
+<meta property="og:url" content="https://ichirohns-jpg.github.io/nsaw-kurashi-01/kawaraban.html">
+
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
 
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 body{
   margin:0;
-  background:#eef3f8;
+  background:#e7edf3;
   font-family:
-  -apple-system,
-  BlinkMacSystemFont,
   "Hiragino Sans",
   "Yu Gothic",
   sans-serif;
-  color:#222;
+  color:#1b2b39;
 }
 
-.wrap{
-  max-width:760px;
-  margin:0 auto;
-  padding:20px 16px 140px;
+/* 上部 */
+
+.top-wrap{
+  padding:14px;
 }
 
-.hero{
-  background:#fff;
-  border-radius:30px;
-  padding:28px;
-  margin-bottom:24px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
+.top-box{
+  background:
+  linear-gradient(135deg,#0f4c81,#16385b);
+  border-radius:26px;
+  padding:24px;
+  color:#fff;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);
 }
 
-.hero-title{
+.main-title{
   font-size:42px;
   font-weight:900;
-  margin-bottom:18px;
+  line-height:1.3;
 }
 
-.hero-desc{
-  font-size:24px;
+.sub-title{
+  margin-top:10px;
+  font-size:21px;
   line-height:1.8;
-  font-weight:700;
-  color:#555;
+  opacity:.95;
 }
 
-.section-title{
-  font-size:34px;
-  font-weight:900;
-  margin:26px 0 18px;
-}
+/* 市ボタン */
 
-.month-title{
-  background:#fff;
-  border-radius:22px;
-  padding:22px;
-  font-size:30px;
-  font-weight:900;
-  margin-top:20px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
-}
-
-.month-btn{
-  width:100%;
-  border:none;
-  background:none;
-  font-size:30px;
-  font-weight:900;
-  text-align:left;
-}
-
-.month-content{
-  display:none;
-  margin-top:18px;
-}
-
-#latest-area{
+.city-row{
   display:flex;
-  flex-direction:column;
-  gap:22px;
+  gap:10px;
+  margin-top:22px;
+  flex-wrap:wrap;
+}
+
+.city-btn{
+  flex:1;
+  min-width:120px;
+  text-decoration:none;
+  color:#fff;
+  font-size:24px;
+  font-weight:900;
+  text-align:center;
+  padding:18px 10px;
+  border-radius:18px;
+}
+
+.shiki{
+  background:#1976d2;
+}
+
+.niiza{
+  background:#2e7d32;
+}
+
+.asaka{
+  background:#ef6c00;
+}
+
+.wako{
+  background:#c62828;
+}
+
+/* 記事 */
+
+.container{
+  padding:0 12px 40px;
 }
 
 .card{
   background:#fff;
-  border-radius:28px;
-  padding:24px;
-  margin-bottom:22px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  border-radius:26px;
+  margin-bottom:24px;
+  overflow:hidden;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
 }
 
-.city{
-  display:inline-block;
-  background:#4da3ff;
-  color:#fff;
-  font-size:20px;
-  font-weight:900;
-  padding:8px 16px;
-  border-radius:999px;
-  margin-bottom:16px;
+.card-image{
+  width:100%;
+  display:block;
 }
 
-.title{
-  font-size:32px;
-  font-weight:900;
-  line-height:1.6;
-  margin-bottom:16px;
+.card-body{
+  padding:20px;
 }
 
 .date{
-  font-size:20px;
+  font-size:22px;
   font-weight:700;
-  color:#666;
+  color:#607080;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:35px;
+  line-height:1.5;
+  font-weight:900;
   margin-bottom:18px;
+  color:#17324d;
 }
 
 .desc{
-  font-size:24px;
+  font-size:28px;
   line-height:1.9;
-  font-weight:700;
-  color:#444;
-  margin-top:18px;
-  white-space:pre-wrap;
+  color:#23313f;
 }
 
-.image-scroll{
+/* 情報リンク */
+
+.links{
+  margin-top:20px;
   display:flex;
-  overflow-x:auto;
-  gap:14px;
-  padding-bottom:10px;
-  margin:18px 0;
-}
-
-.image-scroll img{
-  width:240px;
-  height:430px;
-  object-fit:cover;
-  border-radius:20px;
-  flex-shrink:0;
-  background:#ddd;
-}
-
-.video-wrap{
-  margin:18px 0;
-}
-
-.video-wrap iframe{
-  width:100%;
-  height:220px;
-  border:none;
-  border-radius:20px;
+  flex-direction:column;
+  gap:12px;
 }
 
 .link-btn{
   display:block;
-  width:100%;
-  text-align:center;
+  background:#f3f7fb;
+  border:2px solid #d6e0ea;
+  border-radius:18px;
+  padding:18px;
   text-decoration:none;
-  background:#58c86b;
-  color:#fff;
-  font-size:26px;
-  font-weight:900;
-  padding:22px;
+  color:#17324d;
+  font-size:24px;
+  font-weight:800;
+}
+
+/* 動画 */
+
+.video-wrap{
+  margin-top:20px;
+  background:#000;
   border-radius:22px;
-  margin-top:16px;
+  padding:14px;
+  border:4px solid #d32f2f;
 }
 
-.loading{
-  font-size:28px;
+.video-head{
+  color:#fff;
+  font-size:25px;
   font-weight:900;
-  text-align:center;
-  padding:50px 20px;
-  color:#666;
+  margin-bottom:12px;
 }
 
-.bottom-menu{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
+.video-title{
+  color:#fff;
+  font-size:22px;
+  line-height:1.7;
+  margin-bottom:12px;
+}
+
+.video-wrap iframe,
+.video-wrap video{
+  width:100%;
+  border-radius:14px;
+}
+
+/* 月別 */
+
+.month-section{
+  margin-top:30px;
+}
+
+.month-title{
+  background:#17324d;
+  color:#fff;
+  padding:18px;
+  border-radius:20px;
+  font-size:30px;
+  font-weight:900;
+}
+
+.month-count{
+  color:#ffd54f;
+}
+
+.month-content{
+  margin-top:12px;
+}
+
+/* ボタン */
+
+.toggle-btn{
+  width:100%;
+  border:none;
   background:#fff;
-  display:flex;
-  justify-content:space-around;
-  padding:14px 0;
-  box-shadow:0 -4px 14px rgba(0,0,0,.10);
-  z-index:999;
-}
-
-.bottom-btn{
-  text-decoration:none;
-  color:#222;
-  font-size:16px;
+  border-radius:18px;
+  padding:18px;
+  margin-top:10px;
+  font-size:24px;
   font-weight:900;
-  text-align:center;
-  width:25%;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
-.bottom-icon{
-  display:block;
-  font-size:28px;
-  margin-bottom:4px;
+/* スマホ */
+
+@media(max-width:768px){
+
+.main-title{
+  font-size:34px;
+}
+
+.sub-title{
+  font-size:18px;
+}
+
+.city-btn{
+  font-size:22px;
+}
+
+.title{
+  font-size:30px;
+}
+
+.desc{
+  font-size:25px;
+}
+
 }
 
 </style>
@@ -213,64 +260,47 @@ body{
 
 <body>
 
-<div class="wrap">
+<div class="top-wrap">
 
-<div class="hero">
+  <div class="top-box">
 
-<div class="hero-title">
-📰 地域瓦版DX
+    <div class="main-title">
+      NSAW 地域瓦版
+    </div>
+
+    <div class="sub-title">
+      志木・新座・朝霞・和光の地域情報を、
+      高齢者にも見やすく届ける
+      地域テレビ型DX
+    </div>
+
+    <div class="city-row">
+
+      <a class="city-btn shiki" href="#">
+        志木市
+      </a>
+
+      <a class="city-btn niiza" href="#">
+        新座市
+      </a>
+
+      <a class="city-btn asaka" href="#">
+        朝霞市
+      </a>
+
+      <a class="city-btn wako" href="#">
+        和光市
+      </a>
+
+    </div>
+
+  </div>
+
 </div>
 
-<div class="hero-desc">
-志木・新座・朝霞・和光の<br>
-暮らし情報・地域ニュース
-</div>
+<div class="container" id="app">
 
-</div>
-
-<div class="section-title">
-最新の記事
-</div>
-
-<div id="latest-area">
-
-<div class="loading">
 読み込み中...
-</div>
-
-</div>
-
-<div class="section-title">
-過去の記事
-</div>
-
-<div id="archive-area">
-
-</div>
-
-</div>
-
-<div class="bottom-menu">
-
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./profile.html">
-<span class="bottom-icon">⚙️</span>
-地域
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺️</span>
-地図
-</a>
-
-<a class="bottom-btn" href="./consult.html">
-<span class="bottom-icon">🤖</span>
-相談
-</a>
 
 </div>
 
@@ -279,417 +309,293 @@ body{
 const SHEET_ID =
 '13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
 
-const JSONP_URL =
+const URL =
 'https://docs.google.com/spreadsheets/d/' +
 SHEET_ID +
 '/gviz/tq?tqx=out:json';
 
-function val(cell){
+function loadSheet(){
 
-if(!cell)return '';
+  const script =
+  document.createElement('script');
 
-if(cell.v !== undefined)return String(cell.v);
+  script.src = URL;
 
-if(cell.f !== undefined)return String(cell.f);
-
-return '';
-
-}
-
-function fmtDate(v){
-
-if(!v)return '';
-
-if(v.includes('Date(')){
-
-const n = v.match(/\d+/g);
-
-if(n){
-
-return (
-n[0] + '/' +
-(Number(n[1])+1) + '/' +
-n[2]
-);
-
-}
-
-}
-
-return v;
-
-}
-
-function driveImage(url){
-
-if(!url)return '';
-
-if(url.includes('drive.google.com')){
-
-const m =
-url.match(/\/d\/([^/]+)/)
-||
-url.match(/id=([^&]+)/);
-
-if(m && m[1]){
-
-return (
-'https://drive.google.com/thumbnail?id=' +
-m[1] +
-'&sz=w1200'
-);
-
-}
-
-}
-
-return url;
-
-}
-
-function youtube(url){
-
-if(!url)return '';
-
-if(url.includes('watch?v=')){
-
-return url.replace(
-'watch?v=',
-'embed/'
-);
-
-}
-
-if(url.includes('youtu.be/')){
-
-const id =
-url.split('youtu.be/')[1]
-.split('?')[0];
-
-return (
-'https://www.youtube.com/embed/' +
-id
-);
-
-}
-
-return url;
-
-}
-
-function toggleMonth(id,event){
-
-const el =
-document.getElementById(id);
-
-const btn =
-event.target;
-
-if(el.style.display === 'block'){
-
-el.style.display = 'none';
-
-btn.innerHTML =
-btn.innerHTML.replace('▼','▶');
-
-}else{
-
-el.style.display = 'block';
-
-btn.innerHTML =
-btn.innerHTML.replace('▶','▼');
-
-}
-
-}
-
-function createCard(c){
-
-const date =
-fmtDate(val(c[0]));
-
-const title =
-val(c[2]);
-
-const imageUrl =
-val(c[3]);
-
-const detail =
-val(c[4]);
-
-const videoTitle =
-val(c[15]);
-
-const videoDetail =
-val(c[16]);
-
-const mediaUrl =
-val(c[17]);
-
-const displayType =
-val(c[21]) || '地域情報';
-
-let mediaHtml = '';
-
-if(imageUrl){
-
-mediaHtml +=
-
-'<div class="image-scroll">' +
-
-'<img src="' +
-driveImage(imageUrl) +
-'">' +
-
-'</div>';
-
-}
-
-if(
-mediaUrl &&
-(
-mediaUrl.includes('youtube.com')
-||
-mediaUrl.includes('youtu.be')
-)
-){
-
-mediaHtml +=
-
-'<div class="video-wrap">' +
-
-'<iframe src="' +
-youtube(mediaUrl) +
-'" allowfullscreen>' +
-
-'</iframe>' +
-
-'</div>';
-
-}
-
-let buttons = '';
-
-const links = [
-
-{
-title: val(c[5]),
-url: val(c[6])
-},
-
-{
-title: val(c[7]),
-url: val(c[8])
-},
-
-{
-title: val(c[9]),
-url: val(c[10])
-},
-
-{
-title: val(c[11]),
-url: val(c[12])
-},
-
-{
-title: val(c[13]),
-url: val(c[14])
-}
-
-];
-
-links.forEach(link => {
-
-if(
-link.title &&
-link.url &&
-link.url.startsWith('http')
-){
-
-buttons +=
-
-'<a class="link-btn" href="' +
-link.url +
-'" target="_blank">' +
-
-link.title +
-
-'</a>';
-
-}
-
-});
-
-if(
-videoTitle &&
-mediaUrl &&
-mediaUrl.startsWith('http')
-){
-
-buttons +=
-
-'<a class="link-btn" href="' +
-mediaUrl +
-'" target="_blank">' +
-
-videoTitle +
-
-'</a>';
-
-}
-
-let fullDetail = detail;
-
-if(videoDetail){
-
-fullDetail +=
-'\n\n' +
-videoDetail;
-
-}
-
-return (
-
-'<div class="card">' +
-
-'<div class="city">' +
-displayType +
-'</div>' +
-
-'<div class="title">' +
-title +
-'</div>' +
-
-'<div class="date">' +
-date +
-'</div>' +
-
-mediaHtml +
-
-'<div class="desc">' +
-fullDetail +
-'</div>' +
-
-buttons +
-
-'</div>'
-
-);
+  document.body.appendChild(script);
 
 }
 
 window.google = {
-visualization:{
-Query:{
-setResponse:function(res){
+  visualization:{
+    Query:{
+      setResponse:function(res){
 
-const rows =
-res.table.rows || [];
+        renderData(res);
 
-const latest =
-document.getElementById(
-'latest-area'
-);
-
-const archive =
-document.getElementById(
-'archive-area'
-);
-
-latest.innerHTML = '';
-archive.innerHTML = '';
-
-rows.reverse();
-
-rows.slice(0,5).forEach(row => {
-
-latest.insertAdjacentHTML(
-'beforeend',
-createCard(row.c)
-);
-
-});
-
-const groups = {};
-
-rows.slice(5).forEach(row => {
-
-const monthRaw =
-val(row.c[22]);
-
-const month =
-monthRaw.includes('Date(')
-? '2026/05'
-: (monthRaw || '2026/05');
-
-if(!groups[month]){
-
-groups[month] = [];
-
-}
-
-groups[month].push(row);
-
-});
-
-Object.keys(groups)
-.sort((a,b)=>b.localeCompare(a,'ja'))
-.forEach((month,index) => {
-
-const id =
-'month-' + index;
-
-archive.insertAdjacentHTML(
-'beforeend',
-
-'<div class="month-title">' +
-
-'<button class="month-btn" onclick="toggleMonth(\'' +
-id +
-'\',event)">' +
-
-'▶ ' +
-month +
-'（' +
-groups[month].length +
-'件）' +
-
-'</button>' +
-
-'<div class="month-content" id="' +
-id +
-'"></div>' +
-
-'</div>'
-
-);
-
-const area =
-document.getElementById(id);
-
-groups[month].forEach(row => {
-
-area.insertAdjacentHTML(
-'beforeend',
-createCard(row.c)
-);
-
-});
-
-});
-
-}
-}
-}
+      }
+    }
+  }
 };
 
-const s =
-document.createElement('script');
+function getCell(row,index){
 
-s.src = JSONP_URL;
+  if(
+    !row.c[index]
+  ) return '';
 
-document.body.appendChild(s);
+  return row.c[index].f ||
+         row.c[index].v ||
+         '';
+
+}
+
+function renderData(res){
+
+  const rows =
+  res.table.rows;
+
+  const app =
+  document.getElementById('app');
+
+  app.innerHTML = '';
+
+  const latest =
+  rows.slice(0,5);
+
+  latest.forEach(row=>{
+
+    app.innerHTML +=
+    buildCard(row);
+
+  });
+
+  const months = {};
+
+  rows.slice(5).forEach(row=>{
+
+    const month =
+    getCell(row,22);
+
+    if(!months[month]){
+      months[month] = [];
+    }
+
+    months[month].push(row);
+
+  });
+
+  Object.keys(months).forEach(month=>{
+
+    const section =
+    document.createElement('div');
+
+    section.className =
+    'month-section';
+
+    const btn =
+    document.createElement('button');
+
+    btn.className =
+    'toggle-btn';
+
+    btn.innerHTML =
+    month +
+    ' の記事 (' +
+    months[month].length +
+    '件)';
+
+    const content =
+    document.createElement('div');
+
+    content.className =
+    'month-content';
+
+    content.style.display =
+    'none';
+
+    months[month].forEach(row=>{
+
+      content.innerHTML +=
+      buildCard(row);
+
+    });
+
+    btn.onclick = ()=>{
+
+      content.style.display =
+      content.style.display ===
+      'none'
+      ? 'block'
+      : 'none';
+
+    };
+
+    section.appendChild(btn);
+
+    section.appendChild(content);
+
+    app.appendChild(section);
+
+  });
+
+}
+
+function buildCard(row){
+
+  const date =
+  getCell(row,0);
+
+  const title =
+  getCell(row,2);
+
+  const image =
+  getCell(row,3);
+
+  const desc =
+  getCell(row,4);
+
+  const media =
+  getCell(row,17);
+
+  const videoTitle =
+  getCell(row,15);
+
+  let html =
+  '<div class="card">';
+
+  if(image){
+
+    html +=
+    '<img class="card-image" src="' +
+    image +
+    '">';
+
+  }
+
+  html +=
+  '<div class="card-body">';
+
+  html +=
+  '<div class="date">' +
+  date +
+  '</div>';
+
+  html +=
+  '<div class="title">' +
+  title +
+  '</div>';
+
+  html +=
+  '<div class="desc">' +
+  desc +
+  '</div>';
+
+  html +=
+  '<div class="links">';
+
+  const linkIndexes = [
+    [5,6],
+    [7,8],
+    [9,10],
+    [11,12],
+    [13,14]
+  ];
+
+  linkIndexes.forEach(pair=>{
+
+    const t =
+    getCell(row,pair[0]);
+
+    const u =
+    getCell(row,pair[1]);
+
+    if(t && u){
+
+      html +=
+      '<a class="link-btn" target="_blank" href="' +
+      u +
+      '">' +
+      t +
+      '</a>';
+
+    }
+
+  });
+
+  html +=
+  '</div>';
+
+  if(media){
+
+    let embed = '';
+
+    if(
+      media.includes('youtube.com') ||
+      media.includes('youtu.be')
+    ){
+
+      let id = '';
+
+      if(media.includes('watch?v=')){
+
+        id =
+        media.split('watch?v=')[1]
+        .split('&')[0];
+
+      }else if(
+        media.includes('youtu.be/')
+      ){
+
+        id =
+        media.split('youtu.be/')[1]
+        .split('?')[0];
+
+      }
+
+      embed =
+      '<iframe height="315" src="https://www.youtube.com/embed/' +
+      id +
+      '" frameborder="0" allowfullscreen></iframe>';
+
+    }else{
+
+      embed =
+      '<video controls src="' +
+      media +
+      '"></video>';
+
+    }
+
+    html +=
+    '<div class="video-wrap">';
+
+    html +=
+    '<div class="video-head">▶ 地域テレビ</div>';
+
+    html +=
+    '<div class="video-title">' +
+    videoTitle +
+    '</div>';
+
+    html +=
+    embed;
+
+    html +=
+    '</div>';
+
+  }
+
+  html +=
+  '</div>';
+
+  html +=
+  '</div>';
+
+  return html;
+
+}
+
+loadSheet();
 
 </script>
 
