@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>地域瓦版DX</title>
 
@@ -39,14 +36,12 @@ background:#fff;
 border-radius:30px;
 padding:28px;
 margin-bottom:24px;
-box-shadow:
-0 8px 24px rgba(0,0,0,.08);
+box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
 .hero-title{
 font-size:42px;
 font-weight:900;
-line-height:1.4;
 margin-bottom:18px;
 }
 
@@ -73,8 +68,7 @@ gap:22px;
 background:#fff;
 border-radius:28px;
 padding:24px;
-box-shadow:
-0 8px 24px rgba(0,0,0,.08);
+box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
 .city{
@@ -117,7 +111,6 @@ overflow-x:auto;
 gap:14px;
 padding-bottom:10px;
 margin:18px 0;
-scroll-snap-type:x mandatory;
 }
 
 .image-scroll img{
@@ -126,7 +119,6 @@ height:430px;
 object-fit:cover;
 border-radius:20px;
 flex-shrink:0;
-scroll-snap-align:start;
 background:#ddd;
 }
 
@@ -134,9 +126,9 @@ background:#ddd;
 margin:18px 0;
 }
 
-.video-wrap iframe{
+.video-wrap iframe,
+.video-wrap video{
 width:100%;
-height:220px;
 border:none;
 border-radius:20px;
 }
@@ -155,28 +147,6 @@ border-radius:22px;
 margin-top:16px;
 }
 
-.archive{
-background:#fff;
-border-radius:28px;
-padding:24px;
-margin-top:30px;
-box-shadow:
-0 8px 24px rgba(0,0,0,.08);
-}
-
-.archive-btn{
-display:block;
-text-decoration:none;
-background:#f4f6f8;
-color:#222;
-font-size:28px;
-font-weight:900;
-padding:22px;
-border-radius:22px;
-margin-bottom:16px;
-text-align:center;
-}
-
 .loading{
 font-size:28px;
 font-weight:900;
@@ -185,37 +155,7 @@ padding:50px 20px;
 color:#666;
 }
 
-.bottom-menu{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-display:flex;
-justify-content:space-around;
-padding:14px 0;
-box-shadow:
-0 -4px 14px rgba(0,0,0,.10);
-z-index:999;
-}
-
-.bottom-btn{
-text-decoration:none;
-color:#222;
-font-size:16px;
-font-weight:900;
-text-align:center;
-width:25%;
-}
-
-.bottom-icon{
-display:block;
-font-size:28px;
-margin-bottom:4px;
-}
-
 </style>
-
 </head>
 
 <body>
@@ -230,19 +170,14 @@ margin-bottom:4px;
 
 <div class="hero-desc">
 志木・新座・朝霞・和光の
-暮らし情報・回覧板・地域ニュースを
-まとめています。
+暮らし情報・地域ニュース
 </div>
 
 </div>
-
-
 
 <div class="section-title">
 最新の記事
 </div>
-
-
 
 <div id="news-area">
 
@@ -252,64 +187,12 @@ margin-bottom:4px;
 
 </div>
 
-
-
-<div class="archive">
-
-<div class="section-title">
-過去の記事
 </div>
-
-<a class="archive-btn" href="#">
-2026年5月の記事
-</a>
-
-<a class="archive-btn" href="#">
-2026年4月の記事
-</a>
-
-<a class="archive-btn" href="#">
-2026年3月の記事
-</a>
-
-</div>
-
-</div>
-
-
-
-<div class="bottom-menu">
-
-<a class="bottom-btn" href="./">
-<span class="bottom-icon">🏠</span>
-ホーム
-</a>
-
-<a class="bottom-btn" href="./profile.html">
-<span class="bottom-icon">⚙️</span>
-地域
-</a>
-
-<a class="bottom-btn" href="./map.html">
-<span class="bottom-icon">🗺️</span>
-地図
-</a>
-
-<a class="bottom-btn" href="./consult.html">
-<span class="bottom-icon">🤖</span>
-相談
-</a>
-
-</div>
-
-
 
 <script>
 
 const SHEET_ID =
 '13qavSy8Thod2S_UWtHf0C7s-IDVcpYYEMvRNPHpabjY';
-
-
 
 const JSONP_URL =
 'https://docs.google.com/spreadsheets/d/' +
@@ -322,9 +205,9 @@ function getCell(cell){
 
 if(!cell)return '';
 
-if(cell.v !== undefined)return cell.v;
+if(cell.v !== undefined)return String(cell.v);
 
-if(cell.f !== undefined)return cell.f;
+if(cell.f !== undefined)return String(cell.f);
 
 return '';
 
@@ -332,9 +215,18 @@ return '';
 
 
 
-/* =========================
-   YouTube判定
-========================= */
+function extractUrls(text){
+
+if(!text)return [];
+
+const matches =
+text.match(/https?:\/\/[^\s]+/g);
+
+return matches || [];
+
+}
+
+
 
 function isYoutube(url){
 
@@ -348,10 +240,6 @@ url.includes('youtu.be')
 
 
 
-/* =========================
-   画像判定
-========================= */
-
 function isImage(url){
 
 return (
@@ -363,6 +251,8 @@ url.includes('.png')
 ||
 url.includes('.webp')
 ||
+url.includes('googleusercontent')
+||
 url.includes('drive.google.com')
 );
 
@@ -370,9 +260,19 @@ url.includes('drive.google.com')
 
 
 
-/* =========================
-   YouTube変換
-========================= */
+function isVideo(url){
+
+return (
+url.includes('.mp4')
+||
+url.includes('.mov')
+||
+url.includes('.webm')
+);
+
+}
+
+
 
 function youtubeEmbed(url){
 
@@ -400,15 +300,9 @@ return url;
 
 
 
-/* =========================
-   Date変換
-========================= */
-
 function formatDate(value){
 
 if(!value)return '';
-
-if(typeof value === 'string'){
 
 if(value.includes('Date(')){
 
@@ -431,15 +325,7 @@ return value;
 
 }
 
-return value;
 
-}
-
-
-
-/* =========================
-   JSONP
-========================= */
 
 window.google = {
 visualization:{
@@ -473,25 +359,30 @@ formatDate(
 getCell(c[0])
 );
 
-
-
 const title =
 getCell(c[2]);
-
-
 
 const detail =
 getCell(c[4]);
 
-
-
-const mediaUrl =
-getCell(c[17]);
-
-
-
 const displayType =
 getCell(c[21]);
+
+
+
+let allText = '';
+
+c.forEach(cell => {
+
+allText +=
+' ' + getCell(cell);
+
+});
+
+
+
+const urls =
+extractUrls(allText);
 
 
 
@@ -499,24 +390,23 @@ let mediaHtml = '';
 
 
 
-/* =========================
-   YouTube
-========================= */
+urls.forEach(url => {
 
-if(
-mediaUrl &&
-isYoutube(mediaUrl)
-){
 
-mediaHtml =
+
+if(isYoutube(url)){
+
+mediaHtml +=
 
 '<div class="video-wrap">' +
 
 '<iframe ' +
 'src="' +
-youtubeEmbed(mediaUrl) +
+youtubeEmbed(url) +
 '" ' +
+'height="220" ' +
 'allowfullscreen>' +
+
 '</iframe>' +
 
 '</div>';
@@ -525,22 +415,19 @@ youtubeEmbed(mediaUrl) +
 
 
 
-/* =========================
-   Image
-========================= */
+else if(isVideo(url)){
 
-else if(
-mediaUrl &&
-isImage(mediaUrl)
-){
+mediaHtml +=
 
-mediaHtml =
+'<div class="video-wrap">' +
 
-'<div class="image-scroll">' +
+'<video controls>' +
 
-'<img src="' +
-mediaUrl +
+'<source src="' +
+url +
 '">' +
+
+'</video>' +
 
 '</div>';
 
@@ -548,10 +435,23 @@ mediaUrl +
 
 
 
-/* =========================
-   スプレッドシートの
-   本物リンクだけ読む
-========================= */
+else if(isImage(url)){
+
+mediaHtml +=
+
+'<div class="image-scroll">' +
+
+'<img src="' +
+url +
+'">' +
+
+'</div>';
+
+}
+
+});
+
+
 
 let infoButtons = '';
 
@@ -592,10 +492,6 @@ infoTitle +
 }
 
 
-
-/* =========================
-   Card
-========================= */
 
 const html =
 
